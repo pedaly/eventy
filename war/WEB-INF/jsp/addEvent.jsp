@@ -19,9 +19,61 @@
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/form.css">
+
+<script src="http://open.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js"></script>
+<script
+	src="http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq"></script>
+
+<script type="text/javascript">
+	MQA.EventUtil.observe(window, 'load', function() {
+
+		var options = {
+			elt : document.getElementById('map'),
+			zoom : 10,
+			latLng : {
+				lat : 39.743943,
+				lng : -105.020089
+			},
+			mtype : 'map',
+			bestFitMargin : 0,
+			zoomOnDoubleClick : true
+
+		};
+
+		window.map = new MQA.TileMap(options);
+
+		MQA.withModule('largezoom', function() {
+			map.addControl(new MQA.LargeZoom(), new MQA.MapCornerPlacement(
+					MQA.MapCorner.TOP_LEFT, new MQA.Size(5, 5)));
+		});
+		MQA.withModule('mousewheel', function() {
+			map.enableMouseWheelZoom();
+		});
+		MQA.withModule('viewoptions', function() {
+			map.addControl(new MQA.ViewOptions());
+		});
+		MQA.withModule('traffictoggle', function() {
+			map.addControl(new MQA.TrafficToggle());
+
+		});
+		MQA.EventManager.addListener(map, 'click', function(evt) {
+			var myPoi = new MQA.Poi();
+			myPoi.draggable = true;
+			myPoi.setLatLng(evt.ll);
+			map.addShape(myPoi);
+			$("#addEditForm #lat").val(myPoi.getLatLng().lat);
+
+			$("#addEditForm #long").val(myPoi.getLatLng().lng);
+
+		});
+
+	});
+</script>
 <script src="js/vendor/jquery-1.8.2.min.js">
-	<\/script>
-	<script src="js/vendor/modernizr-2.6.2.min.js">
+	
+</script>
+<script src="js/vendor/modernizr-2.6.2.min.js">
+	
 </script>
 <script>
 	$('#top_menu').css("backgroundColor", "blue");
@@ -50,11 +102,31 @@
 					Zapisz </a>
 			</nav>
 
-			<form action="#" method="POST">
+			<form id="addEditForm" action="#" method="POST">
+
+
+
+				<div id="map" class="mapquestMap"></div>
+
 				<fieldset>
 					<label> Tytuł <input type="text" id="title" name="title" />
+					</label>
+				</fieldset>
+
+
+
+				<fieldset>
+
+					<label> Miasto <input type="text" name="city" id="city" /></label>
+					<label> Adres <input type="text" name="address"
+						id="address" /></label> <label>Latitude<input type="number"
+						name="lat" id="lat" />
+					</label> <label>Longtitude <input type="number" name="long"
+						id="long" />
+
 					</label> <label> Opis <textarea name="descritpion" cols="15"
 							rows="30"> </textarea></label>
+
 				</fieldset>
 
 				<p class="details_button">+ Details</p>
@@ -66,18 +138,6 @@
 									type="text" id="skype" name="skype" /><label>
 					</fieldset>
 				</div>
-
-				<fieldset>
-					<label> Miasto <input type="text" name="city" id="city" /></label>
-					<label> Adres <input type="text" name="address"
-						id="address" /></label> <label>Latitude<input type="number"
-						name="lat" id="lat" /></label> <label>Longtitude<input
-						type="number" name="long" id="long" /></label>
-					<div class="map">
-						<img src="img/map.png" alt="mapa" />
-					</div>
-
-				</fieldset>
 			</form>
 
 		</div>
