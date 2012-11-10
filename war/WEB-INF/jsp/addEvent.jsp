@@ -1,3 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -97,14 +102,15 @@
 	<div class="outer">
 		<div class="logo"></div>
 		<div class="container">
-			<nav class="menu">
-				<a href="#"> Zapisz i dodaj kolejne </a><span> | </span> <a href="#">
-					Zapisz </a>
-			</nav>
 
-			<form id="addEditForm" action="#" method="POST">
+			<form id="addEditForm" modelAttribute="event" action="/saveEvent"
+				method="post" accept-charset="utf-8">
 
-
+				<nav class="menu">
+					<a href="#"> Zapisz i dodaj kolejne </a><span> | </span> <a
+						href="/save2"> Zapisz </a> <input type="submit"
+						value="Zapisz event do chuja" />
+				</nav>
 
 				<div id="map" class="mapquestMap"></div>
 
@@ -118,13 +124,13 @@
 				<fieldset>
 
 					<label> Miasto <input type="text" name="city" id="city" /></label>
-					<label> Adres <input type="text" name="address"
-						id="address" /></label> <label>Latitude<input type="number"
+					<label> Adres <input type="text" name="streetAndNumber"
+						id="address" /></label> <label>Latitude <input type="number"
 						name="lat" id="lat" />
-					</label> <label>Longtitude <input type="number" name="long"
+					</label> <label>Longtitude <input type="number" name="lng"
 						id="long" />
 
-					</label> <label> Opis <textarea name="descritpion" cols="15"
+					</label> <label> Opis <textarea name="description" cols="15"
 							rows="30"> </textarea></label>
 
 				</fieldset>
@@ -133,9 +139,9 @@
 				<div class="details">
 					<fieldset>
 						<label> WWW <input type="text" id="webpage" name="webpage" />
-						</label> <label> Telefon <input type="text" id="telephone"
-							name="telephone" /><label> <label> Skype <input
-									type="text" id="skype" name="skype" /><label>
+						</label> <label> Telefon <input type="text" id="phone"
+							name="telephone" /></label> <label> Skype <input type="text"
+							id="skype" name="skype" /></label>
 					</fieldset>
 				</div>
 			</form>

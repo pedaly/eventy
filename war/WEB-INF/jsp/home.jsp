@@ -1,3 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%-- <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" --%>
+<%-- 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0"> --%>
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -52,7 +57,16 @@
 			</nav>
 			<div class="spacer"></div>
 
+
+			<%-- 			<c:forEach items="${events}" var="event"> --%>
+
+			<!-- 				<div> -->
+			<%-- 					<c:out value="${event.title}" /> --%>
+			<!-- 				</div> -->
+			<%-- 			</c:forEach> --%>
 			<table class="events_table">
+
+
 				<thead>
 					<tr>
 						<td>Tytuł</td>
@@ -65,7 +79,8 @@
 					</tr>
 				</thead>
 				<tr class="event_row">
-					<td>Suspendisse potenti</td>
+
+					<td>${events.} }</td>
 					<td>Suspendisse potenti. Quisque interdum, us mi...</td>
 					<td>01/01/2013</td>
 					<td>Łódź</td>

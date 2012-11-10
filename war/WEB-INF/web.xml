@@ -10,7 +10,18 @@
 	</listener>
 
 	<servlet>
+		<servlet-name>CreateNewEvent</servlet-name>
+		<servlet-class>pl.nonamesevent.servlet.ServletCreateEvent</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateNewEvent</servlet-name>
+		<url-pattern>/createNewEvent</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>main</servlet-name>
+
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
