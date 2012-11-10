@@ -1,8 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%-- <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" --%>
-<%-- 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0"> --%>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -25,8 +24,10 @@
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/vendor/jquery-1.8.2.min.js">
-	<\/script>
-	<script src="js/vendor/modernizr-2.6.2.min.js">
+	
+</script>
+<script src="js/vendor/modernizr-2.6.2.min.js">
+	
 </script>
 <script>
 	$('#top_menu').css("backgroundColor", "blue");
@@ -56,14 +57,14 @@
 				<a href="/addEvent.do"> Dodaj </a>
 			</nav>
 			<div class="spacer"></div>
+			<c:out value="This is JSTL" />
 
+			<c:forEach items="${events}" var="event">
 
-			<%-- 			<c:forEach items="${events}" var="event"> --%>
-
-			<!-- 				<div> -->
-			<%-- 					<c:out value="${event.title}" /> --%>
-			<!-- 				</div> -->
-			<%-- 			</c:forEach> --%>
+				<div>
+					<c:out value="${event.title}" />
+				</div>
+			</c:forEach>
 			<table class="events_table">
 
 
@@ -80,7 +81,7 @@
 				</thead>
 				<tr class="event_row">
 
-					<td>${events.} }</td>
+					<td>Suspendisse potenti. Q</td>
 					<td>Suspendisse potenti. Quisque interdum, us mi...</td>
 					<td>01/01/2013</td>
 					<td>Łódź</td>
