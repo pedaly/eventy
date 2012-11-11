@@ -4,12 +4,7 @@
 	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html class="no-js">
-<!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,7 +12,7 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
 
-<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 <link rel="stylesheet" href="css/normalize.css">
@@ -29,57 +24,8 @@
 <script
 	src="http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq"></script>
 
-<script type="text/javascript">
-	MQA.EventUtil.observe(window, 'load', function() {
-
-		var options = {
-			elt : document.getElementById('map'),
-			zoom : 10,
-			latLng : {
-				lat : 39.743943,
-				lng : -105.020089
-			},
-			mtype : 'map',
-			bestFitMargin : 0,
-			zoomOnDoubleClick : true
-
-		};
-
-		window.map = new MQA.TileMap(options);
-
-		MQA.withModule('largezoom', function() {
-			map.addControl(new MQA.LargeZoom(), new MQA.MapCornerPlacement(
-					MQA.MapCorner.TOP_LEFT, new MQA.Size(5, 5)));
-		});
-		MQA.withModule('mousewheel', function() {
-			map.enableMouseWheelZoom();
-		});
-		MQA.withModule('viewoptions', function() {
-			map.addControl(new MQA.ViewOptions());
-		});
-		MQA.withModule('traffictoggle', function() {
-			map.addControl(new MQA.TrafficToggle());
-
-		});
-		MQA.EventManager.addListener(map, 'click', function(evt) {
-			var myPoi = new MQA.Poi();
-			myPoi.draggable = true;
-			myPoi.setLatLng(evt.ll);
-			map.addShape(myPoi);
-			$("#addEditForm #lat").val(myPoi.getLatLng().lat);
-
-			$("#addEditForm #long").val(myPoi.getLatLng().lng);
-
-		});
-
-	});
-</script>
-<script src="js/vendor/jquery-1.8.2.min.js">
-	
-</script>
-<script src="js/vendor/modernizr-2.6.2.min.js">
-	
-</script>
+<script src="js/vendor/jquery-1.8.2.min.js"></script>
+<script src="js/vendor/modernizr-2.6.2.min.js"></script>
 <script>
 	$('#top_menu').css("backgroundColor", "blue");
 	$(function() {
@@ -88,11 +34,19 @@
 		});
 	});
 </script>
+
+<script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var height = 400;
+		var width = 600;
+		EventMap.init(width, height);
+		MQA.EventManager.addListener(EventMap.map, 'click', EventMap.addPoint)
+	});
+</script>
 </head>
 <body>
-	<!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
+
 	<nav class="top_menu">
 		<a href="#"> Zarządzaj wydarzeniami </a> <span>&nbsp | &nbsp <span>
 				<a href="#"> Zarządzaj kategoriami</a> <span>&nbsp | &nbsp <span>
@@ -110,9 +64,13 @@
 					<a href="#"> Zapisz i dodaj kolejne </a><span> | </span> <a
 						href="/save2"> Zapisz </a> <input type="submit"
 						value="Zapisz event do chuja" />
+
 				</nav>
 
-				<div id="map" class="mapquestMap"></div>
+				<div id="map" class="mapquestMap">
+					<button type="button" id="srch"
+						onclick="EventMap.addPointByAddress()">Search</button>
+				</div>
 
 				<fieldset>
 					<label> Tytuł <input type="text" id="title" name="title" />
@@ -124,7 +82,7 @@
 				<fieldset>
 
 					<label> Miasto <input type="text" name="city" id="city" /></label>
-					<label> Adres <input type="text" name="streetAndNumber"
+					<label> Ulica <input type="text" name="streetAndNumber"
 						id="address" /></label> <label>Latitude <input type="number"
 						name="lat" id="lat" />
 					</label> <label>Longtitude <input type="number" name="lng"
