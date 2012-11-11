@@ -73,8 +73,18 @@ EventMap = {
 	},
 	addPointByAddress : function() {
 
-		var city = $("#addEditForm #city").val();
-		var street = $("#addEditForm #streetAndNumber").val();
+		var cityOrigin = $("#addEditForm #city").val();
+		if ($("#addEditForm #city").val() != undefined)
+			var city = EventMap.removePolishChar(cityOrigin);
+		else
+			var city = [];
+		if ($("#addEditForm #streetAndNumber").val() != undefined)
+			var street = EventMap.removePolishChar(streetOrigin);
+		else
+			var street = [];
+
+		// var city = $("#addEditForm #city").val();
+		// var street = $("#addEditForm #streetAndNumber").val();
 		var newPoi;
 		$
 				.ajax({
@@ -93,12 +103,9 @@ EventMap = {
 				.done(
 						function(msg) {
 							EventMap.resp = msg;
-							for ( var i = 0; i < msg.results.length; i++) {
-
-								for ( var j = 0; j < msg.results[i].locations.length; j++) {
-
-									if (msg.results[i].locations.length < 2) {
-
+							if (msg.results[0].locations.length < 2) {
+								for ( var i = 0; i < msg.results.length; i++) {
+									for ( var j = 0; j < msg.results[i].locations.length; j++) {
 										newPoi = new MQA.Poi(
 												{
 													lat : msg.results[i].locations[j].displayLatLng.lat,
@@ -112,11 +119,11 @@ EventMap = {
 										fillLanLngLabel(newPoi.getLatLng().lat,
 												newPoi.getLatLng().lng);
 										EventMap.isEmpty = false;
-									} else {
-										alert("Sory gosciu ale adres jest ma�o specyzyjny");
-									}
 
+									}
 								}
+							} else {
+								alert("Sory gościu ale adres jest mało specyzyjny - znaleziono więcej niż 1 wynik...");
 							}
 						});
 
@@ -138,6 +145,73 @@ EventMap = {
 		});
 
 	},
+	removePolishChar : function(address) {
+		var addr = [];
+		addr = address;
+		alert(address);
+		for ( var i = 0; i < addr.length; i++) {
+			switch (addr[i]) {
+			case "ą":
+				addr = addr.substr(0, i) + 'a' + addr.substr(i + 1);
+				break;
+			case "ć":
+				addr = addr.substr(0, i) + 'c' + addr.substr(i + 1);
+				break;
+			case "ę":
+				addr = addr.substr(0, i) + 'e' + addr.substr(i + 1);
+				break;
+
+			case "ł":
+				addr = addr.substr(0, i) + 'l' + addr.substr(i + 1);
+				break;
+			case "ń":
+				addr = addr.substr(0, i) + 'n' + addr.substr(i + 1);
+				break;
+			case "ó":
+				addr = addr.substr(0, i) + 'o' + addr.substr(i + 1);
+				break;
+			case "ś":
+				addr = addr.substr(0, i) + 's' + addr.substr(i + 1);
+				break;
+			case "ź":
+				addr = addr.substr(0, i) + 'z' + addr.substr(i + 1);
+				break;
+			case "ż":
+				addr = addr.substr(0, i) + 'z' + addr.substr(i + 1);
+				break;
+			case "Ą":
+				addr = addr.substr(0, i) + 'a' + addr.substr(i + 1);
+				break;
+			case "Ć":
+				addr = addr.substr(0, i) + 'c' + addr.substr(i + 1);
+				break;
+			case "Ę":
+				addr = addr.substr(0, i) + 'e' + addr.substr(i + 1);
+				break;
+			case "Ł":
+				addr = addr.substr(0, i) + 'l' + addr.substr(i + 1);
+				break;
+			case "Ń":
+				addr = addr.substr(0, i) + 'n' + addr.substr(i + 1);
+				break;
+			case "Ó":
+				addr = addr.substr(0, i) + 'o' + addr.substr(i + 1);
+				break;
+			case "Ś":
+				addr = addr.substr(0, i) + 's' + addr.substr(i + 1);
+				break;
+			case "Ź":
+				addr = addr.substr(0, i) + 'z' + addr.substr(i + 1);
+				break;
+			case "Ż":
+				addr = addr.substr(0, i) + 'z' + addr.substr(i + 1);
+				break;
+			}
+		}
+
+		return addr;
+
+	}
 }
 function fillLanLngLabel(lat, lng) {
 	$("#addEditForm #lat").val(lat);

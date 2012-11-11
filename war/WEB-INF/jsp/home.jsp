@@ -50,14 +50,9 @@
 				<a href="/addEvent.do"> Dodaj </a>
 			</nav>
 			<div class="spacer"></div>
-			<c:out value="This is JSTL" />
 
-			<c:forEach items="${events}" var="event">
 
-				<div>
-					<c:out value="${event.title}" />
-				</div>
-			</c:forEach>
+
 			<table class="events_table">
 
 
@@ -72,53 +67,21 @@
 						<!-- td for edit/remove column -->
 					</tr>
 				</thead>
-				<tr class="event_row">
-
-					<td>Suspendisse potenti. Q</td>
-					<td>Suspendisse potenti. Quisque interdum, us mi...</td>
-					<td>01/01/2013</td>
-					<td>Łódź</td>
-					<td>Klubowe</td>
-					<td class="edit"><a href="#"> edytuj </a> <span>&nbsp |
-							&nbsp <span> <a href="#"> usuń </a></td>
-
-				</tr>
-				<tr class="event_row">
-					<td>Suspendisse potenti</td>
-					<td>Suspendisse potenti. Quisque interdum, us mi...</td>
-					<td>01/01/2013</td>
-					<td>Łódź</td>
-					<td>Klubowe</td>
-					<td class="edit"><a href="#"> edytuj </a> <span>&nbsp |
-							&nbsp <span> <a href="#"> usuń </a></td>
-				</tr>
-				<tr class="event_row">
-					<td>Suspendisse potenti</td>
-					<td>Suspendisse potenti. Quisque interdum, us mi...</td>
-					<td>01/01/2013</td>
-					<td>Łódź</td>
-					<td>Klubowe</td>
-					<td class="edit"><a href="#"> edytuj </a> <span>&nbsp |
-							&nbsp <span> <a href="#"> usuń </a></td>
-				</tr>
-				<tr class="event_row">
-					<td>Suspendisse potenti</td>
-					<td>Suspendisse potenti. Quisque interdum, us mi...</td>
-					<td>01/01/2013</td>
-					<td>Łódź</td>
-					<td>Klubowe</td>
-					<td class="edit"><a href="#"> edytuj </a> <span>&nbsp |
-							&nbsp <span> <a href="#"> usuń </a></td>
-
-				</tr>
+				<c:forEach items="${events}" var="event">
+					<tr class="event_row">
+						<td>${event.title}</td>
+						<td>${event.description}</td>
+						<td>${event.dateOfEvent}</td>
+						<td>${event.city}</td>
+						<td>${event.phone}</td>
+						<td class="edit"><a href="#"> edytuj </a> <span>&nbsp
+								| &nbsp <span> <a href="#"> usuń </a></td>
+					</tr>
+				</c:forEach>
 			</table>
 
 		</div>
-		<div>
-			<p>
-				Date: <input type="text" id="datepicker" />
-			</p>
-		</div>
+
 
 	</div>
 
