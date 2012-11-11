@@ -150,7 +150,8 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event " + title + " w " + city + " latlng: " + lat + "," + lng;
+		return "Event " + title + " w " + city + " latlng: " + lat + "," + lng
+				+ "," + dateOfEvent;
 	}
 
 }

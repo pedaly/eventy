@@ -17,6 +17,7 @@ import dao.Dao;
 @Controller
 public class EventController {
 
+	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory
 			.getLogger(EventController.class);
 

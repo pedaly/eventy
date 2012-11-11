@@ -57,8 +57,10 @@
 		<div class="logo"></div>
 		<div class="container">
 
+
 			<form id="addEditForm" modelAttribute="event" action="/saveEvent"
 				method="post" accept-charset="utf-8">
+
 
 				<nav class="menu">
 					<a href="#"> Zapisz i dodaj kolejne </a><span> | </span> <a
@@ -71,6 +73,7 @@
 					<button type="button" id="srch"
 						onclick="EventMap.addPointByAddress()">Search</button>
 				</div>
+
 
 				<fieldset>
 					<label> Tytuł <input type="text" id="title" name="title" />
@@ -88,6 +91,8 @@
 					</label> <label>Longtitude <input type="number" name="lng"
 						id="long" />
 
+					</label> <label>Date: <input type="text" id="datepicker"
+						name="dateOfEvent" />
 					</label> <label> Opis <textarea name="description" cols="15"
 							rows="30"> </textarea></label>
 

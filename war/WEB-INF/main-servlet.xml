@@ -11,10 +11,11 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<context:component-scan base-package="pl.nonamesevent" />
+	<context:component-scan base-package="pl.nonamesevent.controller" />
 
 	<mvc:annotation-driven />
-
+	<context:annotation-config/>
+	
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -23,7 +24,26 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+<!-- <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean> -->
+<!--  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> -->
+<!-- <property name="messageConverters"> -->
+<!--   <list> -->
+<!--     <ref bean="jacksonMessageConverter"/> -->
+<!--   </list> -->
+<!-- </property> -->
+<!-- </bean> -->
+	
+ 
 
+  <bean id="jsonHttpMessageConverter"
+        class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+    <property name="supportedMediaTypes" value="application/json"/>
+  </bean>
 
-
+  <bean
+    class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <property name="messageConverters">
+        <ref bean="jsonHttpMessageConverter"/>
+    </property>
+  </bean>
 </beans>
