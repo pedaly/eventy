@@ -29,14 +29,7 @@
 <script src="js/vendor/modernizr-2.6.2.min.js">
 	
 </script>
-<script>
-	$('#top_menu').css("backgroundColor", "blue");
-	$(function() {
-		$("#datepicker").datepicker({
-			minDate : new Date()
-		});
-	});
-</script>
+
 </head>
 <body>
 	<!--[if lt IE 7]>

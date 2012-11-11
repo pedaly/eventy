@@ -103,15 +103,14 @@
 		<div class="logo"></div>
 		<div class="container">
 
+
+			<nav class="menu">
+				<a href="#"> Zapisz i dodaj kolejne </a><span> | </span> <a
+					href="/save2"> Zapisz </a>
+			</nav>
 			<form id="addEditForm" modelAttribute="event" action="/saveEvent"
 				method="post" accept-charset="utf-8">
-
-				<nav class="menu">
-					<a href="#"> Zapisz i dodaj kolejne </a><span> | </span> <a
-						href="/save2"> Zapisz </a> <input type="submit"
-						value="Zapisz event do chuja" />
-				</nav>
-
+				<input type="submit" value="Zapisz event do chuja" />
 				<div id="map" class="mapquestMap"></div>
 
 				<fieldset>
@@ -130,6 +129,8 @@
 					</label> <label>Longtitude <input type="number" name="lng"
 						id="long" />
 
+					</label> <label>Date: <input type="text" id="datepicker"
+						name="dateOfEvent" />
 					</label> <label> Opis <textarea name="description" cols="15"
 							rows="30"> </textarea></label>
 

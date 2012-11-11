@@ -19,6 +19,7 @@ public enum Dao {
 		EntityManager em = EMFService.get().createEntityManager();
 		// Read the existing entries
 		Query q = em.createQuery("select m from Event m");
+		@SuppressWarnings("unchecked")
 		List<Event> Events = q.getResultList();
 		return Events;
 	}
@@ -80,6 +81,7 @@ public enum Dao {
 		EntityManager em = EMFService.get().createEntityManager();
 		Query q = em.createQuery("select e from Event e");
 
+		@SuppressWarnings("unchecked")
 		List<Event> Events = q.getResultList();
 		return Events;
 	}
