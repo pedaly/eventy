@@ -48,9 +48,9 @@
 <body>
 
 	<nav class="top_menu">
-		<a href="#"> Zarządzaj wydarzeniami </a> <span>&nbsp | &nbsp <span>
-				<a href="#"> Zarządzaj kategoriami</a> <span>&nbsp | &nbsp <span>
-						<a href="#"> Zarządzaj uzytkownikami </a>
+		<a href="/home.do"> Zarządzaj wydarzeniami </a> <span>&nbsp |
+			&nbsp <span> <a href="#"> Zarządzaj kategoriami</a> <span>&nbsp
+					| &nbsp <span> <a href="#"> Zarządzaj uzytkownikami </a>
 	</nav>
 
 	<div class="outer">

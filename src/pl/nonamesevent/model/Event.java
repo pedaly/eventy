@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+// dodac postcode, kategorie, wojewodzwto , powiat
 @Entity
 public class Event {
 	@Id
