@@ -14,9 +14,9 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String lng;
+	private Double lng;
 
-	private String lat;
+	private Double lat;
 
 	private String title;
 
@@ -45,19 +45,21 @@ public class Event {
 		this.symbol = symbol;
 	}
 
-	public String getLng() {
+
+
+	public Double getLng() {
 		return lng;
 	}
 
-	public void setLng(String lng) {
+	public void setLng(Double lng) {
 		this.lng = lng;
 	}
 
-	public String getLat() {
+	public Double getLat() {
 		return lat;
 	}
 
-	public void setLat(String lat) {
+	public void setLat(Double lat) {
 		this.lat = lat;
 	}
 
@@ -149,6 +151,11 @@ public class Event {
 		this.symbol = symbol;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Event " + title + " w " + city + " latlng: " + Double.toString(lat) + "," + lng
+//				+ "," + dateOfEvent;
+//	}
 	@Override
 	public String toString() {
 		return "Event " + title + " w " + city + " latlng: " + lat + "," + lng

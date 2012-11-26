@@ -1,7 +1,11 @@
 package pl.nonamesevent.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.jasper.tagplugins.jstl.core.Redirect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -11,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import pl.nonamesevent.dao.Dao;
 import pl.nonamesevent.model.Event;
-import dao.Dao;
 
 @Controller
 public class EventController {
@@ -46,18 +50,19 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/saveEvent", method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute(value = "event") Event event,
-			BindingResult result) {
+	public String save(@ModelAttribute(value = "event") Event event,
+			BindingResult result, HttpServletResponse response) {
 
 		ModelAndView mav = new ModelAndView("addEvent");
 
 		if (result.hasErrors()) {
 			mav.addObject("event", event);
-			return mav;
+			return "redirect: addEvent";
 		}
 		System.out.println(event.toString());
 		Dao.INSTANCE.add(event);
-
-		return new ModelAndView("home");
+	
+		
+		return "redirect: addEvent";
 	}
 }

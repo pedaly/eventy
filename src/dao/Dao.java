@@ -38,8 +38,8 @@ public enum Dao {
 				ev.setTitle(title);
 				ev.setDateOfEvent(dateOfEvent);
 				ev.setDescription(desc);
-				ev.setLat(lat);
-				ev.setLng(lng);
+//				ev.setLat(lat);
+//				ev.setLng(lng);
 				ev.setPhone(phone);
 				ev.setSkype(skype);
 				ev.setStreetAndNumber(street);
