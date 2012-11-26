@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/v2"/>
 	<classpathentry exported="true" kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/aopalliance-1.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/commons-logging-1.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/org.springframework.asm-3.0.5.RELEASE.jar"/>

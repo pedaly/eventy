@@ -1,7 +1,5 @@
 package pl.nonamesevent.dao;
 
-import java.awt.print.Book;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,11 +8,11 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.datanucleus.store.ExecutionContext;
 
+import pl.nonamesevent.model.Category;
 import pl.nonamesevent.model.Event;
 import pl.nonamesevent.model.EventsList;
 import pl.nonamesevent.service.EMFService;
@@ -23,6 +21,8 @@ import pl.nonamesevent.utilities.GeoLocationInBoundingCircle;
 @NamedNativeQuery(name = "Event.findByLocation", query = "SELECT e FROM Event e WHERE lat < :latMax AND lat > :latMin")
 public enum Dao {
 	INSTANCE;
+
+	/* ------------------ DAO FOR EVENTS -------------------------- */
 
 	public List<Event> listEvents() {
 		EntityManager em = EMFService.get().createEntityManager();
@@ -33,39 +33,7 @@ public enum Dao {
 		return Events;
 	}
 
-	public void add(String city, Date dateOfEvent, String desc, String lat,
-			String lng, String manager, String phone, String skype,
-			String street, String symbol, String title) {
-		synchronized (this) {
-			EntityManager em = null;
-			try {
-
-				em = EMFService.get().createEntityManager();
-				em.getTransaction().begin();
-				Event ev = new Event();
-				ev.setCity(city);
-				ev.setTitle(title);
-				ev.setDateOfEvent(dateOfEvent);
-				ev.setDescription(desc);
-				// ev.setLat(lat);
-				// ev.setLng(lng);
-				ev.setPhone(phone);
-				ev.setSkype(skype);
-				ev.setStreetAndNumber(street);
-				em.persist(ev);
-				ExecutionContext ec = (ExecutionContext) em.getDelegate();
-				ec.getTransaction().commit();
-
-			} catch (Exception e) {
-				em.close();
-				System.out.println("Chujowo ale polecial warning: "
-						+ e.getMessage() + "  FIX ME!!!!!!!  ");
-			}
-
-		}
-	}
-
-	public void add(Event event) {
+	public void addEvent(Event event) {
 		synchronized (this) {
 			EntityManager em = null;
 			try {
@@ -78,10 +46,10 @@ public enum Dao {
 				ec.getTransaction().commit();
 
 			} catch (Exception e) {
-				em.close();
-				e.printStackTrace();
 				System.out.println("Chujowo ale polecial warning: "
 						+ e.getMessage() + "  FIX ME!!!!!!!  ");
+			}finally{
+				em.close();
 			}
 
 		}
@@ -128,10 +96,12 @@ public enum Dao {
 		// Query q = em.createQuery(cq);
 		System.out
 				.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		Query q = em.createQuery("SELECT e FROM Event e WHERE lat > :latMin AND lat < :latMax",Event.class);
+		Query q = em.createQuery(
+				"SELECT e FROM Event e WHERE lat > :latMin AND lat < :latMax",
+				Event.class);
 		q.setParameter("latMin", boundingCords.get("latMin"));
 		q.setParameter("latMax", boundingCords.get("latMax"));
-		
+
 		System.out.println("latMin : " + boundingCords.get("latMin"));
 		System.out.println("latMax : " + boundingCords.get("latMax"));
 		List<Event> list = q.getResultList();
@@ -146,4 +116,64 @@ public enum Dao {
 
 		return list;
 	}
+
+	/* ------------------ DAO FOR CATEGORY -------------------------- */
+	public List<Category> listCategories() {
+		EntityManager em = EMFService.get().createEntityManager();
+
+		Query q = em.createQuery("select c from Category c");
+		@SuppressWarnings("unchecked")
+		List<Category> categories = q.getResultList();
+		return categories;
+	}
+
+	public void addCategory(Category category) {
+		synchronized (this) {
+			EntityManager em = null;
+			try {
+				em = EMFService.get().createEntityManager();
+				em.getTransaction().begin();
+				em.persist(category);
+				// ExecutionContext ec = (ExecutionContext) em.getDelegate();
+				// ec.getTransaction().commit();
+				em.getTransaction().commit();
+			} catch (Exception e) {				
+				System.out.println("Wypieprza blad z transakcj¹"
+						+ e.getMessage() + "  FIX ME!!!!!!!  ");
+			} finally {
+				em.close();
+			}
+
+		}
+	}
+
+	public Category getCategory(Long id) {
+		Category result = null;
+		EntityManager mgr = EMFService.get().createEntityManager();
+		try {
+			result = mgr.find(Category.class, id);
+		} finally {
+			mgr.close();
+		}
+		if (result == null) {
+			System.out.println("No Category returned");
+
+		}
+		return result;
+	}
+   /* 
+       public void deleteContacts() {
+        logger.info("Entering deleteContacts");
+        EntityManager mgr = EMF.get().createEntityManager();
+        try {
+            Query q = mgr.createQuery("DELETE FROM Contact x");
+            q.executeUpdate();
+        } finally {
+            mgr.close();
+        }
+        logger.info("Exiting deleteContacts");          
+    }
+    */
+
+
 }

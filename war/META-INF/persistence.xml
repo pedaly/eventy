@@ -7,6 +7,7 @@
 
 	<persistence-unit name="transactions-optional">
 		<provider>org.datanucleus.store.appengine.jpa.DatastorePersistenceProvider</provider>
+		<class>pl.nonamesevent.model.Category</class>
 		<class>pl.nonamesevent.model.Event</class>
 
 		<properties>

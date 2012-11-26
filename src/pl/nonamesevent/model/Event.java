@@ -2,12 +2,15 @@ package pl.nonamesevent.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-// dodac postcode, kategorie, wojewodzwto , powiat
 @Entity
 public class Event {
 	@Id
@@ -36,16 +39,31 @@ public class Event {
 
 	private String skype;
 
-	private String symbol;
+	private String postcode;
+
+	private String wojewodztwo;
+
+	private String powiat;
+
+	// @ManyToOne(cascade = { CascadeType.ALL }, targetEntity = Category.class,
+	// fetch = FetchType.EAGER)
+	// @JoinColumn(name = "categoryId")
+	// private Category category;
+
+//	@ManyToOne(targetEntity = Category.class, fetch = FetchType.EAGER)
+//	@JoinColumn(name = "categoryId")
+//	private Category category;
 
 	public Event() {
 	}
 
-	public Event(String symbol) {
-		this.symbol = symbol;
+	public Long getId() {
+		return id;
 	}
 
-
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Double getLng() {
 		return lng;
@@ -135,27 +153,44 @@ public class Event {
 		this.skype = skype;
 	}
 
-	public Long getId() {
-		return id;
+	public String getPostcode() {
+		return postcode;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 
-	public String getSymbol() {
-		return symbol;
+	public String getWojewodztwo() {
+		return wojewodztwo;
 	}
 
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
+	public void setWojewodztwo(String wojewodztwo) {
+		this.wojewodztwo = wojewodztwo;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Event " + title + " w " + city + " latlng: " + Double.toString(lat) + "," + lng
-//				+ "," + dateOfEvent;
+	public String getPowiat() {
+		return powiat;
+	}
+
+	public void setPowiat(String powiat) {
+		this.powiat = powiat;
+	}
+
+//	public Category getCategory() {
+//		return category;
 //	}
+//
+//	public void setCategory(Category category) {
+//		this.category = category;
+//	}
+
+	// @Override
+	// public String toString() {
+	// return "Event " + title + " w " + city + " latlng: " +
+	// Double.toString(lat) + "," + lng
+	// + "," + dateOfEvent;
+	// }
 	@Override
 	public String toString() {
 		return "Event " + title + " w " + city + " latlng: " + lat + "," + lng

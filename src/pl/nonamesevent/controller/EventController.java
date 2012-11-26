@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import pl.nonamesevent.dao.Dao;
+import pl.nonamesevent.model.Category;
 import pl.nonamesevent.model.Event;
 
 @Controller
@@ -40,6 +41,11 @@ public class EventController {
 		}
 		ModelAndView mav = new ModelAndView("home");
 		mav.addObject("events", events);
+		
+		Category cat =  new Category();
+		cat.setName("pierwsza kategoria");
+		Dao.INSTANCE.addCategory(cat);
+		
 		return mav;
 	}
 
@@ -60,7 +66,7 @@ public class EventController {
 			return "redirect: addEvent";
 		}
 		System.out.println(event.toString());
-		Dao.INSTANCE.add(event);
+		Dao.INSTANCE.addEvent(event);
 	
 		
 		return "redirect: addEvent";
