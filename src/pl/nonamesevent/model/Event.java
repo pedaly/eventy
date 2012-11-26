@@ -15,7 +15,7 @@ public class Event {
 
 	private String lng;
 
-	private String lat;
+	private double lat;
 
 	private String title;
 
@@ -52,11 +52,11 @@ public class Event {
 		this.lng = lng;
 	}
 
-	public String getLat() {
+	public double getLat() {
 		return lat;
 	}
 
-	public void setLat(String lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
 
@@ -150,7 +150,7 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event " + title + " w " + city + " latlng: " + lat + "," + lng
+		return "Event " + title + " w " + city + " latlng: " + Double.toString(lat) + "," + lng
 				+ "," + dateOfEvent;
 	}
 

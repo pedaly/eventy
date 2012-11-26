@@ -86,9 +86,9 @@
 
 					<label> Miasto <input type="text" name="city" id="city" /></label>
 					<label> Ulica <input type="text" name="streetAndNumber"
-						id="address" /></label> <label>Latitude <input type="number"
+						id="address" /></label> <label>Latitude <input type="text"
 						name="lat" id="lat" />
-					</label> <label>Longtitude <input type="number" name="lng"
+					</label> <label>Longtitude <input type="text" name="lng"
 						id="long" />
 
 					</label> <label>Date: <input type="text" id="datepicker"
