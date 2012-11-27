@@ -44,11 +44,9 @@ public enum Dao {
 
 				em = EMFService.get().createEntityManager();
 				em.getTransaction().begin();
-
-				
+			
 				em.persist(event);
-				
-				
+							
 				ExecutionContext ec = (ExecutionContext) em.getDelegate();
 				ec.getTransaction().commit();
 				// em.close();
