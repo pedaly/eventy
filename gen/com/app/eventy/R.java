@@ -17,43 +17,49 @@ public final class R {
     }
     public static final class drawable {
         public static final int androidmarker=0x7f020000;
-        public static final int ic_action_search=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
+        public static final int event_marker=0x7f020001;
+        public static final int ic_action_search=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int imprezyCheckBox=0x7f080019;
-        public static final int imprezyId=0x7f08001a;
-        public static final int imprezyOkolicznoscioweCheckBox=0x7f080017;
-        public static final int imprezyOkolicznoscioweId=0x7f080018;
-        public static final int kategorieId=0x7f080007;
-        public static final int kategorieOpisId=0x7f080008;
-        public static final int kinoCheckBox=0x7f08000b;
-        public static final int kinoId=0x7f08000c;
-        public static final int koncertyCheckBox=0x7f080009;
-        public static final int koncertyId=0x7f08000a;
-        public static final int mapview=0x7f080000;
-        public static final int menu_settings=0x7f08001c;
-        public static final int number=0x7f080006;
-        public static final int pokazyCheckBox=0x7f080013;
-        public static final int pokazyId=0x7f080014;
-        public static final int promiecId=0x7f080003;
-        public static final int promienOpisId=0x7f080004;
-        public static final int saveSettings=0x7f08001b;
-        public static final int scrollView1=0x7f080001;
-        public static final int seekBar=0x7f080005;
-        public static final int spektakleCheckBox=0x7f08000f;
-        public static final int spektakleId=0x7f080010;
-        public static final int targiCheckBox=0x7f080015;
-        public static final int targiId=0x7f080016;
-        public static final int title=0x7f080002;
-        public static final int wydarzeniaId=0x7f080012;
-        public static final int wydarzeniaeCheckBox=0x7f080011;
-        public static final int wystawyCheckBox=0x7f08000d;
-        public static final int wystawyId=0x7f08000e;
+        public static final int imprezyCheckBox=0x7f08001d;
+        public static final int imprezyId=0x7f08001e;
+        public static final int imprezyOkolicznoscioweCheckBox=0x7f08001b;
+        public static final int imprezyOkolicznoscioweId=0x7f08001c;
+        public static final int kategorieId=0x7f08000b;
+        public static final int kategorieOpisId=0x7f08000c;
+        public static final int kinoCheckBox=0x7f08000f;
+        public static final int kinoId=0x7f080010;
+        public static final int koncertyCheckBox=0x7f08000d;
+        public static final int koncertyId=0x7f08000e;
+        public static final int mapview=0x7f080005;
+        public static final int menu_settings=0x7f080020;
+        public static final int number=0x7f08000a;
+        public static final int pokazyCheckBox=0x7f080017;
+        public static final int pokazyId=0x7f080018;
+        public static final int promiecId=0x7f080007;
+        public static final int promienOpisId=0x7f080008;
+        public static final int saveSettings=0x7f08001f;
+        public static final int scrollView1=0x7f080006;
+        public static final int seekBar=0x7f080009;
+        public static final int spektakleCheckBox=0x7f080013;
+        public static final int spektakleId=0x7f080014;
+        public static final int targiCheckBox=0x7f080019;
+        public static final int targiId=0x7f08001a;
+        public static final int textView1=0x7f080002;
+        public static final int textView2=0x7f080001;
+        public static final int textView3=0x7f080003;
+        public static final int textView4=0x7f080004;
+        public static final int title=0x7f080000;
+        public static final int wydarzeniaId=0x7f080016;
+        public static final int wydarzeniaeCheckBox=0x7f080015;
+        public static final int wystawyCheckBox=0x7f080011;
+        public static final int wystawyId=0x7f080012;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_settings=0x7f030001;
+        public static final int activity_event=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_settings=0x7f030002;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
@@ -63,6 +69,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050001;
         public static final int menu_settings=0x7f050002;
+        public static final int title_activity_event=0x7f050005;
         public static final int title_activity_main=0x7f050003;
         public static final int title_activity_settings=0x7f050004;
     }

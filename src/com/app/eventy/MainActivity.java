@@ -9,22 +9,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.app.eventy.R;
+import com.app.eventy.dao.EventDAO;
+import com.app.eventy.model.Event;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 
-public class HelloGoogleMaps extends MapActivity {
+public class MainActivity extends MapActivity {
+	
 	public static final String PREFS_NAME = "MyPrefsFile";
 	public static final int MENU_SETTING_ID = 1;
 	public static final int MENU_EXIT_ID = 2;
 	
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
+	    
+		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_main);
 	    
 	    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -41,19 +41,23 @@ public class HelloGoogleMaps extends MapActivity {
 	     
 
 	    
-	    
+	    // Wyswietlanie eventow na mapie
 	    MapView mapView = (MapView) findViewById(R.id.mapview);
+	    mapView.getController().setCenter(new GeoPoint((int) (52.05 * 1E6), (int) (19.45 * 1E6)));
+	    mapView.getController().setZoom(7);
 	    mapView.setBuiltInZoomControls(true);
 	    
-	    List<Overlay> mapOverlays = mapView.getOverlays();
-	    Drawable drawable = this.getResources().getDrawable(R.drawable.androidmarker);
-	    HelloItemizedOverlay itemizedoverlay = new HelloItemizedOverlay(drawable, this);
+	    Drawable eventMarker = this.getResources().getDrawable(R.drawable.event_marker);
+	    EventItemizedOverlay eventItemizedOverlay = new EventItemizedOverlay(eventMarker, this);
 	    
-	    GeoPoint point = new GeoPoint(19240000,-99120000);
-	    OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!", "I'm in Mexico City!");
-	
-	    itemizedoverlay.addOverlay(overlayitem);
-	    mapOverlays.add(itemizedoverlay);
+	    EventDAO eventDAO = new EventDAO(getApplicationContext());
+	    List<Event> events = eventDAO.getAllEvents();
+	    for(Event event : events) {
+	    	eventItemizedOverlay.addEvent(event);
+	    }
+	    
+	    mapView.getOverlays().add(eventItemizedOverlay);
+	    //Koniec
 	    
 	}
 	
