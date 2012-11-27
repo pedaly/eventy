@@ -43,9 +43,14 @@ public class EventController {
 		mav.addObject("events", events);
 		
 		Category cat =  new Category();
-		cat.setName("pierwsza kategoria");
+		cat.setName("druga kategoria");
 		Dao.INSTANCE.addCategory(cat);
 		
+		Event e = new Event();
+		e.setCity("Mandalay");
+		Dao.INSTANCE.addEvent(e);		
+		e.setCategory(cat);		
+
 		return mav;
 	}
 

@@ -1,5 +1,6 @@
 package pl.nonamesevent.dao;
 
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.store.ExecutionContext;
+import org.datanucleus.transaction.NucleusTransactionException;
 
 import pl.nonamesevent.model.Category;
 import pl.nonamesevent.model.Event;
@@ -30,6 +33,7 @@ public enum Dao {
 		Query q = em.createQuery("select m from Event m");
 		@SuppressWarnings("unchecked")
 		List<Event> Events = q.getResultList();
+		em.close();
 		return Events;
 	}
 
@@ -41,15 +45,20 @@ public enum Dao {
 				em = EMFService.get().createEntityManager();
 				em.getTransaction().begin();
 
+				
 				em.persist(event);
+				
+				
 				ExecutionContext ec = (ExecutionContext) em.getDelegate();
 				ec.getTransaction().commit();
-
-			} catch (Exception e) {
-				System.out.println("Chujowo ale polecial warning: "
+				// em.close();
+			} catch (NucleusTransactionException e) {
+				e.getStackTrace();
+				System.out.println("Add event - problem z transakcj¹ : "
 						+ e.getMessage() + "  FIX ME!!!!!!!  ");
-			}finally{
 				em.close();
+			} finally {
+				// em.close();
 			}
 
 		}
@@ -124,6 +133,7 @@ public enum Dao {
 		Query q = em.createQuery("select c from Category c");
 		@SuppressWarnings("unchecked")
 		List<Category> categories = q.getResultList();
+		em.close();
 		return categories;
 	}
 
@@ -134,14 +144,17 @@ public enum Dao {
 				em = EMFService.get().createEntityManager();
 				em.getTransaction().begin();
 				em.persist(category);
-				// ExecutionContext ec = (ExecutionContext) em.getDelegate();
-				// ec.getTransaction().commit();
-				em.getTransaction().commit();
-			} catch (Exception e) {				
-				System.out.println("Wypieprza blad z transakcj¹"
+				ExecutionContext ec = (ExecutionContext) em.getDelegate();
+				ec.getTransaction().commit();
+				// em.close();
+				// em.getTransaction().commit();
+			} catch (NucleusTransactionException e) {
+				e.getStackTrace();
+				System.out.println("Wypieprza blad z transakcj¹ "
 						+ e.getMessage() + "  FIX ME!!!!!!!  ");
-			} finally {
 				em.close();
+			} finally {
+				// em.close();
 			}
 
 		}
@@ -161,19 +174,11 @@ public enum Dao {
 		}
 		return result;
 	}
-   /* 
-       public void deleteContacts() {
-        logger.info("Entering deleteContacts");
-        EntityManager mgr = EMF.get().createEntityManager();
-        try {
-            Query q = mgr.createQuery("DELETE FROM Contact x");
-            q.executeUpdate();
-        } finally {
-            mgr.close();
-        }
-        logger.info("Exiting deleteContacts");          
-    }
-    */
-
+	/*
+	 * public void deleteContacts() { logger.info("Entering deleteContacts");
+	 * EntityManager mgr = EMF.get().createEntityManager(); try { Query q =
+	 * mgr.createQuery("DELETE FROM Contact x"); q.executeUpdate(); } finally {
+	 * mgr.close(); } logger.info("Exiting deleteContacts"); }
+	 */
 
 }

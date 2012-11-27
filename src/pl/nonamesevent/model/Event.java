@@ -11,11 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.google.appengine.api.datastore.Key;
+
 @Entity
 public class Event {
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Long id;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Key key;
 
 	private Double lng;
 
@@ -45,24 +51,30 @@ public class Event {
 
 	private String powiat;
 
-	// @ManyToOne(cascade = { CascadeType.ALL }, targetEntity = Category.class,
-	// fetch = FetchType.EAGER)
-	// @JoinColumn(name = "categoryId")
-	// private Category category;
+
 
 //	@ManyToOne(targetEntity = Category.class, fetch = FetchType.EAGER)
 //	@JoinColumn(name = "categoryId")
-//	private Category category;
+	@ManyToOne
+	private Category category;
 
 	public Event() {
 	}
 
-	public Long getId() {
-		return id;
+//	public Long getId() {
+//		return id;
+//	}
+//
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
+
+	public Key getKey() {
+		return key;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setKey(Key key) {
+		this.key = key;
 	}
 
 	public Double getLng() {
@@ -177,13 +189,13 @@ public class Event {
 		this.powiat = powiat;
 	}
 
-//	public Category getCategory() {
-//		return category;
-//	}
-//
-//	public void setCategory(Category category) {
-//		this.category = category;
-//	}
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	// @Override
 	// public String toString() {

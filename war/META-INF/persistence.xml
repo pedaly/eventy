@@ -12,7 +12,7 @@
 
 		<properties>
 			<property name="datanucleus.NontransactionalRead" value="true" />
-			<property name="datanucleus.NontransactionalWrite" value="true" />
+			<property name="datanucleus.NontransactionalWrite" value="false" />
 			<property name="datanucleus.singletonEMFForName" value="true" />
 			<property name="datanucleus.ConnectionURL" value="appengine" />
 
