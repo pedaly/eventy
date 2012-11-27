@@ -12,7 +12,6 @@
     android:layout_height="match_parent" >
  
 
-       
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -67,7 +66,7 @@
                 android:ems="4"
                  android:layout_height="22dp" 
     			android:padding="1dp"
-	
+		
     			android:textSize="17dp"
                 android:background="#FFF"
                 android:layout_alignParentRight="true"
@@ -274,16 +273,17 @@
         android:layout_marginTop="25dp"
         android:text="Imprezy okolicznościowe" />
 
-    <TextView
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
+    
+
+    <Button
+        android:id="@+id/saveSettings"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imprezyOkolicznoscioweId"
-        android:layout_marginTop="45dp"
+         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
-        android:text="progess" />
-
- 
+        android:onClick="saveSettings"
+        android:text="Zapisz" />
 
 </RelativeLayout>
 </ScrollView>

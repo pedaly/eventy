@@ -36,9 +36,9 @@ public final class R {
         public static final int number=0x7f080006;
         public static final int pokazyCheckBox=0x7f080013;
         public static final int pokazyId=0x7f080014;
-        public static final int progress=0x7f08001b;
         public static final int promiecId=0x7f080003;
         public static final int promienOpisId=0x7f080004;
+        public static final int saveSettings=0x7f08001b;
         public static final int scrollView1=0x7f080001;
         public static final int seekBar=0x7f080005;
         public static final int spektakleCheckBox=0x7f08000f;
