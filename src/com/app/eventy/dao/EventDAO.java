@@ -90,7 +90,7 @@ public class EventDAO extends SQLiteOpenHelper {
 	
 	public List<Event> getAllEvents() {
 		SQLiteDatabase database = this.getReadableDatabase();
-		Cursor cursor = database.query(EVENT_TABLE_NAME, new String[]{ID, LNG, LAT}, null, null, null, null, null);
+		Cursor cursor = database.rawQuery("SELECT * FROM " + EVENT_TABLE_NAME, null);
 		List<Event> events = new ArrayList<Event>();
 		cursor.moveToFirst();
 		while(!cursor.isAfterLast()) {
@@ -98,6 +98,19 @@ public class EventDAO extends SQLiteOpenHelper {
 			event.setId(cursor.getInt(cursor.getColumnIndex(ID)));
 			event.setLng(cursor.getDouble(cursor.getColumnIndex(LNG)));
 			event.setLat(cursor.getDouble(cursor.getColumnIndex(LAT)));
+			event.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
+			event.setDescription(cursor.getString(cursor.getColumnIndex(DESCRIPTION)));
+			event.setDateOfEvent(new Date(cursor.getLong(cursor.getColumnIndex(DATE_OF_EVENT))));
+			event.setManagerOfEvent(cursor.getString(cursor.getColumnIndex(MANAGER_OF_EVENT)));
+			event.setCity(cursor.getString(cursor.getColumnIndex(CITY)));
+			event.setStreetAndNumber(cursor.getString(cursor.getColumnIndex(STREET_AND_NUMBER)));
+			event.setWebpage(cursor.getString(cursor.getColumnIndex(WEBPAGE)));
+			event.setPhone(cursor.getString(cursor.getColumnIndex(PHONE)));
+			event.setSkype(cursor.getString(cursor.getColumnIndex(SKYPE)));
+			event.setPostcode(cursor.getString(cursor.getColumnIndex(POSTCODE)));
+			event.setWojewodztwo(cursor.getString(cursor.getColumnIndex(WOJEWODZTWO)));
+			event.setPowiat(cursor.getString(cursor.getColumnIndex(POWIAT)));
+			event.setCategory(cursor.getInt(cursor.getColumnIndex(CATEGORY)));
 			events.add(event);
 			cursor.moveToNext();
 		}

@@ -3,6 +3,7 @@ package com.app.eventy;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -38,9 +39,11 @@ public class EventItemizedOverlay extends ItemizedOverlay {
 		
 	@Override
 	protected boolean onTap(int index) {
-		Intent intent = new Intent(context, EventActivity.class);
-		intent.putExtra("id", events.get(index).getId());
-		context.startActivity(intent);
+		Event event = events.get(index);
+		AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+		dialog.setTitle(event.getTitle());
+		dialog.setMessage(event.getDescription());
+		dialog.show();
 		return true;
 	}
 

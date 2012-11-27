@@ -6,5 +6,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_event">EventActivity</string>
+    <string name="title_activity_aaa">AaaActivity</string>
 
 </resources>
