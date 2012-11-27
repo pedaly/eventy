@@ -21,10 +21,35 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
+        public static final int imprezyCheckBox=0x7f080019;
+        public static final int imprezyId=0x7f08001a;
+        public static final int imprezyOkolicznoscioweCheckBox=0x7f080017;
+        public static final int imprezyOkolicznoscioweId=0x7f080018;
+        public static final int kategorieId=0x7f080007;
+        public static final int kategorieOpisId=0x7f080008;
+        public static final int kinoCheckBox=0x7f08000b;
+        public static final int kinoId=0x7f08000c;
+        public static final int koncertyCheckBox=0x7f080009;
+        public static final int koncertyId=0x7f08000a;
         public static final int mapview=0x7f080000;
-        public static final int menu_settings=0x7f080003;
-        public static final int progress=0x7f080002;
-        public static final int seekBar=0x7f080001;
+        public static final int menu_settings=0x7f08001c;
+        public static final int number=0x7f080006;
+        public static final int pokazyCheckBox=0x7f080013;
+        public static final int pokazyId=0x7f080014;
+        public static final int progress=0x7f08001b;
+        public static final int promiecId=0x7f080003;
+        public static final int promienOpisId=0x7f080004;
+        public static final int scrollView1=0x7f080001;
+        public static final int seekBar=0x7f080005;
+        public static final int spektakleCheckBox=0x7f08000f;
+        public static final int spektakleId=0x7f080010;
+        public static final int targiCheckBox=0x7f080015;
+        public static final int targiId=0x7f080016;
+        public static final int title=0x7f080002;
+        public static final int wydarzeniaId=0x7f080012;
+        public static final int wydarzeniaeCheckBox=0x7f080011;
+        public static final int wystawyCheckBox=0x7f08000d;
+        public static final int wystawyId=0x7f08000e;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

@@ -1,22 +1,289 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+  <ScrollView
+       xmlns:android="http://schemas.android.com/apk/res/android"
+   		 xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        
+      >
+        
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+ 
 
-    <SeekBar
+       
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_centerHorizontal="true"   
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="17dp"
+        android:text="Ustawienia"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+           
+    <TextView
+        android:id="@+id/promiecId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        
+        android:text="Promień"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="20dp" />
+    
+        <TextView
+        android:id="@+id/promienOpisId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+
+        android:text="Podaj promiń, z którego będą pobierane eventy"
+        android:textColor="#fa6c00"
+        android:layout_below="@+id/promiecId"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="10dp" />
+        
+         <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp" 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/promiecId"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="24dp"
+         android:layout_marginRight="24dp"
+      
         />
+         
+            <EditText
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+               
+            	android:layout_below="@+id/seekBar"
+                android:layout_marginTop="5dp"
+                android:ems="4"
+                 android:layout_height="22dp" 
+    			android:padding="1dp"
+	
+    			android:textSize="17dp"
+                android:background="#FFF"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="24dp"
+                android:inputType="number" >
+       
+   			 </EditText>
+         
+         
+         
+    
+    
+    
+    
+    
+           
+    <TextView
+        android:id="@+id/kategorieId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        
+        android:text="Kategorie"
+        android:layout_below="@+id/number"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="20dp" />
+    
+        <TextView
+        android:id="@+id/kategorieOpisId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+    
+        android:text="Wybierz kategorie, do których będą należeć pobierane eventy"
+        android:textColor="#fa6c00"
+        android:layout_below="@+id/kategorieId"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="10dp" />
+
+
+  
+
+    <CheckBox
+        android:id="@+id/koncertyCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/koncertyId"
+        android:layout_alignBottom="@+id/koncertyId"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24dp" />
+
+    
+    
+     <CheckBox
+        android:id="@+id/kinoCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/kinoId"
+        android:layout_alignBottom="@+id/kinoId"
+        android:layout_alignLeft="@+id/koncertyCheckBox" />
+    <CheckBox
+        android:id="@+id/wystawyCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/wystawyId"
+        android:layout_alignBottom="@+id/wystawyId"
+        android:layout_alignLeft="@+id/koncertyCheckBox" />
+    
+    <CheckBox
+        android:id="@+id/spektakleCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/spektakleId"
+        android:layout_alignBottom="@+id/spektakleId"
+        android:layout_alignLeft="@+id/koncertyCheckBox" />
+    
+    
+      <CheckBox
+        android:id="@+id/wydarzeniaeCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/wydarzeniaId"
+        android:layout_alignBottom="@+id/wydarzeniaId"
+        android:layout_alignLeft="@+id/koncertyCheckBox" />
+      
+            <CheckBox
+        android:id="@+id/pokazyCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/pokazyId"
+        android:layout_alignBottom="@+id/pokazyId"
+        android:layout_alignLeft="@+id/koncertyCheckBox" />
+            
+            
+              <CheckBox
+        android:id="@+id/targiCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/targiId"
+        android:layout_alignBottom="@+id/targiId"
+        android:layout_alignLeft="@+id/koncertyCheckBox" />
+              
+                 <CheckBox
+        android:id="@+id/imprezyOkolicznoscioweCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/imprezyOkolicznoscioweId"
+        android:layout_alignBottom="@+id/imprezyOkolicznoscioweId"
+        android:layout_alignLeft="@+id/koncertyCheckBox" />
+    
+    
+     <CheckBox
+        android:id="@+id/imprezyCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/imprezyId"
+        android:layout_alignBottom="@+id/imprezyId"
+        android:layout_alignLeft="@+id/koncertyCheckBox" />
+    
+    
+    <TextView
+        android:id="@+id/koncertyId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/kategorieOpisId"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="30dp"
+        android:text="Koncerty" />
+
+    <TextView
+        android:id="@+id/kinoId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/koncertyId"
+        android:layout_below="@+id/koncertyId"
+        android:layout_marginTop="25dp"
+        android:text="Kino i film" />
+    
+    <TextView
+        android:id="@+id/wystawyId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/kinoId"
+         android:layout_below="@+id/kinoId"
+        android:layout_marginTop="25dp"
+        android:text="Wystawy,wydarzenia artystyczne" />
+    
+     <TextView
+        android:id="@+id/imprezyId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/wystawyId"
+        android:layout_below="@+id/wystawyId"
+        android:layout_marginTop="25dp"
+        android:text="Imprezy klubowe i taneczne" />
+     
+     <TextView
+        android:id="@+id/spektakleId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imprezyId"
+        android:layout_below="@+id/imprezyId"
+        android:layout_marginTop="25dp"
+        android:text="Spektakle i przedstwienia" />
+     
+   
+        
+          <TextView
+        android:id="@+id/wydarzeniaId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spektakleId"
+        android:layout_below="@+id/spektakleId"
+        android:layout_marginTop="25dp"
+        android:text="Wydarzenia sportowe" />
+          
+            
+          <TextView
+        android:id="@+id/pokazyId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/wydarzeniaId"
+        android:layout_below="@+id/wydarzeniaId"
+        android:layout_marginTop="25dp"
+        android:text="Pokazy, imprezy plenerowe" />
+          
+         <TextView
+        android:id="@+id/targiId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pokazyId"
+        android:layout_below="@+id/pokazyId"
+        android:layout_marginTop="25dp"
+        android:text="Targi kursy, szkolenia" />
+         
+         
+           <TextView
+        android:id="@+id/imprezyOkolicznoscioweId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/targiId"
+        android:layout_below="@+id/targiId"
+        android:layout_marginTop="25dp"
+        android:text="Imprezy okolicznościowe" />
 
     <TextView
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/imprezyOkolicznoscioweId"
+        android:layout_marginTop="45dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:text="progess" />
+
+ 
 
 </RelativeLayout>
+</ScrollView>
