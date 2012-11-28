@@ -42,14 +42,14 @@ public class EventController {
 		ModelAndView mav = new ModelAndView("home");
 		mav.addObject("events", events);
 		
-		Category cat =  new Category();
-		cat.setName("druga kategoria");
-		Dao.INSTANCE.addCategory(cat);
-		
-		Event e = new Event();
-		e.setCity("Mandalay");
-		Dao.INSTANCE.addEvent(e);		
-		e.setCategory(cat);		
+//		Category cat =  new Category();
+//		cat.setName("druga kategoria");
+//		Dao.INSTANCE.addCategory(cat);
+//		
+//		Event e = new Event();
+//		e.setCity("Mandalay");
+//		Dao.INSTANCE.addEvent(e);		
+//		e.setCategory(cat);		
 
 		return mav;
 	}

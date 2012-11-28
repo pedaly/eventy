@@ -3,6 +3,14 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ page import="java.util.List" %>
+<%@ page import="com.google.appengine.api.users.User" %>
+<%@ page import="com.google.appengine.api.users.UserService" %>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
+	
+	
 <!DOCTYPE html>
 <html class="no-js">
 <head>
@@ -27,10 +35,35 @@
 </head>
 <body>
 
+
+
+
+
+
 	<nav class="top_menu">
 		<a href="/home.do"> Zarządzaj wydarzeniami </a> <span>&nbsp |
 			&nbsp <span> <a href="#"> Zarządzaj kategoriami</a> <span>&nbsp
 					| &nbsp <span> <a href="#"> Zarządzaj uzytkownikami </a>
+					
+	<span style="float:right;font-size: 14px;margin-right:180px;"> 				
+	<%
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
+		if (user != null) {
+			pageContext.setAttribute("user", user);
+	%>
+	
+		Witaj, ${fn:escapeXml(user.nickname)}! (<a href="<%=userService.createLogoutURL("/home")%>">
+		Wyloguj</a>.)
+
+	<%
+		} else {
+		System.out.println(request.getRequestURI());
+		System.out.println(request.getRequestURI());
+	%>
+		 <a href="<%=userService.createLoginURL("/home")%>"> Logowanie</a> 
+	<% } %>
+	</span>
 	</nav>
 
 	<div class="outer">
