@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import com.app.eventy.model.Event;

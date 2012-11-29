@@ -78,7 +78,6 @@ public class SettingsActivity extends Activity  implements OnSeekBarChangeListen
 		
 	}
 	public void getSettings() {
-		int a=settings.getInt("promien", 0);
 		mProgressText.setText(String.valueOf(settings.getInt("promien", 0)));
 		getSingleSetting(R.id.imprezyOkolicznoscioweCheckBox,"imprezyOkolicznosciowe");
 		getSingleSetting(R.id.imprezyCheckBox,"imprezy");
@@ -94,7 +93,6 @@ public class SettingsActivity extends Activity  implements OnSeekBarChangeListen
 	
 	public void getSingleSetting(int resId,String str){
 		 CheckBox checkBox = (CheckBox) findViewById(resId);
-		 boolean b=settings.getBoolean(str, false);
 		 checkBox.setChecked(settings.getBoolean(str, false));
 		
 	}
