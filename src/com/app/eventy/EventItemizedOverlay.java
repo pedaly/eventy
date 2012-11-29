@@ -5,8 +5,11 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.app.eventy.model.Event;
 import com.google.android.maps.GeoPoint;
@@ -39,11 +42,37 @@ public class EventItemizedOverlay extends ItemizedOverlay {
 		
 	@Override
 	protected boolean onTap(int index) {
+		
 		Event event = events.get(index);
-		AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-		dialog.setTitle(event.getTitle());
-		dialog.setMessage(event.getDescription());
-		dialog.show();
+		
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.dialog_event, null);
+		
+		TextView description = (TextView) view.findViewById(R.id.description);
+		description.setText(event.getDescription());
+		
+		TextView address = (TextView) view.findViewById(R.id.address);
+		address.setText(event.getStreetAndNumber() + "\n"
+				+ event.getPostcode() + " " + event.getCity() + "\n"
+				+ event.getPowiat() + ", " + event.getWojewodztwo());
+		
+		TextView contact = (TextView) view.findViewById(R.id.contact);
+		contact.setText(
+			"Manager: " + event.getManagerOfEvent() + "\n" +
+			"WWW: " + event.getWebpage() + "\n" +
+			"Tel: " + event.getPhone() + "\n" +
+			"Skype: " + event.getSkype() + "\n"
+		);
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setIcon(R.drawable.ic_launcher).setTitle(event.getTitle()).setView(view).setPositiveButton("Zamknij", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+
+		builder.create().show();
+		
 		return true;
 	}
 

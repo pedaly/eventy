@@ -21,6 +21,9 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
+        public static final int address=0x7f07001f;
+        public static final int contact=0x7f070021;
+        public static final int description=0x7f07001d;
         public static final int imprezyCheckBox=0x7f070019;
         public static final int imprezyId=0x7f07001a;
         public static final int imprezyOkolicznoscioweCheckBox=0x7f070017;
@@ -44,6 +47,9 @@ public final class R {
         public static final int spektakleId=0x7f070010;
         public static final int targiCheckBox=0x7f070015;
         public static final int targiId=0x7f070016;
+        public static final int textView1=0x7f07001e;
+        public static final int textView2=0x7f07001c;
+        public static final int textView3=0x7f070020;
         public static final int title=0x7f070002;
         public static final int wydarzeniaId=0x7f070012;
         public static final int wydarzeniaeCheckBox=0x7f070011;
@@ -53,6 +59,7 @@ public final class R {
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_settings=0x7f030001;
+        public static final int dialog_event=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

@@ -4,21 +4,21 @@ import java.util.Date;
 
 public class Event {
 
-	private Integer id;
-	private Double lng;
-	private Double lat;
-	private String title;
-	private String description;
+	private Integer id;//
+	private Double lng;//
+	private Double lat;//
+	private String title;//
+	private String description;//
 	private Date dateOfEvent;
-	private String managerOfEvent;
-	private String city;
-	private String streetAndNumber;
-	private String webpage;
-	private String phone;
-	private String skype;
-	private String postcode;
-	private String wojewodztwo;
-	private String powiat;
+	private String managerOfEvent;//
+	private String city;//
+	private String streetAndNumber;//
+	private String webpage;//
+	private String phone;//
+	private String skype;//
+	private String postcode;//
+	private String wojewodztwo;//
+	private String powiat;//
 	private Integer category;
 	
 	public Integer getId() {
