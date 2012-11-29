@@ -39,7 +39,7 @@ public class MainActivity extends MapActivity {
 	    setContentView(R.layout.activity_main);
 	    
 	    settings = getSharedPreferences(PREFS_NAME, 0);
-	    context.getApplicationContext();
+	    context=getApplicationContext();
 	     if(settings.getBoolean("firstRun", true)){
 	    	 SharedPreferences.Editor editor = settings.edit();
 	         editor.putBoolean("firstRun", false);
@@ -49,26 +49,7 @@ public class MainActivity extends MapActivity {
 	         
 	     }
 	 
-	     
-
-	    
-	    // Wyswietlanie eventow na mapie
-	    MapView mapView = (MapView) findViewById(R.id.mapview);
-	    mapView.getController().setCenter(new GeoPoint((int) (52.05 * 1E6), (int) (19.45 * 1E6)));
-	    mapView.getController().setZoom(7);
-	    mapView.setBuiltInZoomControls(true);
-	    
-	    Drawable eventMarker = this.getResources().getDrawable(R.drawable.event_marker);
-	    EventItemizedOverlay eventItemizedOverlay = new EventItemizedOverlay(eventMarker, this);
-	    
-	    EventDAO eventDAO = new EventDAO(getApplicationContext());
-	    List<Event> events = eventDAO.getAllEvents();
-	    for(Event event : events) {
-	    	eventItemizedOverlay.addEvent(event);
-	    }
-	    
-	    mapView.getOverlays().add(eventItemizedOverlay);
-	    //Koniec
+	     refreshView();
 	    
 	}
 	
@@ -120,7 +101,10 @@ public class MainActivity extends MapActivity {
 		    	try {
 					List<Event> le=update.SendRequest(location);
 					EventDAO eventDao=new EventDAO(context);
+					eventDao.deleteAllEvents();
+					eventDao.saveEvents(le);
 					
+					refreshView();
 					
 				} catch (IOException e) {
 					locationManager.removeUpdates(this);
@@ -139,6 +123,28 @@ public class MainActivity extends MapActivity {
 
 		// Register the listener with the Location Manager to receive location updates
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+		
+	}
+
+	protected void refreshView() {
+	    
+		MapView mapView = (MapView) findViewById(R.id.mapview);
+	    mapView.getOverlays().clear();
+	    
+	    mapView.getController().setCenter(new GeoPoint((int) (52.05 * 1E6), (int) (19.45 * 1E6)));
+	    mapView.getController().setZoom(7);
+	    mapView.setBuiltInZoomControls(true);
+	    
+	    Drawable eventMarker = this.getResources().getDrawable(R.drawable.event_marker);
+	    EventItemizedOverlay eventItemizedOverlay = new EventItemizedOverlay(eventMarker, this);
+	    
+	    EventDAO eventDAO = new EventDAO(getApplicationContext());
+	    List<Event> events = eventDAO.getAllEvents();
+	    for(Event event : events) {
+	    	eventItemizedOverlay.addEvent(event);
+	    }
+	    
+	    mapView.getOverlays().add(eventItemizedOverlay);
 		
 	}
 }
