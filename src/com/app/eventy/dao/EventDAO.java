@@ -119,25 +119,33 @@ public class EventDAO extends SQLiteOpenHelper {
 		return events;
 	}
 	
-	public void saveEvent(Event event) {
+	public void saveEvents(List<Event> events) {
 		SQLiteDatabase database = this.getWritableDatabase();
-		ContentValues content = new ContentValues();
-		content.put(LNG, event.getLng());
-		content.put(LAT, event.getLat());
-		content.put(TITLE, event.getTitle());
-		content.put(DESCRIPTION, event.getDescription());
-		content.put(DATE_OF_EVENT, event.getDateOfEvent().getTime());
-		content.put(MANAGER_OF_EVENT, event.getManagerOfEvent());
-		content.put(CITY, event.getCity());
-		content.put(STREET_AND_NUMBER, event.getStreetAndNumber());
-		content.put(WEBPAGE, event.getWebpage());
-		content.put(PHONE, event.getPhone());
-		content.put(SKYPE, event.getSkype());
-		content.put(POSTCODE, event.getPostcode());
-		content.put(WOJEWODZTWO, event.getWojewodztwo());
-		content.put(POWIAT, event.getPowiat());
-		content.put(CATEGORY, event.getCategory());
-		database.insert(EVENT_TABLE_NAME, null, content);
+		for(Event event : events) {
+			ContentValues content = new ContentValues();
+			content.put(LNG, event.getLng());
+			content.put(LAT, event.getLat());
+			content.put(TITLE, event.getTitle());
+			content.put(DESCRIPTION, event.getDescription());
+			content.put(DATE_OF_EVENT, event.getDateOfEvent().getTime());
+			content.put(MANAGER_OF_EVENT, event.getManagerOfEvent());
+			content.put(CITY, event.getCity());
+			content.put(STREET_AND_NUMBER, event.getStreetAndNumber());
+			content.put(WEBPAGE, event.getWebpage());
+			content.put(PHONE, event.getPhone());
+			content.put(SKYPE, event.getSkype());
+			content.put(POSTCODE, event.getPostcode());
+			content.put(WOJEWODZTWO, event.getWojewodztwo());
+			content.put(POWIAT, event.getPowiat());
+			content.put(CATEGORY, event.getCategory());
+			database.insert(EVENT_TABLE_NAME, null, content);
+		}
+		database.close();
+	}
+	
+	public void deleteAllEvents() {
+		SQLiteDatabase database = this.getWritableDatabase();
+		database.delete(EVENT_TABLE_NAME, null, null);
 		database.close();
 	}
 
