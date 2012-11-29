@@ -1,16 +1,23 @@
 package com.app.eventy;
 
+import java.io.IOException;
 import java.util.List;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.app.eventy.dao.EventDAO;
 import com.app.eventy.model.Event;
+import com.app.eventy.service.UpdatingService;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
@@ -18,8 +25,12 @@ import com.google.android.maps.MapView;
 public class MainActivity extends MapActivity {
 	
 	public static final String PREFS_NAME = "MyPrefsFile";
-	public static final int MENU_SETTING_ID = 1;
-	public static final int MENU_EXIT_ID = 2;
+	public static final int MENU_UPDATE_ID = 1;
+	public static final int MENU_SETTING_ID = 2;
+	public static final int MENU_EXIT_ID = 3;
+	private LocationManager locationManager;
+	private SharedPreferences settings;
+	private Context context;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +38,8 @@ public class MainActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_main);
 	    
-	    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-
+	    settings = getSharedPreferences(PREFS_NAME, 0);
+	    context.getApplicationContext();
 	     if(settings.getBoolean("firstRun", true)){
 	    	 SharedPreferences.Editor editor = settings.edit();
 	         editor.putBoolean("firstRun", false);
@@ -70,6 +81,7 @@ public class MainActivity extends MapActivity {
 	 @Override
 	    public boolean onCreateOptionsMenu(Menu menu)
 	    {
+		 menu.add(Menu.NONE,MENU_UPDATE_ID,Menu.NONE,"Poka¿ eventy");
 	     	menu.add(Menu.NONE,MENU_SETTING_ID,Menu.NONE,"Ustawienia");
 	     	menu.add(Menu.NONE,MENU_EXIT_ID,Menu.NONE,"Wyjœcie");
 	        
@@ -89,7 +101,44 @@ public class MainActivity extends MapActivity {
 	    		 Intent intent = new Intent(this, SettingsActivity.class);
 		         startActivity(intent);
 	    		return true;
+	    	} else if(item.getItemId() == MENU_UPDATE_ID){
+	    		getCurrentLocation();
+	    		
 	    	}
 	    	return false;
 	    }
+
+	private void getCurrentLocation() {
+		// Acquire a reference to the system Location Manager
+		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		
+		// Define a listener that responds to location updates
+		LocationListener locationListener = new LocationListener() {
+		    public void onLocationChanged(Location location) {
+		    	UpdatingService update= new UpdatingService(settings);
+		    	locationManager.removeUpdates(this);
+		    	try {
+					List<Event> le=update.SendRequest(location);
+					EventDAO eventDao=new EventDAO(context);
+					
+					
+				} catch (IOException e) {
+					locationManager.removeUpdates(this);
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	
+		    }
+
+		    public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+		    public void onProviderEnabled(String provider) {}
+
+		    public void onProviderDisabled(String provider) {}
+		  };
+
+		// Register the listener with the Location Manager to receive location updates
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+		
+	}
 }

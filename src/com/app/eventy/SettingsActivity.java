@@ -14,7 +14,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 
 
 public class SettingsActivity extends Activity  implements OnSeekBarChangeListener {
-	private static final String PREFS_NAME = "MyPrefsFile2";
+	private static final String PREFS_NAME = "MyPrefsFile";
 	private SharedPreferences settings;
 	private Editor editor;
 	private SeekBar mSeekBar;
