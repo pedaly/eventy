@@ -25,7 +25,7 @@
 <body>
 
 	<div class="mainPage">
-		<a href="/eventsList"><div class="logoMain"></div></a>
+		<a href="/user/eventsList"><div class="logoMain"></div></a>
 		<div>
 			<p>
 				<%

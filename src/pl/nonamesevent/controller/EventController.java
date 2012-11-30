@@ -1,12 +1,10 @@
 package pl.nonamesevent.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.jasper.tagplugins.jstl.core.Redirect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,24 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-
 import pl.nonamesevent.dao.Dao;
-import pl.nonamesevent.model.Category;
 import pl.nonamesevent.model.Event;
 
 @Controller
+@RequestMapping(value = "/user")
 public class EventController {
 
 	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory
 			.getLogger(EventController.class);
 
-	@RequestMapping(value = {"/index", "/"}, method = RequestMethod.GET)
-	public ModelAndView index() {
-		System.out.println("/index");
-		return new ModelAndView("index");
-	}
 
 	@RequestMapping(value = "/eventsList", method = RequestMethod.GET)
 	public ModelAndView home() {
@@ -70,7 +61,7 @@ public class EventController {
 		Dao.INSTANCE.remove(id);
 		return "redirect: eventsList";
 	}
-	@RequestMapping(value = "/addEvent", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/addEvent", method = RequestMethod.GET)
 	public ModelAndView addEvent(@ModelAttribute("event") Event event,
 			BindingResult result) {
 		return new ModelAndView("addEvent");
