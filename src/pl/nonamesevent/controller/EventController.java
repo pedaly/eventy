@@ -65,6 +65,11 @@ public class EventController {
 		mav.addObject("event",e);
 		return mav;
 	}
+	@RequestMapping(value = "/event/{id}/delete")
+	public String deleteEvent(@PathVariable int id){
+		Dao.INSTANCE.remove(id);
+		return "redirect: eventsList";
+	}
 	@RequestMapping(value = "/addEvent", method = RequestMethod.GET)
 	public ModelAndView addEvent(@ModelAttribute("event") Event event,
 			BindingResult result) {

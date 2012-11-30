@@ -53,11 +53,11 @@
 				<a class="MyButton" href="/event/${event.key.id}/delete"> Usuń </a>
 			</nav>
 			<div class="singleEvent">
-				<p><span class="label">Tytuł : </span> <span>${event.title}</span></p>
-				<p><span class="label">Termin : </span> <span><fmt:formatDate value="${event.dateOfEvent}" pattern="yyyy-MM-dd" /></span></p>
+				<p><span class="label">Tytuł : </span> <span>${ fn:length(event.title) == 0 ? "b.d." :  event.title}</span></p>
+				<p><span class="label">Termin : </span> <span><fmt:formatDate value="${event.dateOfEvent }" pattern="yyyy-MM-dd" /></span></p>
 				<p><span class="label">Lokalizacja : </span>  <span>${event.city}, ${event.streetAndNumber},  ${event.wojewodztwo}</span></p>
 				<p><span class="label">Współrzędne : </span> <span>${event.lat} , ${event.lng}</span></p>
-				<p><span class="label">Opis : </span> <span> ${event.description}</span></p>
+				<p><span class="label">Opis : </span> <span> ${ fn:length(event.description) == 0 ? "b.d" : event.description}</span></p>
 				<p class="details_button">+ Details</p>
 					<div class="details">
 						<p><span class="label">WWW : </span> <span> ${ fn:length(event.webpage) == 0 ? "b.d." :  event.webpage}</span></p>
