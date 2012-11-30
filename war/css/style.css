@@ -4,7 +4,9 @@ body {
 	font-family: 'Arial';
 	color:#333;
 	/*background-color:#0c0d12;*/
-	background-color: #eee;
+	background-color: #eee;	
+	background-image:url(../img/tlo.png);
+	
 	font-size:14px;
 	
 }
@@ -111,8 +113,22 @@ tr.event_row td{
 td.edit{
 	background-color: #345;
 }
-.mainPage h2{
-	display:inline;
+.mainPage{
+	margin: 8%  0 0 25%;
+	width:50%;
+	text-align: center;
+}
+.mainPage .logoMain{
+	height: 213px;
+	background: url("../img/logo_mainpage.png") no-repeat;
+	background-position: center;
+	
+}
+.login{
+	color:#999;
+	font-size:1em;
+	font-weight:200;
+	letter-spacing:-0.8pt;
 }
 footer{
 	
@@ -144,6 +160,32 @@ footer{
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2379ba', endColorstr='#99c5f2');
 	background-color:#2379ba;
 }.MyButton:active {
+	position:relative;
+	top:1px;
+}
+
+.login {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background-color:transparent;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}
+.login:hover{
+	bacground-color: #eee;
+}
+.login:active {
 	position:relative;
 	top:1px;
 }

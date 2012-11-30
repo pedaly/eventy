@@ -3,14 +3,14 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%@ page import="java.util.List" %>
-<%@ page import="com.google.appengine.api.users.User" %>
-<%@ page import="com.google.appengine.api.users.UserService" %>
-<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
-	
-	
+
+<%@ page import="java.util.List"%>
+<%@ page import="com.google.appengine.api.users.User"%>
+<%@ page import="com.google.appengine.api.users.UserService"%>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
 <!DOCTYPE html>
 <html class="no-js">
 <head>
@@ -35,9 +35,12 @@
 </head>
 <body>
 
-<div class="mainPage">
-	<h2> get more </h2>
-	<img src="../img/logo.png"/>
-</div>
+	<div class="mainPage">
+		<div class="logoMain"></div>
+		<div>
+			<p>
+				<a class="login" ref="#"> loguj </a>
+		</div>
+	</div>
 </body>
 </html>
