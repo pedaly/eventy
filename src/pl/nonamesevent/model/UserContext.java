@@ -2,7 +2,11 @@ package pl.nonamesevent.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Obiekt który trzyma informacje od uzytkownika, na ich podstawie zwraca odpowiednia liste eventów
+ * @author Kamil
+ *
+ */
 public class UserContext {
 
 	private List<String> categories = new ArrayList<String>();
@@ -28,13 +32,13 @@ public class UserContext {
 	public double getLat() {
 		return lat;
 	}
-	public void setLat(Long lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
 	public double getLon() {
 		return lon;
 	}
-	public void setLon(Long lon) {
+	public void setLon(double lon) {
 		this.lon = lon;
 	}
 	public int getSearchRadius() {
@@ -44,16 +48,21 @@ public class UserContext {
 		this.searchRadius = searchRadius;
 	}
 	@Override
-	public String toString(){
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("[");
-		for(String x : categories){
-			stringBuilder.append(x);
-			stringBuilder.append(",");
-		}
-		stringBuilder.append("]");
-		return "{categories : " + stringBuilder  + ", " + "lat : " + lat +  ", lon : " + lon + ", searchRadius : " + searchRadius + " }";
+	public String toString() {
+	   return "DataObject [lat=" + lat + ", lon=" + lon + ", searchRadius="
+		+ searchRadius+ ", categories" + categories + "]";
 	}
+//	@Override
+//	public String toString(){
+//		StringBuilder stringBuilder = new StringBuilder();
+//		stringBuilder.append("[");
+//		for(String x : categories){
+//			stringBuilder.append(x);
+//			stringBuilder.append(",");
+//		}
+//		stringBuilder.append("]");
+//		return "{categories : " + stringBuilder  + ", " + "lat : " + lat +  ", lon : " + lon + ", searchRadius : " + searchRadius + " }";
+//	}
 	
 	
 }

@@ -48,13 +48,15 @@
 <body>
 
 	<nav class="top_menu">
-		<a href="/home.do"> Zarządzaj wydarzeniami </a> <span>&nbsp |
+		<div class="logo"></div>
+		<div class="links">
+		<a href="/eventsList"> Zarządzaj wydarzeniami </a> <span>&nbsp |
 			&nbsp <span> <a href="#"> Zarządzaj kategoriami</a> <span>&nbsp
 					| &nbsp <span> <a href="#"> Zarządzaj uzytkownikami </a>
+		</div>
 	</nav>
 
 	<div class="outer">
-		<div class="logo"></div>
 		<div class="container">
 
 
@@ -63,10 +65,8 @@
 
 
 				<nav class="menu">
-					<a href="#"> Zapisz i dodaj kolejne </a><span> | </span> <a
-						href="/save2"> Zapisz </a> <input type="submit"
-						value="Zapisz event do chuja" />
-
+					<button class="MyButton" type="submit" value="true" name="submit"> Zapisz i dodaj kolejne </button>
+					<button class="MyButton" type="submit" value="false" name="submit"> Zapisz </button>
 				</nav>
 
 				<div id="map" class="mapquestMap">
@@ -111,6 +111,7 @@
 
 		</div>
 	</div>
+
 
 
 	<script src="js/plugins.js"></script>

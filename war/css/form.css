@@ -80,3 +80,32 @@ input:hover,textarea:hover,input:focus,textarea:focus {
 	float: right;
 	margin: 15px;
 }
+.MyButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #e1e9ed;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #e1e9ed;
+	box-shadow:inset 0px 1px 0px 0px #e1e9ed;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #99c5f2), color-stop(1, #2379ba) );
+	background:-moz-linear-gradient( center top, #99c5f2 5%, #2379ba 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#99c5f2', endColorstr='#2379ba');
+	background-color:#99c5f2;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 25px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #266099;
+}.MyButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2379ba), color-stop(1, #99c5f2) );
+	background:-moz-linear-gradient( center top, #2379ba 5%, #99c5f2 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2379ba', endColorstr='#99c5f2');
+	background-color:#2379ba;
+}.MyButton:active {
+	position:relative;
+	top:1px;
+}

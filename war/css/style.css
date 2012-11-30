@@ -15,11 +15,13 @@ a, a.active, a.visited{
 nav.top_menu {
 	font-size:12px;
 	letter-spacing:-0.8pt;
+/* 	text-align:right; */
 	color: #ddd;
 	position: fixed;
+	z-index:10;
 	width: 100%;
-	height: 2em;
-	padding: 0.5em 0 0 0.5em;
+	height: 3em;
+/* 	padding: 0.5em 2em 0em 0; */
 	min-width:700px;
 	border-bottom:1px solid #111;
 	
@@ -35,6 +37,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#292a2d', end
 
 
 }
+nav.top_menu div.links{
+	margin-right: 20px;	
+	position:absolute;
+	top:0.5em;
+	right:5px;
+	padding: 0.5em 2em 0em 0; 
+}
+
 nav.menu{
 	border-bottom: 3px groove #fff;
 	padding:0.5em;
@@ -45,15 +55,25 @@ nav.menu a{
 }
 
 .outer{
-	margin: 0 0;
+	margin: 0 auto;
+	position:relative;
+	top:3.5em;
 }
 .logo{
 	background: url(../img/logo.png) no-repeat;
-	background-size: auto 80px;
-	position:relative;
-	top:2.5em;
-	width:100%;
-	height:120px;
+	background-size: 100% auto;
+	background-position: 0px 0px;
+	position:absolute;
+	z-index:999;
+	min-width:6em;
+	width:5%;
+	height:3em;
+}
+.container{
+	margin: 0 auto;
+	position: relative;
+	width: 80%;
+	min-width:700px;
 }
 .inline{
 	display:inline;
@@ -81,14 +101,49 @@ table tr.event_row td{
 tr.event_row:nth-child(even){
 	background-color: #ccc;
 }
-tr.event_row td:nth-child(odd){
-	background-color: #bbb;
+/*tr.event_row:nth-child(odd){
+	background-color: #eee;
+}*/
+tr.event_row td{
+	border-top: 1px solid #ddd;
+	border-right: 1px solid #888;
 }
 td.edit{
 	background-color: #345;
 }
-.container{
-	margin: 0 auto;
-	width: 80%;
-	min-width:700px;
+.mainPage h2{
+	display:inline;
+}
+footer{
+	
+	position: absolute;
+}
+.MyButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #e1e9ed;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #e1e9ed;
+	box-shadow:inset 0px 1px 0px 0px #e1e9ed;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #99c5f2), color-stop(1, #2379ba) );
+	background:-moz-linear-gradient( center top, #99c5f2 5%, #2379ba 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#99c5f2', endColorstr='#2379ba');
+	background-color:#99c5f2;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 25px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #266099;
+}.MyButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2379ba), color-stop(1, #99c5f2) );
+	background:-moz-linear-gradient( center top, #2379ba 5%, #99c5f2 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2379ba', endColorstr='#99c5f2');
+	background-color:#2379ba;
+}.MyButton:active {
+	position:relative;
+	top:1px;
 }

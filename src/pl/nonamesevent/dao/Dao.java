@@ -1,5 +1,6 @@
 package pl.nonamesevent.dao;
 
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +89,8 @@ public enum Dao {
 		// lon, distance, null, null, null, null);
 		// EntityManager em = EMFService.get().createEntityManager();
 		// Query q = em.createQuery(query);
+		
+		
 		EntityManager em = EMFService.get().createEntityManager();
 		HashMap<String, Double> boundingCords = GeoLocationInBoundingCircle
 				.getBoundingCords(lat, lon, distance);
@@ -97,6 +100,7 @@ public enum Dao {
 		Root<Event> candidate = cq.from(Event.class);
 		candidate.alias("e");
 		cq.select(candidate);
+
 		// Path titleField = candidate.get("lat");
 		// //cq.where(cb.equal(titleField, "Bar Book"));
 		// cq.where(cb.lt(titleField, boundingCords.get("latMin")));
@@ -109,18 +113,28 @@ public enum Dao {
 		q.setParameter("latMin", boundingCords.get("latMin"));
 		q.setParameter("latMax", boundingCords.get("latMax"));
 
-		System.out.println("latMin : " + boundingCords.get("latMin"));
-		System.out.println("latMax : " + boundingCords.get("latMax"));
-		List<Event> list = q.getResultList();
+		System.out.println("# latMin : " + boundingCords.get("latMin"));
+		System.out.println("# latMax : " + boundingCords.get("latMax"));
+		System.out.println("# lonMin : " + boundingCords.get("lonMin"));
+		System.out.println("# lonMax : " + boundingCords.get("lonMax"));
+		List<Event> tmp = q.getResultList();
+		
+		List<Event> list = new ArrayList<Event>();
+		for(Event e : tmp){
+			if(e.getLng() > boundingCords.get("lonMin") && e.getLng() < boundingCords.get("lonMax")){
+				list.add(e);
+			}
+		}
 		System.out.println("size of list : " + list.size());
 		for (Event e : list) {
 			System.out.println(e.toString());
 
 		}
-		EventsList events = new EventsList();
-		events.setEvents(Dao.INSTANCE.getEvents());
-		System.out.println("A ilosc wszystkich w bazie to : " + events.size());
+		//EventsList events = new EventsList();
+		//events.setEvents(Dao.INSTANCE.getEvents());
+		//System.out.println("A ilosc wszystkich w bazie to : " + events.size());
 
+		
 		return list;
 	}
 
