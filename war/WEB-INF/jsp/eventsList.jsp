@@ -23,13 +23,13 @@
 
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
-<link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/style.css">
-<script src="js/vendor/jquery-1.8.2.min.js">
+<link rel="stylesheet" href="/css/normalize.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/style.css">
+<script src="/js/vendor/jquery-1.8.2.min.js">
 	
 </script>
-<script src="js/vendor/modernizr-2.6.2.min.js">
+<script src="/js/vendor/modernizr-2.6.2.min.js">
 	
 </script>
 

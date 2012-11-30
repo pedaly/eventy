@@ -12,9 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import pl.nonamesevent.dao.Dao;
 import pl.nonamesevent.model.Category;
@@ -54,7 +57,14 @@ public class EventController {
 
 		return mav;
 	}
-
+	
+	@RequestMapping(value = "/event/{id}")
+	public ModelAndView showEvent(@PathVariable int id){
+		ModelAndView mav = new ModelAndView("singleEvent");
+		Event e = Dao.INSTANCE.getEvent(id);
+		mav.addObject("event",e);
+		return mav;
+	}
 	@RequestMapping(value = "/addEvent", method = RequestMethod.GET)
 	public ModelAndView addEvent(@ModelAttribute("event") Event event,
 			BindingResult result) {

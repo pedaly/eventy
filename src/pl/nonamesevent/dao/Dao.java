@@ -16,6 +16,9 @@ import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.store.ExecutionContext;
 import org.datanucleus.transaction.NucleusTransactionException;
 
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+
 import pl.nonamesevent.model.Category;
 import pl.nonamesevent.model.Event;
 import pl.nonamesevent.model.EventsList;
@@ -70,6 +73,13 @@ public enum Dao {
 		List<Event> Events = q.getResultList();
 		return Events;
 	}
+	public Event getEvent(int id){
+		EntityManager em = EMFService.get().createEntityManager();
+		Key key = KeyFactory.createKey(Event.class.getSimpleName(), id);
+		Event e = em.find(Event.class, key);
+		System.out.println("Found Event : " + e.toString());
+		return e;
+	}
 
 	public void remove(long id) {
 		EntityManager em = EMFService.get().createEntityManager();
@@ -95,21 +105,10 @@ public enum Dao {
 		HashMap<String, Double> boundingCords = GeoLocationInBoundingCircle
 				.getBoundingCords(lat, lon, distance);
 
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery cq = cb.createQuery();
-		Root<Event> candidate = cq.from(Event.class);
-		candidate.alias("e");
-		cq.select(candidate);
-
-		// Path titleField = candidate.get("lat");
-		// //cq.where(cb.equal(titleField, "Bar Book"));
-		// cq.where(cb.lt(titleField, boundingCords.get("latMin")));
-		// Query q = em.createQuery(cq);
 		System.out
 				.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		Query q = em.createQuery(
-				"SELECT e FROM Event e WHERE lat > :latMin AND lat < :latMax",
-				Event.class);
+				"SELECT e FROM Event e WHERE lat > :latMin AND lat < :latMax");
 		q.setParameter("latMin", boundingCords.get("latMin"));
 		q.setParameter("latMax", boundingCords.get("latMax"));
 
