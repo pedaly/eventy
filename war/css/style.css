@@ -234,3 +234,8 @@ footer{
 	text-shadow:1px 1px 0px #ffffff;
 /* 	width: 200px; */
 }
+
+.overTableRow{
+	border-left:10px solid #84bbf3;
+	cursor:pointer;
+}

@@ -91,7 +91,9 @@
 					</tr>
 				</thead>
 				<c:forEach items="${events}" var="event">
-					<tr class="event_row">
+					<tr class="event_row" onmouseover="ChangeColor(this, true);" 
+						onmouseout="ChangeColor(this, false);"  
+						onclick="DoNav('/event/${event.key.id}')">
 						<td>${event.title}</td>
 						<td>${fn:substring(event.description,0,30)}</td>
 						<td><fmt:formatDate value="${event.dateOfEvent}" pattern="yyyy-MM-dd" />
