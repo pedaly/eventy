@@ -1,9 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ include file="common/taglibs.jsp"%>		
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
 <html class="no-js">
 <head>
 <meta charset="utf-8">
@@ -47,14 +44,7 @@
 </head>
 <body>
 
-	<nav class="top_menu">
-		<div class="logo"></div>
-		<div class="links">
-		<a href="/eventsList"> Zarządzaj wydarzeniami </a> <span>&nbsp |
-			&nbsp <span> <a href="#"> Zarządzaj kategoriami</a> <span>&nbsp
-					| &nbsp <span> <a href="#"> Zarządzaj uzytkownikami </a>
-		</div>
-	</nav>
+	<%@ include file="navi.jsp"%>	
 
 	<div class="outer">
 		<div class="container">

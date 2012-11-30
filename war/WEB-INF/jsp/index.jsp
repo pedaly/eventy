@@ -1,17 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ include file="common/taglibs.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%@ page import="java.util.List"%>
-<%@ page import="com.google.appengine.api.users.User"%>
-<%@ page import="com.google.appengine.api.users.UserService"%>
-<%@ page import="com.google.appengine.api.users.UserServiceFactory"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
-<!DOCTYPE html>
 <html class="no-js">
 <head>
 <meta charset="utf-8">
@@ -36,10 +25,31 @@
 <body>
 
 	<div class="mainPage">
-		<div class="logoMain"></div>
+		<a href="/eventsList"><div class="logoMain"></div></a>
 		<div>
 			<p>
-				<a class="login" ref="#"> loguj </a>
+				<%
+					UserService userService = UserServiceFactory.getUserService();
+					User user = userService.getCurrentUser();
+					if (user != null) {
+						pageContext.setAttribute("user", user);
+				%>
+				Witaj, ${fn:escapeXml(user.nickname)}! (<a class="login"
+					href="<%=userService.createLogoutURL("/eventsList")%>"> Wyloguj</a>.)
+
+				<%
+					} else {
+						System.out.println(request.getRequestURI());
+						System.out.println(request.getRequestURI());
+				%>
+				<a class="login"
+					href="<%=userService.createLoginURL("/eventsList")%>">
+					Logowanie</a>
+
+				<%
+					}
+				%>
+			
 		</div>
 	</div>
 </body>
