@@ -4,6 +4,24 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/main-servlet.xml</param-value>
 	</context-param>
+	
+	 <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/event/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/addEvent</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
