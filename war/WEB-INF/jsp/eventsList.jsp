@@ -28,7 +28,7 @@
 	<div class="outer">
 		<div class="container">
 			<nav class="menu">
-				<a class="MyButton" href="/addEvent"> Dodaj </a>
+				<a class="MyButton" href="/admin/addEvent"> Dodaj </a>
 			</nav>
 			<div class="spacer"></div>
 

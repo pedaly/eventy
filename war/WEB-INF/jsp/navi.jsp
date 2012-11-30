@@ -14,13 +14,13 @@
  	if (user != null) {
  		pageContext.setAttribute("user", user);
  %> Witaj, ${fn:escapeXml(user.nickname)}! (<a
-			href="<%=userService.createLogoutURL("/user/eventsList")%>"> Wyloguj</a>.)
+			href="<%=userService.createLogoutURL("/eventsList")%>"> Wyloguj</a>.)
 
 			<%
  	} else {
  		System.out.println(request.getRequestURI());
  		System.out.println(request.getRequestURI());
- %> <a href="<%=userService.createLoginURL("/user/eventsList")%>">
+ %> <a href="<%=userService.createLoginURL("/eventsList")%>">
 				Logowanie</a> <%
  	}
  %>

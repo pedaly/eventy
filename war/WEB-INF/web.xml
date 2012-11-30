@@ -5,17 +5,23 @@
 		<param-value>/WEB-INF/main-servlet.xml</param-value>
 	</context-param>
 
-
-
 	<security-constraint>
 		<display-name>SecurityConstraint</display-name>
 		<web-resource-collection>
-			<url-pattern>/user/*</url-pattern>
+			<url-pattern>/</url-pattern>
 		</web-resource-collection>
-		<auth-constraint>
-			<role-name>*</role-name>
-		</auth-constraint>
+
 	</security-constraint>
+
+<!-- 	<security-constraint> -->
+<!-- 		<display-name>SecurityConstraint</display-name> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<url-pattern>/*</url-pattern> -->
+<!-- 		</web-resource-collection> -->
+<!-- 		<auth-constraint> -->
+<!-- 			<role-name>*</role-name> -->
+<!-- 		</auth-constraint> -->
+<!-- 	</security-constraint> -->
 
 	<security-constraint>
 		<web-resource-collection>

@@ -19,7 +19,6 @@ import pl.nonamesevent.dao.Dao;
 import pl.nonamesevent.model.Event;
 
 @Controller
-@RequestMapping(value = "/user")
 public class EventController {
 
 	@SuppressWarnings("unused")
