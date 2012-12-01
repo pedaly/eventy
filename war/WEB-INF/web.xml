@@ -23,14 +23,14 @@
 <!-- 		</auth-constraint> -->
 <!-- 	</security-constraint> -->
 
-	<security-constraint>
-		<web-resource-collection>
-			<url-pattern>/admin/addEvent</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
+<!-- 	<security-constraint> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<url-pattern>/admin/addEvent</url-pattern> -->
+<!-- 		</web-resource-collection> -->
+<!-- 		<auth-constraint> -->
+<!-- 			<role-name>admin</role-name> -->
+<!-- 		</auth-constraint> -->
+<!-- 	</security-constraint> -->
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>

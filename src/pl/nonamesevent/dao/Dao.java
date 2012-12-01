@@ -81,6 +81,13 @@ public enum Dao {
 		return e;
 	}
 
+	public void updateEvent(Event e){
+		EntityManager em = EMFService.get().createEntityManager();
+		em.persist(e);
+		System.out.println("after persist");
+		em.refresh(e);
+		System.out.println("Refresh done");
+	}
 	public void remove(long id) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {

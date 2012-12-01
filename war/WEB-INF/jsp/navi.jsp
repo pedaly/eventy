@@ -14,7 +14,7 @@
  	if (user != null) {
  		pageContext.setAttribute("user", user);
  %> Witaj, ${fn:escapeXml(user.nickname)}! (<a
-			href="<%=userService.createLogoutURL("/eventsList")%>"> Wyloguj</a>.)
+			href="<%=userService.createLogoutURL("/index")%>"> Wyloguj</a>.)
 
 			<%
  	} else {

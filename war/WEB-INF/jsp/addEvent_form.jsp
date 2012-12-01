@@ -18,8 +18,7 @@
 <link rel="stylesheet" href="/css/form.css">
 
 <script src="http://open.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js"></script>
-<script
-	src="http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq"></script>
+<script src="http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq"></script>
 
 <script src="/js/vendor/jquery-1.8.2.min.js"></script>
 <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
@@ -50,9 +49,9 @@
 		<div class="container">
 
 
-			<form id="addEditForm" modelAttribute="event" action="/saveEvent"
-				method="post" accept-charset="utf-8">
-
+<!-- 			<form id="addEditForm" modelAttribute="event" action="/saveEvent" -->
+<!-- 				method="post" accept-charset="utf-8"> -->
+			<form:form method="PUT" id="addEditForm" commandName="event" >
 
 				<nav class="menu">
 					<button class="MyButton" type="submit" value="true" name="submit"> Zapisz i dodaj kolejne </button>
@@ -74,30 +73,24 @@
 
 				<fieldset>
 
-					<label> Miasto <input type="text" name="city" id="city" /></label>
-					<label> Ulica <input type="text" name="streetAndNumber"
-						id="address" /></label> <label>Latitude <input type="text"
-						name="lat" id="lat" />
-					</label> <label>Longtitude <input type="text" name="lng"
-						id="long" />
-
-					</label> <label>Date: <input type="text" id="datepicker"
-						name="dateOfEvent" />
-					</label> <label> Opis <textarea name="description" cols="15"
-							rows="30"> </textarea></label>
+					<label> Miasto <form:input path="city" name="city" id="city" /></label>
+					<label> Ulica <form:input path="streetAndNumber" name="streetAndNumber" id="address" /></label> 
+					<label>Latitude <form:input path="lat" name="lat" id="lat" /></label> 
+					<label>Longtitude <form:input path="lng" name="lng" id="long" /></label> 
+					<label>Date: <form:input path="dateOfEvent" id="datepicker" name="dateOfEvent" /></label> 
+					<label> Opis <form:textarea path="description"  name="description" cols="15" rows="30"/> </label>
 
 				</fieldset>
 
 				<p class="details_button">+ Details</p>
 				<div class="details">
 					<fieldset>
-						<label> WWW <input type="text" id="webpage" name="webpage" />
-						</label> <label> Telefon <input type="text" id="phone"
-							name="telephone" /></label> <label> Skype <input type="text"
-							id="skype" name="skype" /></label>
+						<label> WWW <form:input path="webpage" id="webpage" name="webpage" /></label> 
+						<label> Telefon <form:input path="phone" id="phone" name="telephone" /></label> 
+						<label> Skype <form:input path="skype" id="skype" name="skype" /></label>
 					</fieldset>
 				</div>
-			</form>
+			</form:form>
 
 		</div>
 	</div>
