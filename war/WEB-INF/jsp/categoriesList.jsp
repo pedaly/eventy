@@ -28,7 +28,7 @@
 	<div class="outer">
 		<div class="container">
 			<nav class="menu">
-				<a class="MyButton" href="/admin/addEvent"> Dodaj </a>
+				<a class="MyButton" href="/admin/addCategory"> Dodaj </a>
 			</nav>
 			<div class="spacer"></div>
 
@@ -37,24 +37,17 @@
 
 				<thead>
 					<tr>
-						<td>Tytuł</td>
-						<td>Opis</td>
-						<td>Termin</td>
-						<td>Lokalizacja</td>
-						<td>Kategoria</td>
+						<td>Nazwa</td>
+
 						<td></td>
 						<!-- td for edit/remove column -->
 					</tr>
 				</thead>
-				<c:forEach items="${events}" var="event">
+				<c:forEach items="${categories}" var="category">
 					<tr class="event_row" onmouseover="ChangeColor(this, true);" 
 						onmouseout="ChangeColor(this, false);"  
-						onclick="DoNav('/event/${event.key.id}')">
-						<td>${event.title}</td>
-						<td>${fn:substring(event.description,0,30)}</td>
-						<td><fmt:formatDate value="${event.dateOfEvent}" pattern="yyyy-MM-dd" />
-						<td>${event.city}</td>
-						<td>${event.category}</td>
+						onclick="DoNav('/category/${category.key.id}')">
+						<td>${category.name}</td>
 						<td class="edit"><a href="#"> edytuj </a> <span>&nbsp
 								| &nbsp <span> <a href="#"> usuń </a></td>
 					</tr>

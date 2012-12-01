@@ -64,15 +64,20 @@
 				</div>
 
 
+	
+
+
+
 				<fieldset>
-					<label> Tytuł <input type="text" id="title" name="title" />
+					<label> Kategoria <select name="category">
+							<c:forEach items="${categories}" var="category">
+
+								<option value="${category.name}">${category.name}</option>
+
+							</c:forEach>
+					</select>
+					</label> <label> Tytuł <input type="text" id="title" name="title" />
 					</label>
-				</fieldset>
-
-
-
-				<fieldset>
-
 					<label> Miasto <form:input path="city" name="city" id="city" /></label>
 					<label> Ulica <form:input path="streetAndNumber" name="streetAndNumber" id="address" /></label> 
 					<label>Latitude <form:input path="lat" name="lat" id="lat" /></label> 
