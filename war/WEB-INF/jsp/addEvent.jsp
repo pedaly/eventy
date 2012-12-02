@@ -57,6 +57,7 @@
 				<nav class="menu">
 					<button class="MyButton" type="submit" value="true" name="submit"> Zapisz i dodaj kolejne </button>
 					<button class="MyButton" type="submit" value="false" name="submit"> Zapisz </button>
+					
 				</nav>
 
 				<div id="map" class="mapquestMap">

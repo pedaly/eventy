@@ -19,8 +19,8 @@ import com.google.gson.reflect.TypeToken;
 
 import pl.nonamesevent.dao.Dao;
 import pl.nonamesevent.model.Event;
-import pl.nonamesevent.model.EventsList;
-import pl.nonamesevent.model.UserContext;
+import pl.nonamesevent.utilities.EventsList;
+import pl.nonamesevent.utilities.UserContext;
 
 @Controller
 @RequestMapping(value = "/WSgetEventList", method=RequestMethod.GET)
