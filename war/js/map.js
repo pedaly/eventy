@@ -72,12 +72,14 @@ EventMap = {
 
 	},
 	addPointByAddress : function() {
-
+		EventMap.clearMap();
 		var cityOrigin = $("#addEditForm #city").val();
 		if ($("#addEditForm #city").val() != undefined)
 			var city = EventMap.removePolishChar(cityOrigin);
 		else
 			var city = [];
+		
+		var streetOrigin = $("#addEditForm #streetAndNumber").val();
 		if ($("#addEditForm #streetAndNumber").val() != undefined)
 			var street = EventMap.removePolishChar(streetOrigin);
 		else
@@ -111,11 +113,15 @@ EventMap = {
 													lat : msg.results[i].locations[j].displayLatLng.lat,
 													lng : msg.results[i].locations[j].displayLatLng.lng,
 												});
-										newPoi.draggable = false;
+										newPoi.draggable = true;
 
 										this.eventPoint = newPoi;
 										EventMap.map.addShape(this.eventPoint);
 										EventMap.map.bestFit();
+										
+										MQA.EventManager.addListener(this.eventPoint, 'click', EventMap.removePoint);
+										EventMap.addDragClickListener(this.eventPoint);
+										
 										fillLanLngLabel(newPoi.getLatLng().lat,
 												newPoi.getLatLng().lng);
 										EventMap.isEmpty = false;
@@ -127,6 +133,10 @@ EventMap = {
 							}
 						});
 
+	},
+	clearMap : function() {
+		EventMap.map.removeShape(this.eventPoint);
+		EventMap.map.removeAllShapes();
 	},
 	removePoint : function(MouseEvent) {
 		if (MQA.EventUtil.isRightClick(MouseEvent)) {
