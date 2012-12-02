@@ -51,12 +51,14 @@ public class Event {
 
 	private String powiat;
 
-
+	private String category;
 
 //	@ManyToOne(targetEntity = Category.class, fetch = FetchType.EAGER)
 //	@JoinColumn(name = "categoryId")
-	@ManyToOne
-	private Category category;
+//	@ManyToOne
+//	private Category category;
+
+
 
 	public Event() {
 	}
@@ -188,14 +190,20 @@ public class Event {
 	public void setPowiat(String powiat) {
 		this.powiat = powiat;
 	}
-
-	public Category getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
+//	public Category getCategory() {
+//		return category;
+//	}
+//
+//	public void setCategory(Category category) {
+//		this.category = category;
+//	}
 
 	// @Override
 	// public String toString() {

@@ -48,9 +48,9 @@ public enum Dao {
 
 				em = EMFService.get().createEntityManager();
 				em.getTransaction().begin();
-			
+
 				em.persist(event);
-							
+
 				ExecutionContext ec = (ExecutionContext) em.getDelegate();
 				ec.getTransaction().commit();
 				// em.close();
@@ -73,7 +73,8 @@ public enum Dao {
 		List<Event> Events = q.getResultList();
 		return Events;
 	}
-	public Event getEvent(int id){
+
+	public Event getEvent(int id) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Key key = KeyFactory.createKey(Event.class.getSimpleName(), id);
 		Event e = em.find(Event.class, key);
@@ -81,20 +82,35 @@ public enum Dao {
 		return e;
 	}
 
-	public void updateEvent(Event e){
+	public void updateEvent(Event e) {
 		EntityManager em = EMFService.get().createEntityManager();
-		em.persist(e);
-		System.out.println("after persist");
-		//em.refresh(e);
+		try {
+			em.persist(e);
+			System.out.println("after persist");
+			em.refresh(e);
+		} catch (NucleusTransactionException nte) {
+			nte.getStackTrace();
+			System.out.println("updateEvent event - problem z transakcj¹ : "
+					+ nte.getMessage() + "  FIX ME!!!!!!!  ");
+			em.close();
+		} finally {
+			//em.close();
+		}
 		System.out.println("Refresh done");
 	}
+
 	public void remove(long id) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
 			Event Event = em.find(Event.class, id);
 			em.remove(Event);
-		} finally {
+		} catch (NucleusTransactionException e) {
+			e.getStackTrace();
+			System.out.println("remove event - problem z transakcj¹ : "
+					+ e.getMessage() + "  FIX ME!!!!!!!  ");
 			em.close();
+		} finally {
+			//em.close();
 		}
 	}
 
@@ -106,16 +122,15 @@ public enum Dao {
 		// lon, distance, null, null, null, null);
 		// EntityManager em = EMFService.get().createEntityManager();
 		// Query q = em.createQuery(query);
-		
-		
+
 		EntityManager em = EMFService.get().createEntityManager();
 		HashMap<String, Double> boundingCords = GeoLocationInBoundingCircle
 				.getBoundingCords(lat, lon, distance);
 
 		System.out
 				.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		Query q = em.createQuery(
-				"SELECT e FROM Event e WHERE lat > :latMin AND lat < :latMax");
+		Query q = em
+				.createQuery("SELECT e FROM Event e WHERE lat > :latMin AND lat < :latMax");
 		q.setParameter("latMin", boundingCords.get("latMin"));
 		q.setParameter("latMax", boundingCords.get("latMax"));
 
@@ -124,10 +139,11 @@ public enum Dao {
 		System.out.println("# lonMin : " + boundingCords.get("lonMin"));
 		System.out.println("# lonMax : " + boundingCords.get("lonMax"));
 		List<Event> tmp = q.getResultList();
-		
+
 		List<Event> list = new ArrayList<Event>();
-		for(Event e : tmp){
-			if(e.getLng() > boundingCords.get("lonMin") && e.getLng() < boundingCords.get("lonMax")){
+		for (Event e : tmp) {
+			if (e.getLng() > boundingCords.get("lonMin")
+					&& e.getLng() < boundingCords.get("lonMax")) {
 				list.add(e);
 			}
 		}
@@ -136,11 +152,11 @@ public enum Dao {
 			System.out.println(e.toString());
 
 		}
-		//EventsList events = new EventsList();
-		//events.setEvents(Dao.INSTANCE.getEvents());
-		//System.out.println("A ilosc wszystkich w bazie to : " + events.size());
+		// EventsList events = new EventsList();
+		// events.setEvents(Dao.INSTANCE.getEvents());
+		// System.out.println("A ilosc wszystkich w bazie to : " +
+		// events.size());
 
-		
 		return list;
 	}
 
@@ -178,6 +194,8 @@ public enum Dao {
 		}
 	}
 
+
+	
 	public Category getCategory(Long id) {
 		Category result = null;
 		EntityManager mgr = EMFService.get().createEntityManager();

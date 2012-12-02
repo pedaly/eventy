@@ -64,16 +64,17 @@
 						onclick="EventMap.addPointByAddress()">Search</button>
 				</div>
 
-
 				<fieldset>
-					<label> Tytuł <form:input path="title" id="title" name="title" />
-					</label>
-				</fieldset>
+					<label> Kategoria <form:select path="category">
+							<c:forEach items="${categories}" var="category">
 
+								<form:option value="${category.name }"> ${category.name }</form:option>
+<%-- 								<option value="${category.name}">${category.name}</option> --%>
 
-
-				<fieldset>
-
+							</c:forEach>
+						</form:select>
+					</label> 
+					<label> Tytuł <input type="text" id="title" name="title" /></label>
 					<label> Miasto <form:input path="city" name="city" id="city" /></label>
 					<label> Ulica <form:input path="streetAndNumber" name="streetAndNumber" id="address" /></label> 
 					<label>Latitude <form:input path="lat" name="lat" id="lat" /></label> 

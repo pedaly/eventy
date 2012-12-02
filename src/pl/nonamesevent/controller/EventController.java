@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import pl.nonamesevent.dao.Dao;
+import pl.nonamesevent.model.Category;
 import pl.nonamesevent.model.Event;
 
 @Controller
@@ -37,16 +38,9 @@ public class EventController {
 			System.out.println(events.get(i).toString());
 		}
 		ModelAndView mav = new ModelAndView("eventsList");
-		mav.addObject("events", events);
 		
-//		Category cat =  new Category();
-//		cat.setName("druga kategoria");
-//		Dao.INSTANCE.addCategory(cat);
-
-//		Event e = new Event();
-//		e.setCity("Mandalay");
-//		Dao.INSTANCE.addEvent(e);		
-//		e.setCategory(cat);		
+	
+		mav.addObject("events", events);
 
 		return mav;
 	}
@@ -59,9 +53,12 @@ public class EventController {
 		return mav;
 	}
 	@RequestMapping(value = "/event/{id}/delete")
-	public String deleteEvent(@PathVariable int id){
+	public ModelAndView deleteEvent(@PathVariable int id){
 		Dao.INSTANCE.remove(id);
-		return "redirect: eventsList";
+		List<Event> events = Dao.INSTANCE.getEvents();
+		ModelAndView mav = new ModelAndView("eventsList");
+		mav.addObject("events", events);
+		return mav;
 	}
 	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.GET)
 	public ModelAndView editEvent(@PathVariable int id){
@@ -81,7 +78,10 @@ public class EventController {
 	@RequestMapping(value = "/admin/addEvent", method = RequestMethod.GET)
 	public ModelAndView addEvent(@ModelAttribute("event") Event event,
 			BindingResult result) {
-		return new ModelAndView("addEvent_form");
+		ModelAndView mav = new ModelAndView("addEvent_form");
+		List<Category> categories = Dao.INSTANCE.listCategories();
+		mav.addObject("categories", categories);
+		return mav;
 	}
 	
 	@RequestMapping(value=" /admin/addEvent", method = RequestMethod.POST)
