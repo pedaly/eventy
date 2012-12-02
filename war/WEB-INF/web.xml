@@ -29,13 +29,13 @@
 		</auth-constraint>
 	</security-constraint>
 	
-	<login-config> 
-	    <auth-method>FORM</auth-method> 
-	    <form-login-config> 
-	        <form-login-page>/</form-login-page> 
-	        <form-error-page>/error.jsp</form-error-page> 
-	    </form-login-config> 
-	</login-config>
+<!-- 	<login-config>  -->
+<!-- 	    <auth-method>FORM</auth-method>  -->
+<!-- 	    <form-login-config>  -->
+<!-- 	        <form-login-page>/</form-login-page>  -->
+<!-- 	        <form-error-page>/error.jsp</form-error-page>  -->
+<!-- 	    </form-login-config>  -->
+<!-- 	</login-config> -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
