@@ -21,8 +21,8 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 import pl.nonamesevent.model.Category;
 import pl.nonamesevent.model.Event;
-import pl.nonamesevent.model.EventsList;
 import pl.nonamesevent.service.EMFService;
+import pl.nonamesevent.utilities.EventsList;
 import pl.nonamesevent.utilities.GeoLocationInBoundingCircle;
 
 @NamedNativeQuery(name = "Event.findByLocation", query = "SELECT e FROM Event e WHERE lat < :latMax AND lat > :latMin")
@@ -102,8 +102,9 @@ public enum Dao {
 	public void remove(long id) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
-			Event Event = em.find(Event.class, id);
-			em.remove(Event);
+			Event event = em.find(Event.class, id);
+			System.out.println("Event to remove " + event.getTitle());
+			em.remove(event);
 		} catch (NucleusTransactionException e) {
 			e.getStackTrace();
 			System.out.println("remove event - problem z transakcj¹ : "

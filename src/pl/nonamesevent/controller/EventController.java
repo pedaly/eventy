@@ -32,7 +32,7 @@ public class EventController {
 
 	@RequestMapping(value = "/eventsList", method = RequestMethod.GET)
 	public ModelAndView home() {
-		System.out.println("/manageEvents");
+		System.out.println("/eventsEvents");
 		List<Event> events = Dao.INSTANCE.getEvents();
 		for (int i = 0; i < events.size(); i++) {
 			System.out.println(events.get(i).toString());
@@ -53,17 +53,17 @@ public class EventController {
 		return mav;
 	}
 	@RequestMapping(value = "/event/{id}/delete")
-	public ModelAndView deleteEvent(@PathVariable int id){
+	public String deleteEvent(@PathVariable int id){
 		Dao.INSTANCE.remove(id);
-		List<Event> events = Dao.INSTANCE.getEvents();
-		ModelAndView mav = new ModelAndView("eventsList");
-		mav.addObject("events", events);
-		return mav;
+		System.out.println("Deleting event "  + id);
+		return "redirect: /eventsList";
 	}
 	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.GET)
 	public ModelAndView editEvent(@PathVariable int id){
 		ModelAndView mav = new ModelAndView("addEvent_form");
 		mav.addObject(Dao.INSTANCE.getEvent(id));
+		List<Category> categories = Dao.INSTANCE.listCategories();
+		mav.addObject("categories", categories);
 		return mav;
 	}
 	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.POST)

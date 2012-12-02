@@ -34,8 +34,8 @@
 <script type="text/javascript" src="/js/map.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		var height = 400;
-		var width = 600;
+		var height = 500;
+		var width = 500;
 		EventMap.init(width, height);
 		MQA.EventManager.addListener(EventMap.map, 'click', EventMap.addPoint)
 	});
@@ -58,38 +58,39 @@
 					<button class="MyButton" type="submit" value="false" name="submit"> Zapisz </button>
 					<form:hidden path="key"/>
 				</nav>
-
-				<div id="map" class="mapquestMap">
+				<div id="map" class="mapquestMap inline">
 					<button type="button" id="srch"
 						onclick="EventMap.addPointByAddress()">Search</button>
 				</div>
-
+<div class="inline">
 				<fieldset>
-					<label> Kategoria <form:select path="category">
+					<label> <span class="label" > Kategoria </span><form:select path="category">
 							<c:forEach items="${categories}" var="category">
 
-								<form:option value="${category.name }"> ${category.name }</form:option>
-<%-- 								<option value="${category.name}">${category.name}</option> --%>
+<%-- 								<form:option value="${category.name }"> ${category.name }</form:option> --%>
+								<option value="${category.name}">${category.name}</option>
 
 							</c:forEach>
 						</form:select>
 					</label> 
-					<label> Tytuł <input type="text" id="title" name="title" /></label>
-					<label> Miasto <form:input path="city" name="city" id="city" /></label>
-					<label> Ulica <form:input path="streetAndNumber" name="streetAndNumber" id="address" /></label> 
-					<label>Latitude <form:input path="lat" name="lat" id="lat" /></label> 
-					<label>Longtitude <form:input path="lng" name="lng" id="long" /></label> 
-					<label>Date: <form:input path="dateOfEvent" id="datepicker" name="dateOfEvent" /></label> 
-					<label> Opis <form:textarea path="description"  name="description" cols="15" rows="30"/> </label>
+					<label ><span class="label">Tytuł </span><form:input path="title" id="title" name="title" /></label>
+					<label> <span class="label">Miasto </span><form:input path="city" name="city" id="city" /></label>
+					<label> <span class="label">Ulica</span> <form:input path="streetAndNumber" name="streetAndNumber" id="address" /></label> 
+					<label> <span class="label"> Latitude </span><form:input path="lat" name="lat" id="lat" /></label> 
+					<label> <span class="label">Longtitude </span><form:input path="lng" name="lng" id="long" /></label> 
+					<label> <span class="label">Date: </span><form:input path="dateOfEvent" id="datepicker" name="dateOfEvent" /></label> 
+					<label> <span class="label">Opis </span></label><form:textarea path="description"  name="description" cols="15" rows="30"/>
 
 				</fieldset>
+		</div>
 
-				<p class="details_button">+ Details</p>
+
+				<p class="details_button label">+ Details </p>
 				<div class="details">
 					<fieldset>
-						<label> WWW <form:input path="webpage" id="webpage" name="webpage" /></label> 
-						<label> Telefon <form:input path="phone" id="phone" name="telephone" /></label> 
-						<label> Skype <form:input path="skype" id="skype" name="skype" /></label>
+						<label><span class="label"> WWW </span><form:input path="webpage" id="webpage" name="webpage" /></label> 
+						<label><span class="label"> Telefon </span><form:input path="phone" id="phone" name="telephone" /></label> 
+						<label><span class="label"> Skype </span><form:input path="skype" id="skype" name="skype" /></label>
 					</fieldset>
 				</div>
 			</form:form>

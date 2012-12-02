@@ -1,7 +1,9 @@
-package pl.nonamesevent.model;
+package pl.nonamesevent.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pl.nonamesevent.model.Event;
 
 
 
