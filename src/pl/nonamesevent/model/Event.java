@@ -3,6 +3,7 @@ package pl.nonamesevent.model;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.google.appengine.api.datastore.Key;
+import com.sun.istack.internal.NotNull;
 
 @Entity
 public class Event {
@@ -22,7 +24,7 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Key key;
-
+	
 	private Double lng;
 
 	private Double lat;
@@ -49,7 +51,7 @@ public class Event {
 
 	private String wojewodztwo;
 
-	private String powiat;
+
 
 	private String category;
 
@@ -183,13 +185,7 @@ public class Event {
 		this.wojewodztwo = wojewodztwo;
 	}
 
-	public String getPowiat() {
-		return powiat;
-	}
 
-	public void setPowiat(String powiat) {
-		this.powiat = powiat;
-	}
 	public String getCategory() {
 		return category;
 	}

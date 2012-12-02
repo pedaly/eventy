@@ -35,7 +35,7 @@
 						pageContext.setAttribute("user", user);
 				%>
 				Witaj, ${fn:escapeXml(user.nickname)}! (<a class="login"
-					href="<%=userService.createLogoutURL("/index")%>"> Wyloguj</a>.)
+					href="<%=userService.createLogoutURL("/")%>"> Wyloguj</a>.)
 
 				<%
 					} else {
@@ -43,7 +43,7 @@
 						System.out.println(request.getRequestURI());
 				%>
 				<a class="login"
-					href="<%=userService.createLoginURL("/index")%>">
+					href="<%=userService.createLoginURL("/")%>">
 					Logowanie</a>
 
 				<%

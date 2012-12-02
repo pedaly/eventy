@@ -84,6 +84,12 @@ EventMap = {
 			var street = EventMap.removePolishChar(streetOrigin);
 		else
 			var street = [];
+		
+		var wojewodztwoOrigin = $("#addEditForm #wojewodztwo").val();
+		if ($("#addEditForm #wojewodztwo").val() != undefined)
+			var wojewodztwo = EventMap.removePolishChar(wojewodztwoOrigin);
+		else
+			var wojewodztwo = [];
 
 		// var city = $("#addEditForm #city").val();
 		// var street = $("#addEditForm #streetAndNumber").val();
@@ -99,6 +105,7 @@ EventMap = {
 						street : street,
 						city : city,
 						adminArea1 : "PL",
+						adminArea3 : wojewodztwo,
 						inFormat : 'json'
 					}
 				})
@@ -129,7 +136,7 @@ EventMap = {
 									}
 								}
 							} else {
-								alert("Sory gościu ale adres jest mało specyzyjny - znaleziono więcej niż 1 wynik...");
+								alert("Adres jest mało specyzyjny - znaleziono więcej niż 1 wynik...");
 							}
 						});
 

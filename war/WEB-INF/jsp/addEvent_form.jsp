@@ -35,7 +35,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var height = 500;
-		var width = 500;
+		var width = 600;
 		EventMap.init(width, height);
 		MQA.EventManager.addListener(EventMap.map, 'click', EventMap.addPoint)
 	});
@@ -59,32 +59,64 @@
 					<form:hidden path="key"/>
 				</nav>
 				<div id="map" class="mapquestMap inline">
-					<button type="button" id="srch"
-						onclick="EventMap.addPointByAddress()">Search</button>
+					<button  class="MyButton" type="button" id="srch"
+						onclick="EventMap.addPointByAddress()">Wyszukaj lokalizację wg. podanego adresu</button>
 				</div>
 <div class="inline">
 				<fieldset>
-					<label> <span class="label" > Kategoria </span><form:select path="category">
+					<label> <span class="label" >Kategoria*</span>
+					<form:select path="category">
 							<c:forEach items="${categories}" var="category">
 
 <%-- 								<form:option value="${category.name }"> ${category.name }</form:option> --%>
 								<option value="${category.name}">${category.name}</option>
 
 							</c:forEach>
-						</form:select>
+					</form:select>
 					</label> 
-					<label ><span class="label">Tytuł </span><form:input path="title" id="title" name="title" /></label>
-					<label> <span class="label">Miasto </span><form:input path="city" name="city" id="city" /></label>
-					<label> <span class="label">Ulica</span> <form:input path="streetAndNumber" name="streetAndNumber" id="address" /></label> 
-					<label> <span class="label"> Latitude </span><form:input path="lat" name="lat" id="lat" /></label> 
-					<label> <span class="label">Longtitude </span><form:input path="lng" name="lng" id="long" /></label> 
-					<label> <span class="label">Date: </span><form:input path="dateOfEvent" id="datepicker" name="dateOfEvent" /></label> 
-					<label> <span class="label">Opis </span></label><form:textarea path="description"  name="description" cols="15" rows="30"/>
+					<label> <span class="label">Tytuł*</span>
+					<form:input path="title" id="title" name="title" required="true" /></label>
+					<label> <span class="label">Województwo</span>
+					<form:select path="wojewodztwo" id="wojewodztwo" name="wojewodztwo">
+								<option value=""></option>
+								<option value="Woj. dolnośląskie">woj. dolnośląskie</option>
+								<option value="Woj. kujawsko-pomorskie">woj. kujawsko-pomorskie</option>
+								<option value="Woj. lubelskie">woj. lubelskie</option>
+								<option value="Woj. lubuskie">woj. lubuskie</option>
+								<option value="Woj. łódzkie">woj. łódzkie</option>
+								<option value="Woj. małopolskie">woj. małopolskie</option>
+								<option value="Woj. mazowieckie">woj. mazowieckie</option>
+								<option value="Woj. opolskie">woj. opolskie</option>
+								<option value="Woj. podkarpackie">woj. podkarpackie</option>
+								<option value="Woj. podlaskie">woj. podlaskie</option>								
+								<option value="Woj. pomorskie">woj. pomorskie</option>							
+								<option value="Woj. śląskie">woj. śląskie</option>		
+								<option value="Woj. świętokrzyskie">woj. świętokrzyskie</option>									
+								<option value="Woj. warmińsko-mazurskie">woj. warmińsko-mazurskie</option>	
+								<option value="Woj. wielkopolskie">woj. wielkopolskie</option>									
+								<option value="Woj. zachodniopomorskie">woj. zachodniopomorskie</option>																					
+					</form:select>
+					</label>
+					<label> <span class="label">Miasto</span>
+					<form:input path="city" name="city" id="city" /></label>
+					<label> <span class="label">Ulica</span>
+					<form:input path="streetAndNumber" name="streetAndNumber" id="address" /></label> 
+					<label> <span class="label">Szerokość geograficzna*</span>
+					<form:input path="lat" name="lat" id="lat" pattern="-?\d{1,3}\.\d+" required="true" /></label> 
+					<label> <span class="label">Długość geograficzna*</span>
+					<form:input path="lng" name="lng" id="long" pattern="-?\d{1,3}\.\d+" required="true"/></label> 
+					<label> <span class="label">Termin</span>
+					<form:input path="dateOfEvent" id="datepicker" name="dateOfEvent" /></label> 
+					<label> <span class="label">Opis</span></label>
+					<form:textarea path="description"  name="description" cols="15" rows="30"/>
 
 				</fieldset>
 		</div>
 
 
+				
+				
+				
 				<p class="details_button label">+ Details </p>
 				<div class="details">
 					<fieldset>

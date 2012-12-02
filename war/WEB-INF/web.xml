@@ -5,38 +5,36 @@
 		<param-value>/WEB-INF/main-servlet.xml</param-value>
 	</context-param>
 
+
+
 	<security-constraint>
 		<display-name>SecurityConstraint</display-name>
 		<web-resource-collection>
-			<url-pattern>/</url-pattern>
+			<url-pattern>/eventsList</url-pattern>
+			<url-pattern>/categoriesList</url-pattern>
+			<url-pattern>/event/*</url-pattern>
 		</web-resource-collection>
-
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
 	</security-constraint>
 
-<!-- 	<security-constraint> -->
-<!-- 		<display-name>SecurityConstraint</display-name> -->
-<!-- 		<web-resource-collection> -->
-<!-- 			<url-pattern>/*</url-pattern> -->
-<!-- 		</web-resource-collection> -->
-<!-- 		<auth-constraint> -->
-<!-- 			<role-name>*</role-name> -->
-<!-- 		</auth-constraint> -->
-<!-- 	</security-constraint> -->
-
-<!-- 	<security-constraint> -->
-<!-- 		<web-resource-collection> -->
-<!-- 			<url-pattern>/admin/addEvent</url-pattern> -->
-<!-- 		</web-resource-collection> -->
-<!-- 		<auth-constraint> -->
-<!-- 			<role-name>admin</role-name> -->
-<!-- 		</auth-constraint> -->
-<!-- 	</security-constraint> -->
-	<login-config>
-		<auth-method>FORM</auth-method>
-		<form-login-config>
-			<form-login-page>/</form-login-page>
-			<form-error-page>/logonError.jsp</form-error-page>
-		</form-login-config>
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/admin/addEvent</url-pattern>
+			<url-pattern>/admin/addCategory</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<login-config> 
+	    <auth-method>FORM</auth-method> 
+	    <form-login-config> 
+	        <form-login-page>/</form-login-page> 
+	        <form-error-page>/error.jsp</form-error-page> 
+	    </form-login-config> 
 	</login-config>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
