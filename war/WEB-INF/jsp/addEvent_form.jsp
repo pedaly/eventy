@@ -51,11 +51,12 @@
 
 <!-- 			<form id="addEditForm" modelAttribute="event" action="/saveEvent" -->
 <!-- 				method="post" accept-charset="utf-8"> -->
-			<form:form method="PUT" id="addEditForm" commandName="event" >
+			<form:form method="POST" id="addEditForm" commandName="event" >
 
 				<nav class="menu">
 					<button class="MyButton" type="submit" value="true" name="submit"> Zapisz i dodaj kolejne </button>
 					<button class="MyButton" type="submit" value="false" name="submit"> Zapisz </button>
+					<form:hidden path="key"/>
 				</nav>
 
 				<div id="map" class="mapquestMap">
@@ -65,7 +66,7 @@
 
 
 				<fieldset>
-					<label> Tytuł <input type="text" id="title" name="title" />
+					<label> Tytuł <form:input path="title" id="title" name="title" />
 					</label>
 				</fieldset>
 

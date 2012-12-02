@@ -63,15 +63,15 @@ public class EventController {
 		Dao.INSTANCE.remove(id);
 		return "redirect: eventsList";
 	}
-	@RequestMapping(value = "/event/{id}/edit")
+	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.GET)
 	public ModelAndView editEvent(@PathVariable int id){
 		ModelAndView mav = new ModelAndView("addEvent_form");
 		mav.addObject(Dao.INSTANCE.getEvent(id));
 		return mav;
 	}
-	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.PUT)
+	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.POST)
 	public ModelAndView postEditEvent(@ModelAttribute("event") Event e){
-		System.out.println("Editing event PUT");
+		System.out.println("Editing event PUT : " + e.getTitle() + " | " + e.getKey().getId());
 		Dao.INSTANCE.updateEvent(e);
 		return new ModelAndView(new RedirectView("/event/"+e.getKey().getId()));
 	}
