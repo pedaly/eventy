@@ -1,6 +1,8 @@
 package pl.nonamesevent.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,15 +31,9 @@ public class EventController {
 
 	@RequestMapping(value = "/eventsList", method = RequestMethod.GET)
 	public ModelAndView home() {
-		System.out.println("/eventsEvents");
 		List<Event> events = Dao.INSTANCE.getEvents();
-		for (int i = 0; i < events.size(); i++) {
-			System.out.println(events.get(i).toString());
-		}
 		ModelAndView mav = new ModelAndView("eventsList");
-
 		mav.addObject("events", events);
-
 		return mav;
 	}
 
@@ -77,13 +73,17 @@ public class EventController {
 	// ----------------------------- add Event
 	// -----------------------------------
 	@RequestMapping(value = "/admin/addEvent", method = RequestMethod.GET)
-	public ModelAndView addEvent(@ModelAttribute("event") Event event,
-			BindingResult result) {
-		ModelAndView mav = new ModelAndView("addEvent_form");
+	public ModelAndView addEvent() {
+
 		List<Category> categories = Dao.INSTANCE.listCategories();
-		mav.addObject("categories", categories);
-		return mav;
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("event", new Event());
+		model.put("categories", categories);
+		return new ModelAndView("addEvent_form", model);
+
 	}
+	
+
 
 	@RequestMapping(value = " /admin/addEvent", method = RequestMethod.POST)
 	public ModelAndView postAddEvent(HttpServletRequest request,

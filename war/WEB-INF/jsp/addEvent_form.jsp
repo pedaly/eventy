@@ -31,20 +31,10 @@
 	});
 </script>
 
-<script type="text/javascript" src="/js/map.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var height = 500;
-		var width = 600;
-		EventMap.init(width, height);
-		MQA.EventManager.addListener(EventMap.map, 'click', EventMap.addPoint);
-		if(${event.lat}!=null && ${event.lng}!=null ){
-			EventMap.showPoint(${event.lat},${event.lng},true);
-		}
-	});
-</script>
+
 </head>
 <body>
+<script type="text/javascript" src="/js/map.js"></script>
 
 	<%@ include file="navi.jsp"%>	
 
@@ -61,6 +51,24 @@
 					<button class="MyButton" type="submit" value="false" name="submit"> Zapisz </button>
 					<form:hidden path="key"></form:hidden>
 				</nav>
+				
+<script type="text/javascript">
+	$(document).ready(function() {
+		var height = 500;
+		var width = 600;
+		EventMap.init(width, height);
+		MQA.EventManager.addListener(EventMap.map, 'click', EventMap.addPoint);
+		
+		var lt = document.forms['addEditForm'].elements["lat"].value;
+		var lg = document.forms['addEditForm'].elements["lng"].value;
+		
+		if(lt!="" && lg!="" ){
+			EventMap.showPoint(lt,lg,true);
+		}
+	});
+</script>
+				
+				
 				<div id="map" class="mapquestMap inline">
 					<button  class="MyButton" type="button" id="srch"
 						onclick="EventMap.addPointByAddress()">Wyszukaj lokalizację wg. podanego adresu</button>
