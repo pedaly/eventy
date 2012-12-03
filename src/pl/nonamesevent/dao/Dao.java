@@ -103,8 +103,10 @@ public enum Dao {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
 			Event event = em.find(Event.class, id);
-			System.out.println("Event to remove " + event.getTitle());
+			em.getTransaction().begin();
 			em.remove(event);
+			ExecutionContext ec = (ExecutionContext) em.getDelegate();
+			ec.getTransaction().commit();
 		} catch (NucleusTransactionException e) {
 			e.getStackTrace();
 			System.out.println("remove event - problem z transakcj¹ : "
