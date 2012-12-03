@@ -107,10 +107,12 @@ EventMap = {
 		
 		var streetOrigin = $("#addEditForm #streetAndNumber").val();
 		if ($("#addEditForm #streetAndNumber").val() != undefined)
-			var street = EventMap.removePolishChar(streetOrigin);
+			var street1 = EventMap.removePolishChar(streetOrigin);
 		else
-			var street = [];
+			var street1 = [];
 		
+
+
 		var wojewodztwoOrigin = $("#addEditForm #wojewodztwo").val();
 		if ($("#addEditForm #wojewodztwo").val() != undefined)
 			var wojewodztwo = EventMap.removePolishChar(wojewodztwoOrigin);
@@ -128,10 +130,10 @@ EventMap = {
 					url : 'http://www.mapquestapi.com/geocoding/v1/address',
 					data : {
 						key : "Fmjtd|luua25ub20%2C72%3Do5-962xhz",
-						street : street,
+						street : street1,
 						city : city,
 						adminArea1 : "PL",
-						adminArea3 : wojewodztwo,
+						adminArea2 : wojewodztwo,
 						inFormat : 'json'
 					}
 				})
@@ -191,7 +193,7 @@ EventMap = {
 	removePolishChar : function(address) {
 		var addr = [];
 		addr = address;
-		alert(address);
+		//alert(address);
 		for ( var i = 0; i < addr.length; i++) {
 			switch (addr[i]) {
 			case "ą":
