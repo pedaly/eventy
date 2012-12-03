@@ -35,7 +35,9 @@
 		var height = 250;
 		var width = 350;
 		EventMap.init(width, height);
-
+		if(${event.lat}!=null && ${event.lng}!=null ){
+			EventMap.showPoint(${event.lat},${event.lng},false);
+		}
 	});
 </script>
 </head>
