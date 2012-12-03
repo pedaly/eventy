@@ -27,7 +27,17 @@
 
 <script type="text/javascript" src="/js/map.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+<script src="http://open.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js"></script>
+<script src="http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq"></script>
+<script type="text/javascript" src="/js/map.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var height = 250;
+		var width = 350;
+		EventMap.init(width, height);
 
+	});
+</script>
 </head>
 <body>
 	<%@ include file="navi.jsp"%>	
@@ -39,6 +49,10 @@
 				<a class="MyButton" href="/event/${event.key.id}/edit"> Edytuj </a>
 				<a class="MyButton" href="/event/${event.key.id}/delete"> Usuń </a>
 			</nav>
+			
+				<div id="map" class="mapquestMap inline">				
+				</div>
+				
 			<div class="singleEvent">
 				<p><span class="label">Tytuł : </span> <span>${ fn:length(event.title) == 0 ? "b.d." :  event.title}</span></p>
 				<p><span class="label">Termin : </span> <span><fmt:formatDate value="${event.dateOfEvent }" pattern="yyyy-MM-dd" /></span></p>

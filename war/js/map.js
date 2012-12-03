@@ -54,6 +54,32 @@ EventMap = {
 
 	},
 
+	showPoint : function(lat,lng,drag) {
+
+		if (EventMap.isEmpty == true) {
+			var myPoi = new MQA.Poi({lat:lat, lng:lng});
+			if(drag){
+				myPoi.draggable = true;
+				MQA.EventManager.addListener(myPoi, 'click', EventMap.removePoint);
+				EventMap.addDragClickListener(myPoi);
+				fillLanLngLabel(myPoi.getLatLng().lat, myPoi.getLatLng().lng);
+			}else{
+				myPoi.draggable = false;
+				
+			}
+			
+			this.eventPoint = myPoi;
+			EventMap.map.addShape(this.eventPoint);
+			EventMap.isEmpty = false;
+			EventMap.best();
+		}
+
+	},	
+	best : function() {
+		EventMap.map.bestFit();
+		EventMap.map.setZoomLevel(EventMap.map.getZoomLevel() - 3);
+	},
+	
 	addPoint : function(event) {
 
 		if (EventMap.isEmpty == true) {
@@ -124,7 +150,7 @@ EventMap = {
 
 										this.eventPoint = newPoi;
 										EventMap.map.addShape(this.eventPoint);
-										EventMap.map.bestFit();
+										EventMap.best();
 										
 										MQA.EventManager.addListener(this.eventPoint, 'click', EventMap.removePoint);
 										EventMap.addDragClickListener(this.eventPoint);

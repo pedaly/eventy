@@ -37,7 +37,10 @@
 		var height = 500;
 		var width = 600;
 		EventMap.init(width, height);
-		MQA.EventManager.addListener(EventMap.map, 'click', EventMap.addPoint)
+		MQA.EventManager.addListener(EventMap.map, 'click', EventMap.addPoint);
+		if(${event.lat}!=null && ${event.lng}!=null ){
+			EventMap.showPoint(${event.lat},${event.lng},true);
+		}
 	});
 </script>
 </head>
@@ -56,7 +59,7 @@
 				<nav class="menu">
 					<button class="MyButton" type="submit" value="true" name="submit"> Zapisz i dodaj kolejne </button>
 					<button class="MyButton" type="submit" value="false" name="submit"> Zapisz </button>
-					<form:hidden path="key"/>
+					<form:hidden path="key"></form:hidden>
 				</nav>
 				<div id="map" class="mapquestMap inline">
 					<button  class="MyButton" type="button" id="srch"
