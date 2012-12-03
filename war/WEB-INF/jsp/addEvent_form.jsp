@@ -117,7 +117,8 @@
 					<label> <span class="label">Długość geograficzna*</span>
 					<form:input path="lng" name="lng" id="long" pattern="-?\d{1,3}\.\d+" required="true"/></label> 
 					<label> <span class="label">Termin</span>
-					<form:input path="dateOfEvent" id="datepicker" name="dateOfEvent" /></label> 
+					<fmt:formatDate value="${event.dateOfEvent}" pattern="MM/dd/yyyy" var="formatedData"/>
+					<form:input path="dateOfEvent" value="${formatedData }" id="datepicker" name="dateOfEvent" /></label> 
 					<label> <span class="label">Opis</span></label>
 					<form:textarea path="description"  name="description" cols="15" rows="30"/>
 
