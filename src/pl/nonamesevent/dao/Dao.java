@@ -97,7 +97,7 @@ public enum Dao {
 	public void remove(Long id) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
-			Event event = em.find(Event.class, "Imprezy");
+			Event event = em.find(Event.class, id);
 			
 			em.getTransaction().begin();
 			em.remove(event);
