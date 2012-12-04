@@ -1,6 +1,7 @@
 package com.app.eventy;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -18,9 +19,11 @@ public class CircleOverlay extends Overlay {
 	double mLat;
 	double mLon;
 	float mRadius;
+	Bitmap marker;
 
 	public CircleOverlay(Context _context, double _lat, double _lon,
-			float radius) {
+			float radius, Bitmap marker) {
+		this.marker = marker;
 		context = _context;
 		mLat = _lat;
 		mLon = _lon;
@@ -55,12 +58,6 @@ public class CircleOverlay extends Overlay {
 		canvas.drawCircle((float) pt.x, (float) pt.y, circleRadius,
 				innerCirclePaint);
 		
-
-		innerCirclePaint.setColor(Color.GREEN);
-		innerCirclePaint.setAlpha(100);
-		circleRadius = projection.metersToEquatorPixels(10)
-				* (1 / FloatMath.cos((float) Math.toRadians(mLat)));
-		canvas.drawCircle((float) pt.x, (float) pt.y, circleRadius,
-				innerCirclePaint);
+		canvas.drawBitmap(marker, (float) (pt.x - marker.getWidth() / 2), (float) (pt.y - marker.getHeight()), null);
 	}
 }
