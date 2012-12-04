@@ -1,5 +1,7 @@
 package pl.nonamesevent.controller;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,14 @@ import pl.nonamesevent.model.Event;
 @Controller
 public class EventController {
 
+	public static List<String> wojewodztwa = Arrays.asList("Woj dolnoœl¹skie",
+			"Woj kujawsko-pomorskie", "Woj lubelskie", "Woj ³ódzkie",
+			"Woj ma³opolskie", "Woj mazowieckie", "Woj opolskie",
+			"Woj podkarpackie", "Woj podlaskie", "Woj pomorskie",
+			"Woj œl¹skie", "Woj œwiêtokrzyskie", "Woj warmiñsko-mazurskie",
+			"Woj wielkopolskie", "Woj zachodniopomorskie");
+	
+	
 	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory
 			.getLogger(EventController.class);
@@ -58,13 +68,13 @@ public class EventController {
 		mav.addObject(Dao.INSTANCE.getEvent(id));
 		List<Category> categories = Dao.INSTANCE.listCategories();
 		mav.addObject("categories", categories);
+		mav.addObject("wojewodztwa", wojewodztwa);
 		return mav;
 	}
 
 	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.POST)
 	public ModelAndView postEditEvent(@ModelAttribute("event") Event e) {
-		System.out.println("Editing event PUT : " + e.getTitle() + " | "
-				+ e.getKey().getId());
+
 		Dao.INSTANCE.updateEvent(e);
 		return new ModelAndView(
 				new RedirectView("/event/" + e.getKey().getId()));
@@ -79,6 +89,7 @@ public class EventController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("event", new Event());
 		model.put("categories", categories);
+		model.put("wojewodztwa", wojewodztwa);
 		return new ModelAndView("addEvent_form", model);
 
 	}

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import pl.nonamesevent.dao.Dao;
 import pl.nonamesevent.model.Category;
+import pl.nonamesevent.model.Event;
 
 @Controller
 public class CategoryController {
@@ -25,6 +27,15 @@ public class CategoryController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(EventController.class);
 
+
+
+	@RequestMapping(value = "/category/{id}/delete")
+	public String deleteCategory(@PathVariable int id) {
+
+		Dao.INSTANCE.deleteCategoryById(id);
+		return "redirect: /categoriesList";
+	}	
+	
 	@RequestMapping(value = "/categoriesList", method = RequestMethod.GET)
 	public ModelAndView categoriesList() {
 		List<Category> categories = Dao.INSTANCE.listCategories();

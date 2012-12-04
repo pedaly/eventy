@@ -6,28 +6,28 @@
 	</context-param>
 
 
-<!-- 	<security-constraint> -->
-<!-- 		<display-name>SecurityConstraint</display-name> -->
-<!-- 		<web-resource-collection> -->
-<!-- 			<url-pattern>/eventsList</url-pattern> -->
-<!-- 			<url-pattern>/categoriesList</url-pattern> -->
-<!-- 			<url-pattern>/event/*</url-pattern> -->
-<!-- 		</web-resource-collection> -->
-<!-- 		<auth-constraint> -->
-<!-- 			<role-name>admin</role-name> -->
-<!-- 		</auth-constraint> -->
-<!-- 	</security-constraint> -->
+	<security-constraint>
+		<display-name>SecurityConstraint</display-name>
+		<web-resource-collection>
+			<url-pattern>/eventsList</url-pattern>
+			<url-pattern>/categoriesList</url-pattern>
+			<url-pattern>/event/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
 
 
-<!-- 	<security-constraint> -->
-<!-- 		<web-resource-collection> -->
-<!-- 			<url-pattern>/admin/addEvent</url-pattern> -->
-<!-- 			<url-pattern>/admin/addCategory</url-pattern> -->
-<!-- 		</web-resource-collection> -->
-<!-- 		<auth-constraint> -->
-<!-- 			<role-name>admin</role-name> -->
-<!-- 		</auth-constraint> -->
-<!-- 	</security-constraint> -->
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/admin/addEvent</url-pattern>
+			<url-pattern>/admin/addCategory</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
 
 
 

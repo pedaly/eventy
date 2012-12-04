@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.google.appengine.api.datastore.Key;
 import com.sun.istack.internal.NotNull;
@@ -24,6 +25,9 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Key key;
+	
+	@Transient
+	private long id;
 	
 	private Double lng;
 
@@ -73,12 +77,24 @@ public class Event {
 //		this.id = id;
 //	}
 
+
+
 	public Key getKey() {
 		return key;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public void setKey(Key key) {
+
 		this.key = key;
+
 	}
 
 	public Double getLng() {

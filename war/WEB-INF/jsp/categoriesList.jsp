@@ -46,10 +46,11 @@
 				<c:forEach items="${categories}" var="category">
 					<tr class="event_row" onmouseover="ChangeColor(this, true);" 
 						onmouseout="ChangeColor(this, false);"  
-						onclick="DoNav('/category/${category.key.id}')">
+						>
 						<td>${category.name}</td>
-						<td class="edit"><a href="#"> edytuj </a> <span>&nbsp
-								| &nbsp <span> <a href="#"> usuń </a></td>
+						<td class="edit">
+						<span>&nbsp
+								| &nbsp <span> <a href="/category/${category.key.id }/delete"> usuń </a></td>
 					</tr>
 				</c:forEach>
 			</table>

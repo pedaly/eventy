@@ -56,7 +56,12 @@
 						<td onclick="DoNav('/event/${event.key.id}')">${event.category}</td>
 						<td class="edit"><a href="/event/${event.key.id}/edit"> edytuj </a> <span>&nbsp
 								| &nbsp <span> <a href="/event/${event.key.id }/delete"> usuń </a></td>
-					</tr><tr><td>link</td></tr>
+					</tr>
+					
+					
+<!-- 					<tr><td>link</td></tr>   o co chodzi z tym linkiem?              -->
+					
+					
 				</c:forEach>
 			</table>
 

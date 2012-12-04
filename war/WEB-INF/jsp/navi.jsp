@@ -7,7 +7,6 @@
 	<div class="links">
 		<a href="/eventsList"> Zarządzaj wydarzeniami </a> <span>&nbsp
 			| &nbsp </span> <a href="/categoriesList"> Zarządzaj kategoriami</a> <span>&nbsp |
-			&nbsp </span> <a href="#"> Zarządzaj uzytkownikami </a> <span>&nbsp |
 			&nbsp </span><span> <%
  	UserService userService = UserServiceFactory.getUserService();
  	User user = userService.getCurrentUser();

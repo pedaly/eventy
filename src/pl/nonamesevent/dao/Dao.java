@@ -47,10 +47,10 @@ public enum Dao {
 			try {
 
 				em = EMFService.get().createEntityManager();
-				em.getTransaction().begin();
+				em.getTransaction().begin();				
 
 				em.persist(event);
-
+				
 				ExecutionContext ec = (ExecutionContext) em.getDelegate();
 				ec.getTransaction().commit();
 				// em.close();
@@ -83,8 +83,16 @@ public enum Dao {
 	}
 
 	public void updateEvent(Event e) {
+
+		
+		remove(e.getId());
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
+			
+			e.setKey(KeyFactory.createKey(Event.class.getSimpleName(), e.getId()));
+			//Key k = em.find(Key.class, e.getId());
+			//e.setKey(k);
+			
 			em.persist(e);
 			System.out.println("after persist");
 			em.refresh(e);
@@ -212,6 +220,23 @@ public enum Dao {
 
 		}
 		return result;
+	}
+	
+	
+	public void deleteCategoryById(long id) {
+		EntityManager em = EMFService.get().createEntityManager();
+		try {
+			Category c = em.find(Category.class, id);
+			em.getTransaction().begin();
+			em.remove(c);
+			ExecutionContext ec = (ExecutionContext) em.getDelegate();
+			ec.getTransaction().commit();
+		} catch (NucleusTransactionException e) {
+			e.getStackTrace();
+			em.close();
+		} finally {
+			//em.close();
+		}
 	}
 	/*
 	 * public void deleteContacts() { logger.info("Entering deleteContacts");
