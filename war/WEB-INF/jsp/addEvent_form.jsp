@@ -64,7 +64,7 @@
 					<button class="MyButton" type="submit" value="true" name="submit"> Zapisz i dodaj kolejne </button>
 					<button class="MyButton" type="submit" value="false" name="submit"> Zapisz </button>
 <%-- 					<form:hidden path="key.id" value="${event.key.id}"></form:hidden> --%>
-					<form:hidden path="id" value="${event.key.id}"></form:hidden>
+					<form:hidden path="id" value="${event.id}"></form:hidden>
 				</nav>
 				
 

@@ -49,13 +49,13 @@
 				<c:forEach items="${events}" var="event">
 					<tr class="event_row" onmouseover="ChangeColor(this, true);" 
 						onmouseout="ChangeColor(this, false);" >
-						<td onclick="DoNav('/event/${event.key.id}')">${event.title}</td>
-						<td onclick="DoNav('/event/${event.key.id}')">${fn:substring(event.description,0,30)}</td>
-						<td onclick="DoNav('/event/${event.key.id}')"><fmt:formatDate value="${event.dateOfEvent}" pattern="yyyy-MM-dd" />
-						<td onclick="DoNav('/event/${event.key.id}')">${event.city}</td>
-						<td onclick="DoNav('/event/${event.key.id}')">${event.category}</td>
-						<td class="edit"><a href="/event/${event.key.id}/edit"> edytuj </a> <span>&nbsp
-								| &nbsp <span> <a href="/event/${event.key.id }/delete"> usuń </a></td>
+						<td onclick="DoNav('/event/${event.id}')">${event.title}</td>
+						<td onclick="DoNav('/event/${event.id}')">${fn:substring(event.description,0,30)}</td>
+						<td onclick="DoNav('/event/${event.id}')"><fmt:formatDate value="${event.dateOfEvent}" pattern="yyyy-MM-dd" />
+						<td onclick="DoNav('/event/${event.id}')">${event.city}</td>
+						<td onclick="DoNav('/event/${event.id}')">${event.category}</td>
+						<td class="edit"><a href="/event/${event.id}/edit"> edytuj </a> <span>&nbsp
+								| &nbsp <span> <a href="/event/${event.id }/delete"> usuń </a></td>
 					</tr>
 					
 					

@@ -48,8 +48,8 @@
 	<div class="outer">
 		<div class="container">
 			<nav class="menu">
-				<a class="MyButton" href="/event/${event.key.id}/edit"> Edytuj </a>
-				<a class="MyButton" href="/event/${event.key.id}/delete"> Usuń </a>
+				<a class="MyButton" href="/event/${event.id}/edit"> Edytuj </a>
+				<a class="MyButton" href="/event/${event.id}/delete"> Usuń </a>
 			</nav>
 			
 				<div id="map" class="mapquestMap inline">				

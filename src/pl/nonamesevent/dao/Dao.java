@@ -1,28 +1,19 @@
 package pl.nonamesevent.dao;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
-import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.store.ExecutionContext;
 import org.datanucleus.transaction.NucleusTransactionException;
-
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 
 import pl.nonamesevent.model.Category;
 import pl.nonamesevent.model.Event;
 import pl.nonamesevent.service.EMFService;
-import pl.nonamesevent.utilities.EventsList;
 import pl.nonamesevent.utilities.GeoLocationInBoundingCircle;
 
 @NamedNativeQuery(name = "Event.findByLocation", query = "SELECT e FROM Event e WHERE lat < :latMax AND lat > :latMin")
@@ -74,10 +65,10 @@ public enum Dao {
 		return Events;
 	}
 
-	public Event getEvent(int id) {
+	public Event getEvent(Long id) {
 		EntityManager em = EMFService.get().createEntityManager();
-		Key key = KeyFactory.createKey(Event.class.getSimpleName(), id);
-		Event e = em.find(Event.class, key);
+		//Key key = KeyFactory.createKey(Event.class.getSimpleName(), id);
+		Event e = em.find(Event.class, id);
 		System.out.println("Found Event : " + e.toString());
 		return e;
 	}
@@ -88,11 +79,7 @@ public enum Dao {
 		remove(e.getId());
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
-			
-			e.setKey(KeyFactory.createKey(Event.class.getSimpleName(), e.getId()));
-			//Key k = em.find(Key.class, e.getId());
-			//e.setKey(k);
-			
+						
 			em.persist(e);
 			System.out.println("after persist");
 			em.refresh(e);
@@ -107,10 +94,11 @@ public enum Dao {
 		System.out.println("Refresh done");
 	}
 
-	public void remove(long id) {
+	public void remove(Long id) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
-			Event event = em.find(Event.class, id);
+			Event event = em.find(Event.class, "Imprezy");
+			
 			em.getTransaction().begin();
 			em.remove(event);
 			ExecutionContext ec = (ExecutionContext) em.getDelegate();

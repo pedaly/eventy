@@ -1,6 +1,5 @@
 package pl.nonamesevent.controller;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +47,7 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/event/{id}")
-	public ModelAndView showEvent(@PathVariable int id) {
+	public ModelAndView showEvent(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("singleEvent");
 		Event e = Dao.INSTANCE.getEvent(id);
 		mav.addObject("event", e);
@@ -56,7 +55,7 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/event/{id}/delete")
-	public ModelAndView deleteEvent(@PathVariable int id) {
+	public ModelAndView deleteEvent(@PathVariable Long id) {
 		Dao.INSTANCE.remove(id);
 		System.out.println("Deleting event " + id);
 
@@ -64,7 +63,7 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.GET)
-	public ModelAndView editEvent(@PathVariable int id) {
+	public ModelAndView editEvent(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("addEvent_form");
 		mav.addObject(Dao.INSTANCE.getEvent(id));
 		List<Category> categories = Dao.INSTANCE.listCategories();
@@ -78,7 +77,7 @@ public class EventController {
 
 		Dao.INSTANCE.updateEvent(e);
 		return new ModelAndView(
-				new RedirectView("/event/" + e.getKey().getId()));
+				new RedirectView("/event/" + e.getId()));
 	}
 
 	// ----------------------------- add Event
@@ -136,17 +135,17 @@ public class EventController {
 	// mav.addObject("event", event);
 	// return "redirect: addEvent";
 	// }
-	// System.out.println(event.toString());
+	// System.out.prLongln(event.toString());
 	// Dao.INSTANCE.addEvent(event);
-	// System.out.println("submit value : " + request.getParameter("submit"));
+	// System.out.prLongln("submit value : " + request.getParameter("submit"));
 	// String submitValue = request.getParameter("submit");
 	// if(submitValue.equalsIgnoreCase("true")){
-	// System.out.println("Zapisz i dodaj kolejne ");
+	// System.out.prLongln("Zapisz i dodaj kolejne ");
 	// mav.setViewName("addEvent");
 	// return "redirect: addEvent";
 	//
 	// }else{
-	// System.out.println("Zapisz i wróc");
+	// System.out.prLongln("Zapisz i wróc");
 	// mav.setViewName("eventsList");
 	// return "redirect: eventsList";
 	// }
