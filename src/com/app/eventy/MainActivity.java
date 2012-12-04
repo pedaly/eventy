@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +31,8 @@ public class MainActivity extends MapActivity {
 	private LocationManager locationManager;
 	private SharedPreferences settings;
 	private Context context;
+	private UpdatingService update;
+	private EventDAO eventDao;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,9 @@ public class MainActivity extends MapActivity {
 	    
 	    settings = getSharedPreferences(PREFS_NAME, 0);
 	    context=getApplicationContext();
+	    update=new UpdatingService(settings);
+	    eventDao=new EventDAO(context);
+	    locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 	     if(settings.getBoolean("firstRun", true)){
 	    	 SharedPreferences.Editor editor = settings.edit();
 	         editor.putBoolean("firstRun", false);
@@ -82,48 +88,67 @@ public class MainActivity extends MapActivity {
 		         startActivity(intent);
 	    		return true;
 	    	} else if(item.getItemId() == MENU_UPDATE_ID){
-	    		getCurrentLocation();
+	    		LocationListener locationListener = new LocationListener() {
+	    		    public void onLocationChanged(Location location) {
+	    		    	
+	    		    	locationManager.removeUpdates(this);
+	    		    	AsyncTask<Location, Void, Location> updateTask = new AsyncTask<Location, Void, Location>() {
+
+	    		    		@Override
+	    		    		protected Location doInBackground(Location... loc) {
+	    		    				try {
+	    	    		    		
+   	    					List<Event> le=update.SendRequest(loc[0]);
+	    	    				
+	    	    					eventDao.deleteAllEvents();
+	    	    					eventDao.saveEvents(le);
+	    	    					
+	    	    				
+	    	    					
+	    	    				} catch (IOException e) {
+	    	    			
+	    	    					e.printStackTrace();
+	    	    				}
+	    		    			
+	    		    		return loc[0];
+	    		    		}
+	    		    		
+	    		    		 @Override
+	    		    		 protected void onPostExecute(Location location) {
+	    		    			 refreshView(location);
+	    		    		 }
+	    		    		
+	    		    		
+
+
+	    		    	
+
+	    		    		};
+
+	    		    		updateTask.execute(location, null, null);
+	    	    		    	
+	    		    	 
+	    		    	
+	    		    	
+	    		    }
+
+	    		    public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+	    		    public void onProviderEnabled(String provider) {}
+
+	    		    public void onProviderDisabled(String provider) {}
+	    		  };
+
+	    		// Register the listener with the Location Manager to receive location updates
+	    		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+	    		
+
 	    		
 	    	}
 	    	return false;
 	    }
 
-	private void getCurrentLocation() {
-		// Acquire a reference to the system Location Manager
-		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-		
-		// Define a listener that responds to location updates
-		LocationListener locationListener = new LocationListener() {
-		    public void onLocationChanged(Location location) {
-		    	UpdatingService update= new UpdatingService(settings);
-		    	locationManager.removeUpdates(this);
-		    	try {
-					List<Event> le=update.SendRequest(location);
-					EventDAO eventDao=new EventDAO(context);
-					eventDao.deleteAllEvents();
-					eventDao.saveEvents(le);
-					
-					refreshView(location);
-					
-				} catch (IOException e) {
-					locationManager.removeUpdates(this);
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		    	
-		    }
-
-		    public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-		    public void onProviderEnabled(String provider) {}
-
-		    public void onProviderDisabled(String provider) {}
-		  };
-
-		// Register the listener with the Location Manager to receive location updates
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-		
-	}
+	
 
 	protected void refreshView(Location location) {
 	    

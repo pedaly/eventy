@@ -54,7 +54,7 @@ public class EventItemizedOverlay extends ItemizedOverlay {
 		TextView address = (TextView) view.findViewById(R.id.address);
 		address.setText(event.getStreetAndNumber() + "\n"
 				+ event.getPostcode() + " " + event.getCity() + "\n"
-				+ event.getPowiat() + ", " + event.getWojewodztwo());
+				+ event.getWojewodztwo());
 		
 		TextView contact = (TextView) view.findViewById(R.id.contact);
 		contact.setText(
