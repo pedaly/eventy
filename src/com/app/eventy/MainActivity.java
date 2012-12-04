@@ -26,8 +26,9 @@ public class MainActivity extends MapActivity {
 	
 	public static final String PREFS_NAME = "MyPrefsFile";
 	public static final int MENU_UPDATE_ID = 1;
-	public static final int MENU_SETTING_ID = 2;
-	public static final int MENU_EXIT_ID = 3;
+	public static final int MENU_UPDATE_LOC_ID = 2;
+	public static final int MENU_SETTING_ID = 3;
+	public static final int MENU_EXIT_ID = 4;
 	
 	private LocationManager locationManager;
 	private SharedPreferences settings;
@@ -37,6 +38,7 @@ public class MainActivity extends MapActivity {
 	private MapView mapView;
 	private Location lastLocation;
 	private Drawable eventMarker;
+	private Menu menu;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class MainActivity extends MapActivity {
 	    update=new UpdatingService(settings);
 	    eventDao=new EventDAO(context);
 	    
+	   
 	    eventMarker = this.getResources().getDrawable(R.drawable.event_marker);
 	    
 	    locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -83,10 +86,12 @@ public class MainActivity extends MapActivity {
 	 @Override
 	    public boolean onCreateOptionsMenu(Menu menu)
 	    {
-		 menu.add(Menu.NONE,MENU_UPDATE_ID,Menu.NONE,"Poka� eventy");
+		 	
+		 	menu.add(Menu.NONE,MENU_UPDATE_ID,Menu.NONE,"Pobierz eventy");
+		 	menu.add(Menu.NONE,MENU_UPDATE_LOC_ID,Menu.NONE,"Pobierz eventy ze swojej lokalizacji");
 	     	menu.add(Menu.NONE,MENU_SETTING_ID,Menu.NONE,"Ustawienia");
 	     	menu.add(Menu.NONE,MENU_EXIT_ID,Menu.NONE,"Wyj�cie");
-	        
+	       
 	    	return true;
 	    }
 	 
@@ -103,7 +108,7 @@ public class MainActivity extends MapActivity {
 	    		 Intent intent = new Intent(this, SettingsActivity.class);
 		         startActivity(intent);
 	    		return true;
-	    	} else if(item.getItemId() == MENU_UPDATE_ID){
+	    	} else if(item.getItemId() == MENU_UPDATE_LOC_ID){
 	    		LocationListener locationListener = new LocationListener() {
 	    		    public void onLocationChanged(Location location) {
 	    		    	
@@ -133,6 +138,7 @@ public class MainActivity extends MapActivity {
 	    		    		 protected void onPostExecute(Location location) {
 	    		    			 lastLocation = location;
 	    		    			 refreshView();
+	    		    			 
 	    		    		 }
 	    		    		
 	    		    		
@@ -161,15 +167,52 @@ public class MainActivity extends MapActivity {
 	    		
 
 	    		
+	    	
+	    	} else if(item.getItemId() == MENU_UPDATE_ID){
+	    		update();
 	    	}
 	    	return false;
 	    }
 
-	
+	void update(){
+		AsyncTask<Void, Void, Void> updateTask = new AsyncTask<Void, Void, Void>() {
+
+    		@Override
+    		protected Void doInBackground(Void... loc) {
+    				try {
+		    		
+				List<Event> le=update.SendRequest(lastLocation);
+				
+					eventDao.deleteAllEvents();
+					eventDao.saveEvents(le);
+					
+				
+					
+				} catch (IOException e) {
+			
+					e.printStackTrace();
+				}
+    			
+    		return null;
+    		}
+    		 @Override
+    		 protected void onPostExecute(Void param) {
+    			 
+    			 refreshView();
+    			 
+    		 }
+    	
+
+    		};
+
+    		updateTask.execute(null, null, null);
+	}
 
 	protected void refreshView() {
-	    
+		
 	    mapView.getOverlays().clear();
+	    mapView.getOverlays().add(new MapGestureDetectorOverlay(this));
+	    
 	    mapView.getController().setCenter(new GeoPoint((int) (lastLocation.getLatitude() * 1e6), (int) (lastLocation.getLongitude() * 1e6)));
 	 
 	    EventItemizedOverlay eventItemizedOverlay = new EventItemizedOverlay(eventMarker, this);
@@ -197,5 +240,21 @@ public class MainActivity extends MapActivity {
 		editor.putFloat("long", (float) lastLocation.getLongitude());
 		editor.commit();
 	}
+
+	public MapView getMapView() {
+		return mapView;
+	}
+
+	
+
+	public Location getLastLocation() {
+		return lastLocation;
+	}
+	public Menu getMenu() {
+		return menu;
+	}
+	
+	
+	
 	
 }
