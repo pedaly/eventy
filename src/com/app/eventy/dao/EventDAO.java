@@ -18,7 +18,6 @@ public class EventDAO extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	
 	private static final String EVENT_TABLE_NAME = "event";
-	private static final String CATEGORY_TABLE_NAME = "category";	
 
 	private static final String ID = "_id";
 	private static final String LNG = "lng";
@@ -34,7 +33,6 @@ public class EventDAO extends SQLiteOpenHelper {
 	private static final String SKYPE = "skype";
 	private static final String POSTCODE = "postcode";
 	private static final String WOJEWODZTWO = "wojewodztwo";
-	private static final String POWIAT = "powiat";
 	private static final String CATEGORY = "category";
 	
 	public EventDAO(Context context) {
@@ -44,7 +42,7 @@ public class EventDAO extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String createSQL = "CREATE TABLE " + EVENT_TABLE_NAME
-				+ " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ " (" + ID + " REAL, "
 				+ LNG + " REAL, "
 				+ LAT + " REAL, "
 				+ TITLE + " TEXT, "
@@ -58,30 +56,8 @@ public class EventDAO extends SQLiteOpenHelper {
 				+ SKYPE + " TEXT, "
 				+ POSTCODE + " TEXT, "
 				+ WOJEWODZTWO + " TEXT, "
-				+ POWIAT + " TEXT, "
-				+ CATEGORY + " INTEGER, "
-				+ "FOREIGN KEY(" + CATEGORY + ") REFERENCES " + CATEGORY_TABLE_NAME + " (" + ID + "))";
-		db.execSQL(createSQL);
-		
-		//TODO do usuniecia - na sztywno jeden event
-		ContentValues content = new ContentValues();
-		content.put(LNG, 19.45);
-		content.put(LAT, 52.05);
-		content.put(TITLE, "test");
-		content.put(DESCRIPTION, "test");
-		content.put(DATE_OF_EVENT, new Date().getTime());
-		content.put(MANAGER_OF_EVENT, "test");
-		content.put(CITY, "test");
-		content.put(STREET_AND_NUMBER, "test");
-		content.put(WEBPAGE, "test");
-		content.put(PHONE, "test");
-		content.put(SKYPE, "test");
-		content.put(POSTCODE, "test");
-		content.put(WOJEWODZTWO, "test");
-		content.put(POWIAT, "test");
-		content.put(CATEGORY, 1);
-		db.insert(EVENT_TABLE_NAME, null, content);
-		
+				+ CATEGORY + " TEXT)";
+		db.execSQL(createSQL);	
 	}
 
 	@Override
@@ -95,7 +71,7 @@ public class EventDAO extends SQLiteOpenHelper {
 		cursor.moveToFirst();
 		while(!cursor.isAfterLast()) {
 			Event event = new Event();
-			event.setId(cursor.getInt(cursor.getColumnIndex(ID)));
+			event.setId(cursor.getLong(cursor.getColumnIndex(ID)));
 			event.setLng(cursor.getDouble(cursor.getColumnIndex(LNG)));
 			event.setLat(cursor.getDouble(cursor.getColumnIndex(LAT)));
 			event.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
@@ -109,8 +85,7 @@ public class EventDAO extends SQLiteOpenHelper {
 			event.setSkype(cursor.getString(cursor.getColumnIndex(SKYPE)));
 			event.setPostcode(cursor.getString(cursor.getColumnIndex(POSTCODE)));
 			event.setWojewodztwo(cursor.getString(cursor.getColumnIndex(WOJEWODZTWO)));
-			event.setPowiat(cursor.getString(cursor.getColumnIndex(POWIAT)));
-			event.setCategory(cursor.getInt(cursor.getColumnIndex(CATEGORY)));
+			event.setCategory(cursor.getString(cursor.getColumnIndex(CATEGORY)));
 			events.add(event);
 			cursor.moveToNext();
 		}
@@ -123,6 +98,7 @@ public class EventDAO extends SQLiteOpenHelper {
 		SQLiteDatabase database = this.getWritableDatabase();
 		for(Event event : events) {
 			ContentValues content = new ContentValues();
+			content.put(ID, event.getId());
 			content.put(LNG, event.getLng());
 			content.put(LAT, event.getLat());
 			content.put(TITLE, event.getTitle());
@@ -136,7 +112,6 @@ public class EventDAO extends SQLiteOpenHelper {
 			content.put(SKYPE, event.getSkype());
 			content.put(POSTCODE, event.getPostcode());
 			content.put(WOJEWODZTWO, event.getWojewodztwo());
-			content.put(POWIAT, event.getPowiat());
 			content.put(CATEGORY, event.getCategory());
 			database.insert(EVENT_TABLE_NAME, null, content);
 		}
