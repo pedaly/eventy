@@ -3,7 +3,6 @@ package com.app.eventy;
 import java.io.IOException;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,7 +48,7 @@ public class MainActivity extends MapActivity {
 	         
 	     }
 	 
-	     refreshView();
+	     refreshView(null);
 	    
 	}
 	
@@ -62,9 +61,9 @@ public class MainActivity extends MapActivity {
 	 @Override
 	    public boolean onCreateOptionsMenu(Menu menu)
 	    {
-		 menu.add(Menu.NONE,MENU_UPDATE_ID,Menu.NONE,"Poka¿ eventy");
+		 menu.add(Menu.NONE,MENU_UPDATE_ID,Menu.NONE,"Pokaï¿½ eventy");
 	     	menu.add(Menu.NONE,MENU_SETTING_ID,Menu.NONE,"Ustawienia");
-	     	menu.add(Menu.NONE,MENU_EXIT_ID,Menu.NONE,"Wyjœcie");
+	     	menu.add(Menu.NONE,MENU_EXIT_ID,Menu.NONE,"Wyjï¿½cie");
 	        
 	    	return true;
 	    }
@@ -104,7 +103,7 @@ public class MainActivity extends MapActivity {
 					eventDao.deleteAllEvents();
 					eventDao.saveEvents(le);
 					
-					refreshView();
+					refreshView(location);
 					
 				} catch (IOException e) {
 					locationManager.removeUpdates(this);
@@ -126,7 +125,7 @@ public class MainActivity extends MapActivity {
 		
 	}
 
-	protected void refreshView() {
+	protected void refreshView(Location location) {
 	    
 		MapView mapView = (MapView) findViewById(R.id.mapview);
 	    mapView.getOverlays().clear();
@@ -144,6 +143,10 @@ public class MainActivity extends MapActivity {
 	    	eventItemizedOverlay.addEvent(event);
 	    }
 	    
+	    if(location !=  null) {
+		    CircleOverlay circleOverlay = new CircleOverlay(this, location.getLatitude(), location.getLongitude(), 1000);
+		    mapView.getOverlays().add(circleOverlay);
+	    }
 	    mapView.getOverlays().add(eventItemizedOverlay);
 		
 	}
