@@ -1,6 +1,9 @@
 package pl.nonamesevent.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,26 +26,28 @@ import pl.nonamesevent.model.Event;
 @Controller
 public class EventController {
 
+	public static List<String> wojewodztwa = Arrays.asList("Woj dolnoœl¹skie",
+			"Woj kujawsko-pomorskie", "Woj lubelskie", "Woj ³ódzkie",
+			"Woj ma³opolskie", "Woj mazowieckie", "Woj opolskie",
+			"Woj podkarpackie", "Woj podlaskie", "Woj pomorskie",
+			"Woj œl¹skie", "Woj œwiêtokrzyskie", "Woj warmiñsko-mazurskie",
+			"Woj wielkopolskie", "Woj zachodniopomorskie");
+	
+	
 	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory
 			.getLogger(EventController.class);
 
 	@RequestMapping(value = "/eventsList", method = RequestMethod.GET)
 	public ModelAndView home() {
-		System.out.println("/eventsEvents");
 		List<Event> events = Dao.INSTANCE.getEvents();
-		for (int i = 0; i < events.size(); i++) {
-			System.out.println(events.get(i).toString());
-		}
 		ModelAndView mav = new ModelAndView("eventsList");
-
 		mav.addObject("events", events);
-
 		return mav;
 	}
 
 	@RequestMapping(value = "/event/{id}")
-	public ModelAndView showEvent(@PathVariable int id) {
+	public ModelAndView showEvent(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("singleEvent");
 		Event e = Dao.INSTANCE.getEvent(id);
 		mav.addObject("event", e);
@@ -50,40 +55,46 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/event/{id}/delete")
-	public String deleteEvent(@PathVariable int id) {
+	public ModelAndView deleteEvent(@PathVariable Long id) {
 		Dao.INSTANCE.remove(id);
 		System.out.println("Deleting event " + id);
-		return "redirect: /eventsList";
+
+		return new ModelAndView(new RedirectView("/eventsList"));
 	}
 
 	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.GET)
-	public ModelAndView editEvent(@PathVariable int id) {
+	public ModelAndView editEvent(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("addEvent_form");
 		mav.addObject(Dao.INSTANCE.getEvent(id));
 		List<Category> categories = Dao.INSTANCE.listCategories();
 		mav.addObject("categories", categories);
+		mav.addObject("wojewodztwa", wojewodztwa);
 		return mav;
 	}
 
 	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.POST)
 	public ModelAndView postEditEvent(@ModelAttribute("event") Event e) {
-		System.out.println("Editing event PUT : " + e.getTitle() + " | "
-				+ e.getKey().getId());
+
 		Dao.INSTANCE.updateEvent(e);
 		return new ModelAndView(
-				new RedirectView("/event/" + e.getKey().getId()));
+				new RedirectView("/event/" + e.getId()));
 	}
 
 	// ----------------------------- add Event
 	// -----------------------------------
 	@RequestMapping(value = "/admin/addEvent", method = RequestMethod.GET)
-	public ModelAndView addEvent(@ModelAttribute("event") Event event,
-			BindingResult result) {
-		ModelAndView mav = new ModelAndView("addEvent_form");
+	public ModelAndView addEvent() {
+
 		List<Category> categories = Dao.INSTANCE.listCategories();
-		mav.addObject("categories", categories);
-		return mav;
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("event", new Event());
+		model.put("categories", categories);
+		model.put("wojewodztwa", wojewodztwa);
+		return new ModelAndView("addEvent_form", model);
+
 	}
+	
+
 
 	@RequestMapping(value = " /admin/addEvent", method = RequestMethod.POST)
 	public ModelAndView postAddEvent(HttpServletRequest request,
@@ -124,17 +135,17 @@ public class EventController {
 	// mav.addObject("event", event);
 	// return "redirect: addEvent";
 	// }
-	// System.out.println(event.toString());
+	// System.out.prLongln(event.toString());
 	// Dao.INSTANCE.addEvent(event);
-	// System.out.println("submit value : " + request.getParameter("submit"));
+	// System.out.prLongln("submit value : " + request.getParameter("submit"));
 	// String submitValue = request.getParameter("submit");
 	// if(submitValue.equalsIgnoreCase("true")){
-	// System.out.println("Zapisz i dodaj kolejne ");
+	// System.out.prLongln("Zapisz i dodaj kolejne ");
 	// mav.setViewName("addEvent");
 	// return "redirect: addEvent";
 	//
 	// }else{
-	// System.out.println("Zapisz i wróc");
+	// System.out.prLongln("Zapisz i wróc");
 	// mav.setViewName("eventsList");
 	// return "redirect: eventsList";
 	// }

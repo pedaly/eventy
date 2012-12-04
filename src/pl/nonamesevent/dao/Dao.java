@@ -1,28 +1,19 @@
 package pl.nonamesevent.dao;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
-import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.store.ExecutionContext;
 import org.datanucleus.transaction.NucleusTransactionException;
-
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 
 import pl.nonamesevent.model.Category;
 import pl.nonamesevent.model.Event;
 import pl.nonamesevent.service.EMFService;
-import pl.nonamesevent.utilities.EventsList;
 import pl.nonamesevent.utilities.GeoLocationInBoundingCircle;
 
 @NamedNativeQuery(name = "Event.findByLocation", query = "SELECT e FROM Event e WHERE lat < :latMax AND lat > :latMin")
@@ -47,10 +38,10 @@ public enum Dao {
 			try {
 
 				em = EMFService.get().createEntityManager();
-				em.getTransaction().begin();
+				em.getTransaction().begin();				
 
 				em.persist(event);
-
+				
 				ExecutionContext ec = (ExecutionContext) em.getDelegate();
 				ec.getTransaction().commit();
 				// em.close();
@@ -74,17 +65,21 @@ public enum Dao {
 		return Events;
 	}
 
-	public Event getEvent(int id) {
+	public Event getEvent(Long id) {
 		EntityManager em = EMFService.get().createEntityManager();
-		Key key = KeyFactory.createKey(Event.class.getSimpleName(), id);
-		Event e = em.find(Event.class, key);
+		//Key key = KeyFactory.createKey(Event.class.getSimpleName(), id);
+		Event e = em.find(Event.class, id);
 		System.out.println("Found Event : " + e.toString());
 		return e;
 	}
 
 	public void updateEvent(Event e) {
+
+		
+		remove(e.getId());
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
+						
 			em.persist(e);
 			System.out.println("after persist");
 			em.refresh(e);
@@ -99,10 +94,11 @@ public enum Dao {
 		System.out.println("Refresh done");
 	}
 
-	public void remove(long id) {
+	public void remove(Long id) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
 			Event event = em.find(Event.class, id);
+			
 			em.getTransaction().begin();
 			em.remove(event);
 			ExecutionContext ec = (ExecutionContext) em.getDelegate();
@@ -212,6 +208,23 @@ public enum Dao {
 
 		}
 		return result;
+	}
+	
+	
+	public void deleteCategoryById(long id) {
+		EntityManager em = EMFService.get().createEntityManager();
+		try {
+			Category c = em.find(Category.class, id);
+			em.getTransaction().begin();
+			em.remove(c);
+			ExecutionContext ec = (ExecutionContext) em.getDelegate();
+			ec.getTransaction().commit();
+		} catch (NucleusTransactionException e) {
+			e.getStackTrace();
+			em.close();
+		} finally {
+			//em.close();
+		}
 	}
 	/*
 	 * public void deleteContacts() { logger.info("Entering deleteContacts");

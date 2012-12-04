@@ -30,21 +30,25 @@
 		});
 	});
 </script>
-
-<script type="text/javascript" src="/js/map.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var height = 500;
 		var width = 600;
 		EventMap.init(width, height);
 		MQA.EventManager.addListener(EventMap.map, 'click', EventMap.addPoint);
-		if(${event.lat}!=null && ${event.lng}!=null ){
-			EventMap.showPoint(${event.lat},${event.lng},true);
+		
+		var lt = document.forms['addEditForm'].elements["lat"].value;
+		var lg = document.forms['addEditForm'].elements["lng"].value;
+		
+		if(lt!="" && lg!="" ){
+			EventMap.showPoint(lt,lg,true);
 		}
 	});
 </script>
+
 </head>
 <body>
+<script type="text/javascript" src="/js/map.js"></script>
 
 	<%@ include file="navi.jsp"%>	
 
@@ -59,45 +63,48 @@
 				<nav class="menu">
 					<button class="MyButton" type="submit" value="true" name="submit"> Zapisz i dodaj kolejne </button>
 					<button class="MyButton" type="submit" value="false" name="submit"> Zapisz </button>
-					<form:hidden path="key"></form:hidden>
+<%-- 					<form:hidden path="key.id" value="${event.key.id}"></form:hidden> --%>
+					<form:hidden path="id" value="${event.id}"></form:hidden>
 				</nav>
+				
+
+				
+				
 				<div id="map" class="mapquestMap inline">
 					<button  class="MyButton" type="button" id="srch"
 						onclick="EventMap.addPointByAddress()">Wyszukaj lokalizację wg. podanego adresu</button>
 				</div>
-<div class="inline">
+				<div class="inline">
 				<fieldset>
 					<label> <span class="label" >Kategoria*</span>
-					<form:select path="category">
+					<form:select path="category">			
 							<c:forEach items="${categories}" var="category">
-
-<%-- 								<form:option value="${category.name }"> ${category.name }</form:option> --%>
-								<option value="${category.name}">${category.name}</option>
-
-							</c:forEach>
+									<c:choose>
+										<c:when test="${category.name==event.category}">
+											<option selected="selected" value="${event.category}">${event.category}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${category.name}">${category.name}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 					</form:select>
 					</label> 
 					<label> <span class="label">Tytuł*</span>
 					<form:input path="title" id="title" name="title" required="true" /></label>
 					<label> <span class="label">Województwo</span>
 					<form:select path="wojewodztwo" id="wojewodztwo" name="wojewodztwo">
-								<option value=""></option>
-								<option value="Woj dolnośląskie">woj. dolnośląskie</option>
-								<option value="Woj kujawsko-pomorskie">woj. kujawsko-pomorskie</option>
-								<option value="Woj lubelskie">woj. lubelskie</option>
-								<option value="Woj lubuskie">woj. lubuskie</option>
-								<option value="Woj łódzkie">woj. łódzkie</option>
-								<option value="Woj małopolskie">woj. małopolskie</option>
-								<option value="Woj mazowieckie">woj. mazowieckie</option>
-								<option value="Woj opolskie">woj. opolskie</option>
-								<option value="Woj podkarpackie">woj. podkarpackie</option>
-								<option value="Woj podlaskie">woj. podlaskie</option>								
-								<option value="Woj pomorskie">woj. pomorskie</option>							
-								<option value="Woj śląskie">woj. śląskie</option>		
-								<option value="Woj świętokrzyskie">woj. świętokrzyskie</option>									
-								<option value="Woj warmińsko-mazurskie">woj. warmińsko-mazurskie</option>	
-								<option value="Woj wielkopolskie">woj. wielkopolskie</option>									
-								<option value="Woj zachodniopomorskie">woj. zachodniopomorskie</option>																					
+							<c:forEach items="${wojewodztwa}" var="woj">
+									<c:choose>
+										<c:when test="${woj==event.wojewodztwo}">
+											<option selected="selected" value="${event.wojewodztwo}">${event.wojewodztwo}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${woj}">${woj}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+																									
 					</form:select>
 					</label>
 					<label> <span class="label">Miasto</span>

@@ -2,29 +2,17 @@ package pl.nonamesevent.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.google.appengine.api.datastore.Key;
-import com.sun.istack.internal.NotNull;
 
 @Entity
 public class Event {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private Long id;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Key key;
-	
+	private Long id;
+
 	private Double lng;
 
 	private Double lat;
@@ -51,34 +39,17 @@ public class Event {
 
 	private String wojewodztwo;
 
-
-
 	private String category;
-
-//	@ManyToOne(targetEntity = Category.class, fetch = FetchType.EAGER)
-//	@JoinColumn(name = "categoryId")
-//	@ManyToOne
-//	private Category category;
-
-
 
 	public Event() {
 	}
 
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
-
-	public Key getKey() {
-		return key;
+	public Long getId() {
+		return id;
 	}
 
-	public void setKey(Key key) {
-		this.key = key;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Double getLng() {
@@ -185,7 +156,6 @@ public class Event {
 		this.wojewodztwo = wojewodztwo;
 	}
 
-
 	public String getCategory() {
 		return category;
 	}
@@ -193,20 +163,7 @@ public class Event {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-//	public Category getCategory() {
-//		return category;
-//	}
-//
-//	public void setCategory(Category category) {
-//		this.category = category;
-//	}
 
-	// @Override
-	// public String toString() {
-	// return "Event " + title + " w " + city + " latlng: " +
-	// Double.toString(lat) + "," + lng
-	// + "," + dateOfEvent;
-	// }
 	@Override
 	public String toString() {
 		return "Event " + title + " w " + city + " latlng: " + lat + "," + lng
