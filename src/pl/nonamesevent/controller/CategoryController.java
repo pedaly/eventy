@@ -30,10 +30,11 @@ public class CategoryController {
 
 
 	@RequestMapping(value = "/category/{id}/delete")
-	public String deleteCategory(@PathVariable int id) {
+	public ModelAndView deleteCategory(@PathVariable int id) {
 
 		Dao.INSTANCE.deleteCategoryById(id);
-		return "redirect: /categoriesList";
+
+		return new ModelAndView(new RedirectView("/categoriesList"));
 	}	
 	
 	@RequestMapping(value = "/categoriesList", method = RequestMethod.GET)

@@ -56,10 +56,11 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/event/{id}/delete")
-	public String deleteEvent(@PathVariable int id) {
+	public ModelAndView deleteEvent(@PathVariable int id) {
 		Dao.INSTANCE.remove(id);
 		System.out.println("Deleting event " + id);
-		return "redirect: /eventsList";
+
+		return new ModelAndView(new RedirectView("/eventsList"));
 	}
 
 	@RequestMapping(value = "/event/{id}/edit", method = RequestMethod.GET)
