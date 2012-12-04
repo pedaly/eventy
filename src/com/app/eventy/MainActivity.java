@@ -28,11 +28,15 @@ public class MainActivity extends MapActivity {
 	public static final int MENU_UPDATE_ID = 1;
 	public static final int MENU_SETTING_ID = 2;
 	public static final int MENU_EXIT_ID = 3;
+	
 	private LocationManager locationManager;
 	private SharedPreferences settings;
 	private Context context;
 	private UpdatingService update;
 	private EventDAO eventDao;
+	private MapView mapView;
+	private Location lastLocation;
+	private Drawable eventMarker;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,11 +44,19 @@ public class MainActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_main);
 	    
+	    mapView = (MapView) findViewById(R.id.mapview);
+	    mapView.setBuiltInZoomControls(true);
+	    
 	    settings = getSharedPreferences(PREFS_NAME, 0);
+	    mapView.getController().setZoom(settings.getInt("zoom", 7));
 	    context=getApplicationContext();
 	    update=new UpdatingService(settings);
 	    eventDao=new EventDAO(context);
+	    
+	    eventMarker = this.getResources().getDrawable(R.drawable.event_marker);
+	    
 	    locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+	    
 	     if(settings.getBoolean("firstRun", true)){
 	    	 SharedPreferences.Editor editor = settings.edit();
 	         editor.putBoolean("firstRun", false);
@@ -53,8 +65,12 @@ public class MainActivity extends MapActivity {
 	         startActivity(intent);
 	         
 	     }
-	 
-	     refreshView(null);
+	     
+	     lastLocation=new Location(LocationManager.NETWORK_PROVIDER);
+	     lastLocation.setLatitude(settings.getFloat("lat", 52.05f));
+	     lastLocation.setLongitude(settings.getFloat("long", 19.45f));
+	     
+	     refreshView();
 	    
 	}
 	
@@ -115,7 +131,8 @@ public class MainActivity extends MapActivity {
 	    		    		
 	    		    		 @Override
 	    		    		 protected void onPostExecute(Location location) {
-	    		    			 refreshView(location);
+	    		    			 lastLocation = location;
+	    		    			 refreshView();
 	    		    		 }
 	    		    		
 	    		    		
@@ -150,29 +167,35 @@ public class MainActivity extends MapActivity {
 
 	
 
-	protected void refreshView(Location location) {
+	protected void refreshView() {
 	    
-		MapView mapView = (MapView) findViewById(R.id.mapview);
 	    mapView.getOverlays().clear();
-	    
-	    mapView.getController().setCenter(new GeoPoint((int) (52.05 * 1E6), (int) (19.45 * 1E6)));
-	    mapView.getController().setZoom(7);
-	    mapView.setBuiltInZoomControls(true);
-	    
-	    Drawable eventMarker = this.getResources().getDrawable(R.drawable.event_marker);
+	    mapView.getController().setCenter(new GeoPoint((int) (lastLocation.getLatitude() * 1e6), (int) (lastLocation.getLongitude() * 1e6)));
+	 
 	    EventItemizedOverlay eventItemizedOverlay = new EventItemizedOverlay(eventMarker, this);
 	    
-	    EventDAO eventDAO = new EventDAO(getApplicationContext());
-	    List<Event> events = eventDAO.getAllEvents();
+	    List<Event> events = eventDao.getAllEvents();
 	    for(Event event : events) {
 	    	eventItemizedOverlay.addEvent(event);
 	    }
-	    
-	    if(location !=  null) {
-		    CircleOverlay circleOverlay = new CircleOverlay(this, location.getLatitude(), location.getLongitude(), 1000);
-		    mapView.getOverlays().add(circleOverlay);
+
+		CircleOverlay circleOverlay = new CircleOverlay(this, lastLocation.getLatitude(), lastLocation.getLongitude(), settings.getInt("promien", 50) * 1000);
+		mapView.getOverlays().add(circleOverlay);
+		
+	    if(events.size() > 0) {
+	    	mapView.getOverlays().add(eventItemizedOverlay);
 	    }
-	    mapView.getOverlays().add(eventItemizedOverlay);
 		
 	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt("zoom", mapView.getZoomLevel());
+		editor.putFloat("lat", (float) lastLocation.getLatitude());
+		editor.putFloat("long", (float) lastLocation.getLongitude());
+		editor.commit();
+	}
+	
 }
