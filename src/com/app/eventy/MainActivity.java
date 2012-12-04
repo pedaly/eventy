@@ -6,6 +6,8 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
@@ -38,7 +40,11 @@ public class MainActivity extends MapActivity {
 	private MapView mapView;
 	private Location lastLocation;
 	private Drawable eventMarker;
-	private Menu menu;
+
+
+
+	private Bitmap myLocationMarker;
+
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,9 +63,10 @@ public class MainActivity extends MapActivity {
 	    
 	   
 	    eventMarker = this.getResources().getDrawable(R.drawable.event_marker);
-	    
+	    myLocationMarker = BitmapFactory.decodeResource(getResources(), R.drawable.my_location_marker);
+	    		
 	    locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-	    
+	   
 	     if(settings.getBoolean("firstRun", true)){
 	    	 SharedPreferences.Editor editor = settings.edit();
 	         editor.putBoolean("firstRun", false);
@@ -222,7 +229,7 @@ public class MainActivity extends MapActivity {
 	    	eventItemizedOverlay.addEvent(event);
 	    }
 
-		CircleOverlay circleOverlay = new CircleOverlay(this, lastLocation.getLatitude(), lastLocation.getLongitude(), settings.getInt("promien", 50) * 1000);
+		CircleOverlay circleOverlay = new CircleOverlay(this, lastLocation.getLatitude(), lastLocation.getLongitude(), settings.getInt("promien", 50) * 1000, myLocationMarker);
 		mapView.getOverlays().add(circleOverlay);
 		
 	    if(events.size() > 0) {
@@ -250,9 +257,7 @@ public class MainActivity extends MapActivity {
 	public Location getLastLocation() {
 		return lastLocation;
 	}
-	public Menu getMenu() {
-		return menu;
-	}
+	
 	
 	
 	
