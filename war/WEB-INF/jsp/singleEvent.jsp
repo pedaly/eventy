@@ -56,19 +56,21 @@
 				</div>
 				
 			<div class="singleEvent">
-				<p><span class="label">Tytuł : </span> <span>${ fn:length(event.title) == 0 ? "b.d." :  event.title}</span></p>
-				<p><span class="label">Termin : </span> <span><fmt:formatDate value="${event.dateOfEvent }" pattern="yyyy-MM-dd" /></span></p>
-				<p><span class="label">Lokalizacja : </span>  <span>${event.city}, ${event.streetAndNumber},  ${event.wojewodztwo}</span></p>
-				<p><span class="label">Współrzędne : </span> <span>${event.lat} , ${event.lng}</span></p>
-				<p><span class="label">Opis : </span> <span> ${ fn:length(event.description) == 0 ? "b.d" : event.description}</span></p>
+				
+				<p><span class="label">Kategoria </span> <span>${event.category}</span></p>
+				<p><span class="label">Tytuł </span> <span>${ fn:length(event.title) == 0 ? "b.d." :  event.title}</span></p>
+				<p><span class="label">Termin  </span> <span><fmt:formatDate value="${event.dateOfEvent }" pattern="yyyy-MM-dd" /></span></p>
+				<p><span class="label">Lokalizacja </span>  <span>${event.city}, ${event.streetAndNumber},  ${event.wojewodztwo}</span></p>
+				<p><span class="label">Współrzędne </span> <span>${event.lat} , ${event.lng}</span></p>
+				<p><span class="label">Opis </span> <span> ${ fn:length(event.description) == 0 ? "b.d" : event.description}</span></p>
 				<p class="details_button">+ Details</p>
 					<div class="details">
-						<p><span class="label">WWW : </span> <span> ${ fn:length(event.webpage) == 0 ? "b.d." :  event.webpage}</span></p>
-						<p><span class="label">Menadzer imprezy : </span> <span> ${ fn:length(event.managerOfEvent) == 0 ? "b.d." : event.managerOfEvent}</span></p>
-						<p><span class="label">Telefon kontaktowy : </span> <span> ${ fn:length(event.phone) == 0 ? "b.d." : event.phone}</span></p>
-						<p><span class="label">Skype : </span> <span> ${ fn:length(event.skype) == 0 ? "b.d." : event.skype}</span></p>
-						<p><span class="label">Kod : </span> <span> ${ fn:length(event.postcode) == 0 ? "b.d." : event.postcode}</span></p>
-						<p><span class="label">Wojewodztwo : </span> <span> ${ fn:length(event.wojewodztwo) == 0 ? "b.d." : event.wojewodztwo}</span></p>
+						<p><span class="label">WWW </span> <span> ${ fn:length(event.webpage) == 0 ? "b.d." :  event.webpage}</span></p>
+						<p><span class="label">Menadzer </span> <span> ${ fn:length(event.managerOfEvent) == 0 ? "b.d." : event.managerOfEvent}</span></p>
+						<p><span class="label">Telefon kontaktowy </span> <span> ${ fn:length(event.phone) == 0 ? "b.d." : event.phone}</span></p>
+						<p><span class="label">Skype </span> <span> ${ fn:length(event.skype) == 0 ? "b.d." : event.skype}</span></p>
+						<p><span class="label">Kod </span> <span> ${ fn:length(event.postcode) == 0 ? "b.d." : event.postcode}</span></p>
+						<p><span class="label">Wojewodztwo  </span> <span> ${ fn:length(event.wojewodztwo) == 0 ? "b.d." : event.wojewodztwo}</span></p>
 					</div>
 			</div>
 		

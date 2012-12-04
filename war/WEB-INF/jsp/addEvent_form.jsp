@@ -94,6 +94,7 @@
 					<form:input path="title" id="title" name="title" required="true" /></label>
 					<label> <span class="label">Województwo</span>
 					<form:select path="wojewodztwo" id="wojewodztwo" name="wojewodztwo">
+							<option value=""> </option>
 							<c:forEach items="${wojewodztwa}" var="woj">
 									<c:choose>
 										<c:when test="${woj==event.wojewodztwo}">
@@ -133,8 +134,10 @@
 				<div class="details">
 					<fieldset>
 						<label><span class="label"> WWW </span><form:input path="webpage" id="webpage" name="webpage" /></label> 
+						<label><span class="label"> Menadzer </span><form:input path="managerOfEvent" id="manager" name="manager" /></label> 
 						<label><span class="label"> Telefon </span><form:input path="phone" id="phone" name="telephone" /></label> 
 						<label><span class="label"> Skype </span><form:input path="skype" id="skype" name="skype" /></label>
+						<label><span class="label"> Kod </span><form:input path="postcode" id="postcode" name="postcode" /></label>
 					</fieldset>
 				</div>
 			</form:form>

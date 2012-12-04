@@ -50,7 +50,7 @@ public class EventWSControler {
 	public @ResponseBody String gsonCheck(@RequestBody UserContext userContext1){
 		//UserContext userContext1 = new UserContext(null, 51.75934,19.4561, 2);
 		logger.log(Level.ALL, " #####Log " + userContext1.toString());
-		logger.warning("##########Warning" + userContext1.toString() + " //  " + userContext1.getLon());
+		logger.warning("########## userContext : " + userContext1.toString() + " //  " + userContext1.getLon());
 		List<Event> list = Dao.INSTANCE.getEventsInGivenCircle(userContext1.getLat(), userContext1.getLon(), userContext1.getSearchRadius());
 		EventsList events = new EventsList();
 		Gson gson = new Gson();
@@ -89,8 +89,8 @@ public class EventWSControler {
 		logger.warning("##########Warning Lista - " + list.toString());
 		
 		Type collectionType = new TypeToken<List<Event>>(){}.getType();
-		UserContext fromJson = gson.fromJson(result, collectionType);
-		System.out.println("Object lat " + fromJson.getLat());
+		List<Event> fromJson = gson.fromJson(result, collectionType);
+
 		return list;
 	}
 }
