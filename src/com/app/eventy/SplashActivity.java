@@ -24,7 +24,7 @@ public class SplashActivity extends Activity {
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		startActivity(new Intent(SplashActivity.this, MainActivity.class));
+		finish();
 	}
 	
 }
