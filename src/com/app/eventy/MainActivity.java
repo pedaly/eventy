@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.app.eventy.dao.EventDAO;
 import com.app.eventy.model.Event;
@@ -42,9 +43,9 @@ public class MainActivity extends MapActivity {
 	private Drawable eventMarker;
 
 
-
+	
 	private Bitmap myLocationMarker;
-
+	boolean isAsyncTaskRunning;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -123,6 +124,10 @@ public class MainActivity extends MapActivity {
 	    		    	AsyncTask<Location, Void, Location> updateTask = new AsyncTask<Location, Void, Location>() {
 
 	    		    		@Override
+	    		    		protected void onPreExecute() {
+	    		    			isAsyncTaskRunning = true;
+	    		    		}
+	    		    		@Override
 	    		    		protected Location doInBackground(Location... loc) {
 	    		    				try {
 	    	    		    		
@@ -145,6 +150,7 @@ public class MainActivity extends MapActivity {
 	    		    		 protected void onPostExecute(Location location) {
 	    		    			 lastLocation = location;
 	    		    			 refreshView();
+	    		    			 isAsyncTaskRunning = false;
 	    		    			 
 	    		    		 }
 	    		    		
@@ -155,8 +161,11 @@ public class MainActivity extends MapActivity {
 
 	    		    		};
 
-	    		    		updateTask.execute(location, null, null);
-	    	    		    	
+	    		    		if(!isAsyncTaskRunning) {
+	    		    			updateTask.execute(location, null, null);
+	    		    		} else {
+	    		    			Toast.makeText(MainActivity.this, "Update jest w tym momencie nie możliwy!", Toast.LENGTH_LONG).show();
+	    		    		}
 	    		    	 
 	    		    	
 	    		    	
@@ -184,6 +193,10 @@ public class MainActivity extends MapActivity {
 	void update(){
 		AsyncTask<Void, Void, Void> updateTask = new AsyncTask<Void, Void, Void>() {
 
+			@Override
+			protected void onPreExecute() {
+				isAsyncTaskRunning = true;
+			}
     		@Override
     		protected Void doInBackground(Void... loc) {
     				try {
@@ -206,13 +219,16 @@ public class MainActivity extends MapActivity {
     		 protected void onPostExecute(Void param) {
     			 
     			 refreshView();
-    			 
+    			 isAsyncTaskRunning = false;
     		 }
     	
 
     		};
-
-    		updateTask.execute(null, null, null);
+    		if(!isAsyncTaskRunning) {
+    			updateTask.execute(null, null, null);
+    		} else {
+    			Toast.makeText(this, "Update jest w tym momencie nie możliwy!", Toast.LENGTH_LONG).show();
+    		}
 	}
 
 	protected void refreshView() {
