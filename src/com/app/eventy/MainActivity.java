@@ -98,7 +98,7 @@ public class MainActivity extends MapActivity {
 		 	menu.add(Menu.NONE,MENU_UPDATE_ID,Menu.NONE,"Pobierz eventy");
 		 	menu.add(Menu.NONE,MENU_UPDATE_LOC_ID,Menu.NONE,"Pobierz eventy ze swojej lokalizacji");
 	     	menu.add(Menu.NONE,MENU_SETTING_ID,Menu.NONE,"Ustawienia");
-	     	menu.add(Menu.NONE,MENU_EXIT_ID,Menu.NONE,"Wyjï¿½cie");
+	     	menu.add(Menu.NONE,MENU_EXIT_ID,Menu.NONE,"Wyjœcie");
 	       
 	    	return true;
 	    }
@@ -151,6 +151,7 @@ public class MainActivity extends MapActivity {
 	    		    			 lastLocation = location;
 	    		    			 refreshView();
 	    		    			 isAsyncTaskRunning = false;
+	    		    			 Toast.makeText(context, "Eventy zostaly  zaktualizowane", Toast.LENGTH_LONG).show();
 	    		    			 
 	    		    		 }
 	    		    		
@@ -164,7 +165,7 @@ public class MainActivity extends MapActivity {
 	    		    		if(!isAsyncTaskRunning) {
 	    		    			updateTask.execute(location, null, null);
 	    		    		} else {
-	    		    			Toast.makeText(MainActivity.this, "Update jest w tym momencie nie moÅ¼liwy!", Toast.LENGTH_LONG).show();
+	    		    			Toast.makeText(MainActivity.this, "Update jest w tym momencie nie mo¿liwy!", Toast.LENGTH_LONG).show();
 	    		    		}
 	    		    	 
 	    		    	
@@ -220,6 +221,8 @@ public class MainActivity extends MapActivity {
     			 
     			 refreshView();
     			 isAsyncTaskRunning = false;
+    			 Toast.makeText(context, "Eventy zostaly  zaktualizowane", Toast.LENGTH_LONG).show();
+    			 
     		 }
     	
 
@@ -227,7 +230,7 @@ public class MainActivity extends MapActivity {
     		if(!isAsyncTaskRunning) {
     			updateTask.execute(null, null, null);
     		} else {
-    			Toast.makeText(this, "Update jest w tym momencie nie moÅ¼liwy!", Toast.LENGTH_LONG).show();
+    			Toast.makeText(this, "Update jest w tym momencie nie mo¿liiwy!", Toast.LENGTH_LONG).show();
     		}
 	}
 
